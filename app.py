@@ -17,12 +17,12 @@ conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 cur = conn.cursor()
 
 #Queries
-#cur.execute("SELECT fruits FROM pgrt_table ")
-#fruits1=cur.fetchall()
-#fruits_val = [fruit[0] for fruit in fruits1]
-#cur.execute("SELECT sales FROM pgrt_table")
-#sales1=cur.fetchall()
-#sales_val = [sales[0] for sales in sales1]
+cur.execute("SELECT fruits FROM react_table ")
+fruits1=cur.fetchall()
+fruits_val = [fruit[0] for fruit in fruits1]
+cur.execute("SELECT sales FROM react_table")
+sales1=cur.fetchall()
+sales_val = [sales[0] for sales in sales1]
 cur.execute("SELECT region FROM react_table")
 region1=cur.fetchall()
 reg_val = [sales[0] for sales in region1]
