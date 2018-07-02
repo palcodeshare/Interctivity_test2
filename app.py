@@ -24,7 +24,7 @@ fruits_val = [fruit[0] for fruit in fruits1]
 cur.execute("SELECT sales FROM react_table")
 sales1=cur.fetchall()
 sales_val = [sales[0] for sales in sales1]
-cur.execute("SELECT region FROM react_table")
+cur.execute("SELECT DISTINCT(region) FROM react_table")
 region1=cur.fetchall()
 reg_val = [sales[0] for sales in region1]
 
@@ -63,6 +63,7 @@ app.layout = html.Div([
 
 def update_graph(reg_col):
 
+    cur = conn.cursor()
     cur.execute("SELECT fruits FROM react_table WHERE region = value ")
     fruits1=cur.fetchall()
     fruits_val = [fruit[0] for fruit in fruits1]
