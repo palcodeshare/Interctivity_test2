@@ -51,15 +51,17 @@ app.layout = html.Div([
     ])
 ])
 
-@app.callback(dash.dependencies.Output('react-graph','figure'),[dash.dependencies.Input('reg_col','value')])
+@app.callback(dash.dependencies.Output('react-graph','figure'),
+    [dash.dependencies.Input('reg_col','value')]
+)
 
-def update_graph(reg_col):
+def update_graph(reg_col_name):
 
     cur = conn.cursor()
-    cur.execute("SELECT fruits FROM react_table WHERE region = value ")
+    cur.execute("SELECT fruits FROM react_table WHERE region = reg_col_name ")
     fruits1=cur.fetchall()
     fruits_val = [fruit[0] for fruit in fruits1]
-    cur.execute("SELECT sales FROM react_table WHERE region = value")
+    cur.execute("SELECT sales FROM react_table WHERE region = reg_col_name")
     sales1=cur.fetchall()
     sales_val = [sales[0] for sales in sales1]
 
