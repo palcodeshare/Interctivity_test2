@@ -24,7 +24,7 @@ cur = conn.cursor()
 #sales1=cur.fetchall()
 #sales_val = [sales[0] for sales in sales1]
 cur.execute("SELECT region FROM pgrt_table")
-region1=cur.fetchall()git
+region1=cur.fetchall()
 reg_val = [sales[0] for sales in region1]
 
 #Dash app
