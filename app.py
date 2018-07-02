@@ -40,14 +40,13 @@ app.layout = html.Div([
             children='''Dash: A web application framework for Python.'''
         ),
     ])
-    html.Div([
-        dcc.Dropdown(
-            id='reg_col',
-            options=[{'label': i, 'value': i} for i in reg_val],
-            value='Dubai'
-        )
-   ])
 
+    dcc.Dropdown(
+        id='reg_col',
+        options=[{'label': i, 'value': i} for i in reg_val],
+        value='Dubai'
+    )
+ 
     dcc.Graph(id='react-graph',
         figure=go.Figure(
             data=[
