@@ -1,6 +1,7 @@
 from dash import dash
 import dash_core_components as dcc
 import dash_html_components as html
+import dash_renderer
 from dash.dependencies import Input, Output
 import plotly.graph_objs as go
 import psycopg2
@@ -28,7 +29,7 @@ region1=cur.fetchall()
 reg_val = [sales[0] for sales in region1]
 
 #Dash app
-app = dash.Dash()
+app = dash.Dash('app', server=server)
 
 app.layout = html.Div([
     html.Div([
