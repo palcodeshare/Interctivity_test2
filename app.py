@@ -47,15 +47,7 @@ app.layout = html.Div([
             value='Dubai'
         ),
 
-        dcc.Graph(id='react-graph',
-            figure=go.Figure(
-                data=[
-                    go.Bar(
-                        x=fruits_val, y=sales_val, name='SF'
-                    ),
-                ],
-            )
-        )
+        dcc.Graph(id='react-graph')
     ])
 ])
 
