@@ -24,7 +24,7 @@ cur = conn.cursor()
 #sales1=cur.fetchall()
 #sales_val = [sales[0] for sales in sales1]
 cur.execute("SELECT region FROM pgrt_table")
-region1=cur.fetchall()
+region1=cur.fetchall()git
 reg_val = [sales[0] for sales in region1]
 
 #Dash app
@@ -40,24 +40,23 @@ app.layout = html.Div([
             children='''Dash: A web application framework for Python.'''
         ),
     ])
-
     html.Div([
         dcc.Dropdown(
             id='reg_col',
             options=[{'label': i, 'value': i} for i in reg_val],
             value='Dubai'
         )
-    ])
+   ])
 
-        dcc.Graph(id='react-graph',
-            figure=go.Figure(
-                data=[
-                    go.Bar(
-                        x=fruits_val, y=sales_val, name='SF'
-                    ),
-                ],
-            )
+    dcc.Graph(id='react-graph',
+        figure=go.Figure(
+            data=[
+                go.Bar(
+                    x=fruits_val, y=sales_val, name='SF'
+                ),
+            ],
         )
+    )
 
 ])
 
