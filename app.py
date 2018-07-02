@@ -1,4 +1,4 @@
-from dash import dash
+import dash
 import dash_core_components as dcc
 import dash_html_components as html
 import dash_renderer
@@ -59,10 +59,7 @@ app.layout = html.Div([
     ])
 ])
 
-@app.callback(
-    dash.dependencies.Output('react-graph','figure'),
-    [dash.dependencies.Input('reg_col','value')]
-)
+@app.callback(dash.dependencies.Output('react-graph','figure'),[dash.dependencies.Input('reg_col','value')])
 
 def update_graph(reg_col):
 
