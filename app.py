@@ -28,7 +28,7 @@ region1=cur.fetchall()
 reg_val = [sales[0] for sales in region1]
 
 #Dash app
-app = dash.Dash('app', server=server)
+app = dash.Dash()
 
 app.layout = html.Div([
     html.Div([
