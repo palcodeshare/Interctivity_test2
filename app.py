@@ -1,7 +1,6 @@
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
-import dash_renderer
 from dash.dependencies import Input, Output
 import plotly.graph_objs as go
 import psycopg2
@@ -51,14 +50,14 @@ app.layout = html.Div([
     ])
 ])
 
-@app.callback(dash.dependencies.Output('react-graph','figure'),
-    [dash.dependencies.Input('reg_col','value')]
+@app.callback(
+    Output('react-graph','figure'),
+    [Input('reg_col','value')]
 )
 
 def update_graph(reg_col_name):
 
-    cur = conn.cursor()
-    cur.execute("SELECT fruits FROM react_table WHERE region = reg_col_name ")
+    cur.execute("SELECT fruits FROM react_table WHERE region = reg_col_name")
     fruits1=cur.fetchall()
     fruits_val = [fruit[0] for fruit in fruits1]
     cur.execute("SELECT sales FROM react_table WHERE region = reg_col_name")
