@@ -32,9 +32,7 @@ region1=cur.fetchall()
 reg_val = [sales[0] for sales in region1]
 
 #Auth
-VALID_USERNAME_PASSWORD_PAIRS = [
-    ['gfkdxb', 'dashboard']
-]
+
 
 app = dash.Dash('app',server=server)
 app = dash.Dash('auth')
