@@ -1,4 +1,5 @@
 import dash
+import dash_auth
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
@@ -6,6 +7,8 @@ import plotly.graph_objs as go
 import psycopg2
 import os
 import flask
+import plotly
+
 
 #Flask hosting
 server = flask.Flask('app')
@@ -28,8 +31,20 @@ cur.execute("SELECT DISTINCT(region) FROM react_table")
 region1=cur.fetchall()
 reg_val = [sales[0] for sales in region1]
 
+#Auth
+VALID_USERNAME_PASSWORD_PAIRS = [
+    ['gfkdxb', 'dashboard']
+]
+
+app = dash.Dash('app',server=server)
+app = dash.Dash('auth')
+auth = dash_auth.BasicAuth(
+    app,
+    VALID_USERNAME_PASSWORD_PAIRS
+)
+
 #Dash app
-app = dash.Dash('app', server=server)
+
 
 app.layout = html.Div([
     html.Div([
@@ -51,8 +66,6 @@ app.layout = html.Div([
     ])
 ])
 
-
-
 @app.callback(
     Output('react-graph','figure'),
     [Input('reg_col','value')]
@@ -71,7 +84,6 @@ def update_graph(reg_col_name):
     sales_val = [sales[0] for sales in sales1]
     print(sales_val)
     clo = conn.rollback()
-
 
     return {
         'data': [go.Bar(
