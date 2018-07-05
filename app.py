@@ -16,6 +16,7 @@ DATABASE_URL = os.environ['DATABASE_URL']
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 cur = conn.cursor()
 
+
 #Queries
 cur.execute("SELECT fruits FROM react_table ")
 fruits1=cur.fetchall()
@@ -50,6 +51,8 @@ app.layout = html.Div([
     ])
 ])
 
+
+
 @app.callback(
     Output('react-graph','figure'),
     [Input('reg_col','value')]
@@ -57,12 +60,18 @@ app.layout = html.Div([
 
 def update_graph(reg_col_name):
 
-    cur.execute("SELECT fruits FROM react_table WHERE region = reg_col_name")
+    print(reg_col_name)
+    SQL="SELECT fruits FROM react_table WHERE region = (%s)"
+    cur.execute(SQL,(reg_col_name,))
     fruits1=cur.fetchall()
     fruits_val = [fruit[0] for fruit in fruits1]
-    cur.execute("SELECT sales FROM react_table WHERE region = reg_col_name")
+    SQL1="SELECT sales FROM react_table WHERE region = (%s) "
+    cur.execute(SQL1,(reg_col_name,))
     sales1=cur.fetchall()
     sales_val = [sales[0] for sales in sales1]
+    print(sales_val)
+    clo = conn.rollback()
+
 
     return {
         'data': [go.Bar(
