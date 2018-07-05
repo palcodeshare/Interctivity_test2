@@ -38,7 +38,7 @@ app = dash.Dash('app',server=server)
 app = dash.Dash('auth')
 auth = dash_auth.BasicAuth(
     app,
-    VALID_USERNAME_PASSWORD_PAIRS
+    (('gfkdxb','1234',),)
 )
 
 #Dash app
