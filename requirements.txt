@@ -38,3 +38,4 @@ urllib3==1.21.1
 Werkzeug==0.12.2
 wheel==0.26.0
 psycopg2==2.7.5
+dash-auth==1.0.0
