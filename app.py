@@ -9,12 +9,12 @@ import os
 import flask
 import plotly
 
-app = dash.Dash('auth')
-auth1 = dash_auth.BasicAuth(
+
+auth = dash_auth.BasicAuth(
     app,
     (('gfkdxb','1234',),)
 )
-
+app = dash.Dash('auth')
 #Flask hosting
 server = flask.Flask('app')
 server.secret_key = os.environ.get('secret_key', 'secret')
