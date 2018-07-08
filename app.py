@@ -9,7 +9,7 @@ import os
 import flask
 import plotly
 
-app = dash.Dash('app')
+app = dash.Dash('app',auth)
 auth = dash_auth.BasicAuth(
     app,
     (('gfkdxb','1234',),)
