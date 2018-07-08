@@ -35,7 +35,7 @@ reg_val = [sales[0] for sales in region1]
 
 
 
-app = dash.Dash('auth')
+app = dash.Dash(['auth'],['app',server=server])
 auth = dash_auth.BasicAuth(
     app,
     (('gfkdxb','1234',),)
@@ -43,7 +43,7 @@ auth = dash_auth.BasicAuth(
 
 #Dash app
 
-app = dash.Dash('app',server=server)
+#app = dash.Dash('app',server=server)
 
 app.layout = html.Div([
     html.Div([
