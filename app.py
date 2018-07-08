@@ -9,11 +9,11 @@ import os
 import flask
 import plotly
 
-app = dash.Dash('auth',server=server)
-auth = dash_auth.BasicAuth(
-    app,
-    (('gfkdxb','1234',),)
-)
+#app = dash.Dash('auth')
+#auth = dash_auth.BasicAuth(
+#    app,
+#    (('gfkdxb','1234',),)
+#)
 
 #Flask hosting
 server = flask.Flask('app')
@@ -44,7 +44,7 @@ reg_val = [sales[0] for sales in region1]
 
 #Dash app
 
-#app = dash.Dash('app',server=server)
+app = dash.Dash('app',server=server)
 
 app.layout = html.Div([
     html.Div([
