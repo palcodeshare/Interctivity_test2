@@ -91,5 +91,8 @@ def update_graph(reg_col_name):
         )]
     }
 
+app.scripts.config.serve_locally = True
+app.css.append_css({'external_url': 'https://codepen.io/chriddyp/pen/bWLwgP.css'})
+
 if __name__ == '__main__':
     app.run_server(debug=True)
