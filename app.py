@@ -9,11 +9,11 @@ import os
 import flask
 import plotly
 
-#app = dash.Dash('auth')
-#auth = dash_auth.BasicAuth(
-#    app,
-#    (('gfkdxb','1234',),)
-#)
+app = dash.Dash('auth')
+auth = dash_auth.BasicAuth(
+    app,
+    (('abcd','1234',),)
+)
 
 #Flask hosting
 server = flask.Flask('app')
@@ -23,18 +23,6 @@ server.secret_key = os.environ.get('secret_key', 'secret')
 DATABASE_URL = os.environ['DATABASE_URL']
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 cur = conn.cursor()
-
-
-#Queries
-cur.execute("SELECT fruits FROM react_table ")
-fruits1=cur.fetchall()
-fruits_val = [fruit[0] for fruit in fruits1]
-cur.execute("SELECT sales FROM react_table")
-sales1=cur.fetchall()
-sales_val = [sales[0] for sales in sales1]
-cur.execute("SELECT DISTINCT(region) FROM react_table")
-region1=cur.fetchall()
-reg_val = [sales[0] for sales in region1]
 
 #Dash app
 
@@ -71,12 +59,6 @@ def update_graph(reg_col_name):
     cur.execute(SQL,(reg_col_name,))
     result=cur.fetchall()
     fruits_val, sales_val = zip(*result)
-    #SQL1="SELECT sales FROM react_table WHERE region = (%s) "
-    #cur.execute(SQL1,(reg_col_name,))
-    #sales1=cur.fetchall()
-    #sales_val = [sales[0] for sales in sales1]
-    #print(sales_val)
-    #clo = conn.rollback()
 
     return {
         'data': [go.Bar(
