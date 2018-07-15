@@ -27,6 +27,10 @@ DATABASE_URL = os.environ['DATABASE_URL']
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 cur = conn.cursor()
 
+cur.execute("SELECT DISTINCT(region) FROM react_table")
+region1=cur.fetchall()
+reg_val = [sales[0] for sales in region1]
+
 #Dash app
 
 app = dash.Dash('app',server=server)
