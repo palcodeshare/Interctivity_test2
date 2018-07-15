@@ -46,25 +46,25 @@ app.layout = html.Div([
 
             html.Div(
                 children='''Shell Dashboard'''
-            ),
-
-            dcc.Dropdown(
-                id='reg_col',
-                options=[{'label': i, 'value': i} for i in reg_val],
-                value='Dubai'
-            ),
-        ], className = "nine columns"),
+            )
+        ], className = "eleven columns"),
 
         html.Div([
             html.Img(
                 src="https://www.gfk.com/fileadmin/fe/gfktheme/images/favicons/apple-touch-icon-72x72.png"
             )
-        ], className = "three columns")
+        ], className = "one columns")
     ], className = "row"),
 
     html.Div([
         html.Div([
-            dcc.Graph(id='react-graph')
+            dcc.Graph(id='react-graph'),
+
+            dcc.Dropdown(
+                id='reg_col',
+                options=[{'label': i, 'value': i} for i in reg_val],
+                value='Dubai'
+            )
         ], className = "six columns")
     ], className = "row")
 ])
