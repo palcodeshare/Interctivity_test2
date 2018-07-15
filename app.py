@@ -10,7 +10,7 @@ import flask
 import plotly
 
 #Bootstrap CSS
-app.css.append_css({'external_url': 'https://codepen.io/mokshaxkrodha/pen/XBXNbP'})
+#app.css.append_css({'external_url': 'https://codepen.io/mokshaxkrodha/pen/XBXNbP'})
 
 #app = dash.Dash('auth')
 #auth = dash_auth.BasicAuth(
