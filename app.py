@@ -53,7 +53,7 @@ app.layout = html.Div([
                 options=[{'label': i, 'value': i} for i in reg_val],
                 value='Dubai'
             ),
-        ], className = "nine columns")
+        ], className = "nine columns"),
 
         html.Div([
             html.Img(
