@@ -9,6 +9,8 @@ import os
 import flask
 import plotly
 
+print(dcc.__version__)
+
 app = dash.Dash()
 server = app.server
 app.config.suppress_callback_exceptions = True
