@@ -55,9 +55,9 @@ app.layout = html.Div([
                     src="https://www.logodesignlove.com/images/evolution/shell-logo-design.gif"
                 )
             )
-        ], className = "one columns")"
+        ], className = "one columns"),
 
-        
+
         html.Div([
             html.Img(
                 src="https://www.gfk.com/fileadmin/fe/gfktheme/images/favicons/apple-touch-icon-72x72.png"
