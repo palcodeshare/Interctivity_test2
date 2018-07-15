@@ -41,12 +41,11 @@ app.layout = html.Div([
     html.Div([
         html.Div([
             html.H1(
-                children='Hello Dash',
-                className='title'
+                children='GfK Dashboard Application'
             ),
 
             html.Div(
-                children='''Dash: A web application framework for Python.'''
+                children='''Shell Dashboard'''
             ),
 
             dcc.Dropdown(
@@ -54,8 +53,13 @@ app.layout = html.Div([
                 options=[{'label': i, 'value': i} for i in reg_val],
                 value='Dubai'
             ),
-        ], className = "four columns")
+        ], className = "nine columns")
 
+        html.Div([
+            html.Img(
+                src="https://www.gfk.com/fileadmin/fe/gfktheme/images/favicons/apple-touch-icon-72x72.png"
+            )
+        ], className = "three columns")
     ], className = "row"),
 
     html.Div([
