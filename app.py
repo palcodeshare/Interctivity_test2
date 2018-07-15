@@ -9,11 +9,14 @@ import os
 import flask
 import plotly
 
-app = dash.Dash('auth')
-auth = dash_auth.BasicAuth(
-    app,
-    (('abcd','1234',),)
-)
+#Bootstrap CSS
+app.css.append_css({'external_url': 'https://codepen.io/mokshaxkrodha/pen/XBXNbP'})
+
+#app = dash.Dash('auth')
+#auth = dash_auth.BasicAuth(
+#    app,
+#    (('abcd','1234',),)
+#)
 
 #Flask hosting
 server = flask.Flask('app')
@@ -30,22 +33,30 @@ app = dash.Dash('app',server=server)
 
 app.layout = html.Div([
     html.Div([
-        html.H1(
-            children='Hello Dash'
-        ),
+        html.Div([
+            html.H1(
+                children='Hello Dash',
+                className='title'
+            ),
 
-        html.Div(
-            children='''Dash: A web application framework for Python.'''
-        ),
+            html.Div(
+                children='''Dash: A web application framework for Python.'''
+            ),
 
-        dcc.Dropdown(
-            id='reg_col',
-            options=[{'label': i, 'value': i} for i in reg_val],
-            value='Dubai'
-        ),
+            dcc.Dropdown(
+                id='reg_col',
+                options=[{'label': i, 'value': i} for i in reg_val],
+                value='Dubai'
+            ),
+        ], className = "four columns")
 
-        dcc.Graph(id='react-graph')
-    ])
+    ], className = "row"),
+
+    html.Div([
+        html.Div([
+            dcc.Graph(id='react-graph')
+        ], className = "six columns")
+    ], className = "row")
 ])
 
 @app.callback(
