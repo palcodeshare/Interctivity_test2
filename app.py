@@ -8,6 +8,7 @@ import psycopg2
 import os
 import flask
 import plotly
+impo
 
 #Bootstrap CSS
 app.css.append_css({'external_url': 'https://codepen.io/mokshaxkrodha/pen/XBXNbP'})
@@ -30,6 +31,8 @@ cur = conn.cursor()
 #Dash app
 
 app = dash.Dash('app',server=server)
+
+app.css.append_css({'external_url': 'https://codepen.io/mokshaxkrodha/pen/XBXNbP'})
 
 app.layout = html.Div([
     html.Div([
