@@ -51,10 +51,8 @@ app.layout = html.Div([
 
         html.Div([
             html.Img(
-                html.Img(
-                    src="https://www.logodesignlove.com/images/evolution/shell-logo-design.gif"
-                )
-            )
+                src="https://www.logodesignlove.com/images/evolution/shell-logo-design.gif"
+            )    
         ], className = "one columns"),
 
 
