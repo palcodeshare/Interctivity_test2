@@ -18,9 +18,7 @@ import plotly
 #    (('abcd','1234',),)
 #)
 
-#Flask hosting
-server = flask.Flask('app')
-server.secret_key = os.environ.get('secret_key', 'secret')
+
 
 #Database connection
 DATABASE_URL = os.environ['DATABASE_URL']
