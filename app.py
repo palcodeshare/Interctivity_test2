@@ -51,7 +51,7 @@ app.layout = html.Div([
 
         html.Div([
             html.Img(
-                src="https://ibb.co/iUcFP8"
+                src="https://image.ibb.co/ktVrxT/Webp_net_resizeimage.png"
             )
         ], className = "one columns"),
 
