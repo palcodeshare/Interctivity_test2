@@ -47,12 +47,12 @@ app.layout = html.Div([
             html.H4(
                 children='''Shell Dashboard'''
             )
-        ], className = "eleven columns"),
+        ], className = "ten columns"),
 
         html.Div([
             html.Img(
                 src="https://www.logodesignlove.com/images/evolution/shell-logo-design.gif"
-            )    
+            )
         ], className = "one columns"),
 
 
