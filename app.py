@@ -8,7 +8,6 @@ import psycopg2
 import os
 import flask
 import plotly
-impo
 
 #Bootstrap CSS
 app.css.append_css({'external_url': 'https://codepen.io/mokshaxkrodha/pen/XBXNbP'})
