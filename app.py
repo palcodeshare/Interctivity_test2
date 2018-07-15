@@ -44,16 +44,26 @@ app.layout = html.Div([
                 children='GfK Dashboard Application'
             ),
 
-            html.Div(
+            html.H4(
                 children='''Shell Dashboard'''
             )
         ], className = "eleven columns"),
 
         html.Div([
             html.Img(
+                html.Img(
+                    src="https://www.logodesignlove.com/images/evolution/shell-logo-design.gif"
+                )
+            )
+        ], className = "one columns")"
+
+        
+        html.Div([
+            html.Img(
                 src="https://www.gfk.com/fileadmin/fe/gfktheme/images/favicons/apple-touch-icon-72x72.png"
             )
         ], className = "one columns")
+
     ], className = "row"),
 
     html.Div([
