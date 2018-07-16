@@ -9,6 +9,8 @@ import os
 import flask
 import plotly
 
+from app import app
+
 #Bootstrap CSS
 #app.css.append_css({'external_url': 'https://codepen.io/mokshaxkrodha/pen/XBXNbP'})
 

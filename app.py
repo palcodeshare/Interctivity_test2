@@ -1,39 +1,22 @@
 import dash
-import dash_auth
-import dash_core_components as dcc
-import dash_html_components as html
-from dash.dependencies import Input, Output
-import plotly.graph_objs as go
-import psycopg2
 import os
-import flask
-import plotly
 
-print(dcc.__version__)
-
-#app = dash.Dash()
-#server = app.server
-
-#Bootstrap CSS
-#app.css.append_css({'external_url': 'https://codepen.io/mokshaxkrodha/pen/XBXNbP'})
-
-#app = dash.Dash('auth')
-#auth = dash_auth.BasicAuth(
-#    app,
-#    (('abcd','1234',),)
-#)
-
-#Flask hosting
-server = flask.Flask('app')
-server.secret_key = os.environ.get('secret_key', 'secret')
-
-#Dash app
-
-app = dash.Dash('app',server=server)
-
-app.config.suppress_callback_exceptions = True
+from flask import send_from_directory
 
 
-index_page = html.Div([
-    dcc.Link('Go to Page 1', href='/apps/app1'),
-])
+app = dash.Dash()
+server = app.server
+app.config.supress_callback_exceptions = True
+
+external_css = [
+    'https://codepen.io/chriddyp/pen/bWLwgP.css',
+    '/static/base.css'
+]
+for css in external_css:
+    app.css.append_css({"external_url": css})
+
+
+@app.server.route('/static/<path:path>')
+def static_file(path):
+    static_folder = os.path.join(os.getcwd(), 'static')
+    return send_from_directory(static_folder, path)
