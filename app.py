@@ -1,16 +1,12 @@
 import dash
 import os
-import flask
+
 from flask import send_from_directory
 
-server = flask.Flask('app')
-server.secret_key = os.environ.get('secret_key', 'secret')
 
-app = dash.Dash('app', server=server)
-# app = dash.Dash(__name__)
-# server=app.server
-# server.secret_key = os.environ.get('secret_key', 'secret')
-app.config.supress_callback_exceptions = True
+app = dash.Dash()
+server = app.server
+app.config.suppress_callback_exceptions = True
 
 external_css = [
     'https://codepen.io/chriddyp/pen/bWLwgP.css',
