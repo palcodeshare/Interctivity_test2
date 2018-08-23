@@ -1,9 +1,7 @@
 import os
 import pickle
 import copy
-import datetime as dt
 import psycopg2
-import pandas as pd
 from flask import Flask
 import dash
 import dash_core_components as dcc
@@ -65,25 +63,29 @@ layout = html.Div(
         #Period Selector/ Quarterly, YTD vs LY & Monthly vs Previous Month
         html.Div([
             html.Div([
-                dcc.Dropdown(
-                    id='flag_period_button',
-                    options=[
-                        {'label': 'Quarterly', 'value': 'qtr'},
-                        {'label': 'Year To Date', 'value': 'ytd'},
-                        {'label': 'Monthly', 'value': 'mom'}
-                    ],
-                    placeholder="Period Comparison"
+                html.Div([
+                    html.P('Select period for overall country-wise flags :', style={'display': 'inline-block'}),
+
+                    dcc.Dropdown(
+                        id='flag_period_button',
+                        options=[
+                            {'label': 'Quarterly Growth% - Q2 2017 vs Q2 2018', 'value': 'qtr'},
+                            {'label': 'Year to Date Growth% - YTD 2017 vs YTD 2018', 'value': 'ytd'}
+                        ],
+                        value='qtr',
+                        placeholder="Period Comparison",
+
+                    )
+                ],className='four columns',style={'padding-top':'200px','verticalAlign': 'middle'}),
+
+                dcc.Graph(
+                    id='flagsoverview',
+                    config={'displayModeBar': False},
+                    className='eight columns'
                 ),
-            ],className='two columns'),
-        ],className='row'),
+            ],className='row'),
 
-
-        html.Div([
-            dcc.Graph(
-                id='flagsoverview',
-                config={'displayModeBar': False}
-            )
-        ],className='row'),
+        ])
     ],
     style={'font-family': 'insight screen'},className='ten columns offset-by-one'
 )
@@ -94,48 +96,7 @@ layout = html.Div(
 )
 
 def update_flag(period_comparison_name):
-    if (period_comparison_name=='mom'):
-        SQL="SELECT ctr_tot, momsvol, momsval, momprice FROM flags"
-        cur.execute(SQL,(period_comparison_name,))
-        result=cur.fetchall()
-        ctr_tot_val, momsvol_val, momsval_val, momprice_val = zip(*result)
-        # clrred = 'rgb(225,0,0)'
-        # clrgrn = 'rgb(0,222,0)'
-        # clrs = [clrred]
-        y1=np.array(momsvol_val)
-        y2=np.array(momsval_val)
-        y3=np.array(momprice_val)
-
-        color1=np.array(['rgba(255, 0, 0, 1)']*y1.shape[0])
-        color2=np.array(['rgba(255, 0, 0, 1)']*y2.shape[0])
-        color3=np.array(['rgba(255, 0, 0, 1)']*y3.shape[0])
-
-        color1[y1<0]='rgba(255, 0, 0, 1)'
-        color1[y1>=0]='rgba(0, 205, 0, 1)'
-        color2[y2<0]='rgba(255, 0, 0, 1)'
-        color2[y2>=0]='rgba(0, 205, 0, 1)'
-        color3[y3<0]='rgba(255, 0, 0, 1)'
-        color3[y3>=0]='rgba(0, 205, 0, 1)'
-
-        trace1 = go.Bar(y=ctr_tot_val,x=momsvol_val,name="Sales Volume",orientation='h',text=momsvol_val,textposition = 'inside',hoverinfo='skip',marker=dict(color=color1.tolist()))
-        trace2 = go.Bar(y=ctr_tot_val,x=momsval_val,name="Sales Value",orientation='h',text=momsval_val,textposition = 'inside',hoverinfo='skip',marker=dict(color=color2.tolist()))
-        trace3 = go.Bar(y=ctr_tot_val,x=momprice_val,name="price",orientation='h',text=momprice_val,textposition = 'inside',hoverinfo='skip',marker=dict(color=color3.tolist()))
-        fig = tls.make_subplots(rows=1, cols=3,shared_yaxes=True,vertical_spacing=0.02,horizontal_spacing=0.05,subplot_titles=('Sales Volume', 'Sales Value USD','Price USD'))
-        fig['layout']['margin'] = {'l': 150, 'r': 40, 'b': 40, 't': 80}
-
-
-        fig.append_trace(trace1,1,1)
-        fig.append_trace(trace2,1,2)
-        fig.append_trace(trace3,1,3)
-        fig['layout']['xaxis1'].update(showgrid=False,autorange=True)
-        fig['layout']['xaxis2'].update(showgrid=False,autorange=True)
-        fig['layout']['xaxis3'].update(showgrid=False,autorange=True)
-        fig['layout']['yaxis1'].update(showgrid=False,autorange='reversed')
-
-      # fig.append_trace({'x':df.Time,'y':df.Volume,'type':'bar','name':'Volume'},2,1)
-        fig['layout'].update(title='Monthly - Jun"'"17 vs Jun"'"18')
-        return fig
-    elif (period_comparison_name=='qtr'):
+    if (period_comparison_name=='qtr'):
         SQL="SELECT ctr_tot, qtrsvol, qtrsval, qtrprice FROM flags"
         cur.execute(SQL,(period_comparison_name,))
         result=cur.fetchall()
@@ -156,21 +117,21 @@ def update_flag(period_comparison_name):
         color3[y3<0]='rgba(255, 0, 0, 1)'
         color3[y3>=0]='rgba(0, 205, 0, 1)'
 
-        trace1 = go.Bar(y=ctr_tot_val,x=qtrsvol_val,name="Sales Volume",orientation='h',text=qtrsvol_val,textposition = 'inside',hoverinfo='skip',marker=dict(color=color1.tolist()))
-        trace2 = go.Bar(y=ctr_tot_val,x=qtrsval_val,name="Sales Value",orientation='h',text=qtrsval_val,textposition = 'inside',hoverinfo='skip',marker=dict(color=color2.tolist()))
-        trace3 = go.Bar(y=ctr_tot_val,x=qtrprice_val,name="price",orientation='h',text=qtrprice_val,textposition = 'inside',hoverinfo='skip',marker=dict(color=color3.tolist()))
+        trace1 = go.Bar(y=ctr_tot_val,x=qtrsvol_val,name="Sales Volume",orientation='h',text=qtrsvol_val,textposition = 'auto',hoverinfo='skip',marker=dict(color=color1.tolist()),showlegend=False)
+        trace2 = go.Bar(y=ctr_tot_val,x=qtrsval_val,name="Sales Value",orientation='h',text=qtrsval_val,textposition = 'auto',hoverinfo='skip',marker=dict(color=color2.tolist()),showlegend=False)
+        trace3 = go.Bar(y=ctr_tot_val,x=qtrprice_val,name="price",orientation='h',text=qtrprice_val,textposition = 'auto',hoverinfo='skip',marker=dict(color=color3.tolist()),showlegend=False)
         fig = tls.make_subplots(rows=1, cols=3, shared_yaxes=True,vertical_spacing=0.02,horizontal_spacing=0.05,subplot_titles=('Sales Volume', 'Sales Value USD','Price USD'))
-        fig['layout']['margin'] = {'l': 150, 'r': 40, 'b': 40, 't': 80}
+        fig['layout']['margin'] = {'l': 150, 'r': 40, 'b': 40, 't': 100}
 
         fig.append_trace(trace1,1,1)
         fig.append_trace(trace2,1,2)
         fig.append_trace(trace3,1,3)
-        fig['layout']['xaxis1'].update(showgrid=False)
-        fig['layout']['xaxis2'].update(showgrid=False)
-        fig['layout']['xaxis3'].update(showgrid=False)
+        fig['layout']['xaxis1'].update(showgrid=False,range=[-100,100],showticklabels=False)
+        fig['layout']['xaxis2'].update(showgrid=False,range=[-100,100],showticklabels=False)
+        fig['layout']['xaxis3'].update(showgrid=False,range=[-100,100],showticklabels=False)
         fig['layout']['yaxis1'].update(showgrid=False,autorange='reversed')
       # fig.append_trace({'x':df.Time,'y':df.Volume,'type':'bar','name':'Volume'},2,1)
-        fig['layout'].update(title='Quarterly - Q2"'"17 vs Q2"'"18')
+        fig['layout'].update(title='Quarterly Growth% - Q2 2017 vs Q2 2018')
         return fig
     elif (period_comparison_name=='ytd'):
         SQL="SELECT ctr_tot, ytdsvol, ytdsval, ytdprice FROM flags"
@@ -193,21 +154,21 @@ def update_flag(period_comparison_name):
         color3[y3<0]='rgba(255, 0, 0, 1)'
         color3[y3>=0]='rgba(0, 205, 0, 1)'
 
-        trace1 = go.Bar(y=ctr_tot_val,x=ytdsvol_val,name="Sales Volume",orientation='h',text=ytdsvol_val,textposition = 'inside',hoverinfo='skip',marker=dict(color=color1.tolist()))
-        trace2 = go.Bar(y=ctr_tot_val,x=ytdsval_val,name="Sales Value",orientation='h',text=ytdsval_val,textposition = 'inside',hoverinfo='skip',marker=dict(color=color2.tolist()))
-        trace3 = go.Bar(y=ctr_tot_val,x=ytdprice_val,name="price",orientation='h',text=ytdprice_val,textposition = 'inside',hoverinfo='skip',marker=dict(color=color3.tolist()))
+        trace1 = go.Bar(y=ctr_tot_val,x=ytdsvol_val,name="Sales Volume",orientation='h',text=ytdsvol_val,textposition = 'auto',hoverinfo='skip',marker=dict(color=color1.tolist()),showlegend=False)
+        trace2 = go.Bar(y=ctr_tot_val,x=ytdsval_val,name="Sales Value",orientation='h',text=ytdsval_val,textposition = 'auto',hoverinfo='skip',marker=dict(color=color2.tolist()),showlegend=False)
+        trace3 = go.Bar(y=ctr_tot_val,x=ytdprice_val,name="price",orientation='h',text=ytdprice_val,textposition = 'auto',hoverinfo='skip',marker=dict(color=color3.tolist()),showlegend=False)
         fig = tls.make_subplots(rows=1, cols=3, shared_yaxes=True,vertical_spacing=0.02,horizontal_spacing=0.05,subplot_titles=('Sales Volume', 'Sales Value USD','Price USD'))
-        fig['layout']['margin'] = {'l': 150, 'r': 150, 'b': 40, 't': 80}
+        fig['layout']['margin'] = {'l': 150, 'r': 40, 'b': 40, 't': 100}
 
 
         fig.append_trace(trace1,1,1)
         fig.append_trace(trace2,1,2)
         fig.append_trace(trace3,1,3)
 
-        fig['layout']['xaxis1'].update(showgrid=False,autorange=True)
-        fig['layout']['xaxis2'].update(showgrid=False,autorange=True)
-        fig['layout']['xaxis3'].update(showgrid=False,autorange=True)
+        fig['layout']['xaxis1'].update(showgrid=False,range=[-100,100],showticklabels=False)
+        fig['layout']['xaxis2'].update(showgrid=False,range=[-100,100],showticklabels=False)
+        fig['layout']['xaxis3'].update(showgrid=False,range=[-100,100],showticklabels=False)
         fig['layout']['yaxis1'].update(showgrid=False,autorange='reversed')
       # fig.append_trace({'x':df.Time,'y':df.Volume,'type':'bar','name':'Volume'},2,1)
-        fig['layout'].update(title='Year to Date - YTD"'"17 vs YTD"'"18')
+        fig['layout'].update(title='Year to Date Growth% - YTD 2017 vs YTD 2018')
         return fig

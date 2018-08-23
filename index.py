@@ -1,14 +1,6 @@
-import dash
-import dash_auth
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
-import plotly.graph_objs as go
-import psycopg2
-import os
-import flask
-import plotly
-from plotly.offline import init_notebook_mode, iplot
 
 from app import app
 from apps import app4
