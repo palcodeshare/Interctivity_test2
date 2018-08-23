@@ -7,7 +7,6 @@ import pandas as pd
 from flask import Flask
 from flask_cors import CORS
 import dash
-from dash.dependencies import Input, Output, State
 import dash_core_components as dcc
 import dash_html_components as html
 import plotly
@@ -77,7 +76,7 @@ layout = html.Div(
                 ),
             ],className='two columns'),
         ],className='row'),
-        
+
 
         html.Div([
             dcc.Graph(

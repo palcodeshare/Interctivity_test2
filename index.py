@@ -11,7 +11,7 @@ import plotly
 from plotly.offline import init_notebook_mode, iplot
 
 from app import app
-from apps import app2, app3, app4
+from apps import app3, app4
 
 
 
@@ -31,12 +31,10 @@ app.layout = html.Div([
 @app.callback(Output('page-content', 'children'),
               [Input('url', 'pathname')])
 def display_page(pathname):
-    if pathname == '/apps/app2':
-         return app2.layout
-    elif pathname == '/apps/app3':
-         return app3.layout
-    elif pathname == '/apps/app4':
+    if pathname == '/apps/app4':
          return app4.layout
+    # elif pathname == '/apps/app4':
+    #      return app4.layout
     else:
         return '404'
 
