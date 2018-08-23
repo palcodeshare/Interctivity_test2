@@ -11,7 +11,7 @@ import plotly
 from plotly.offline import init_notebook_mode, iplot
 
 from app import app
-from apps import app3, app4
+from apps import app4
 
 
 
