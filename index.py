@@ -1,24 +1,42 @@
-from dash.dependencies import Input, Output
+import dash
+import dash_auth
 import dash_core_components as dcc
 import dash_html_components as html
+from dash.dependencies import Input, Output
+import plotly.graph_objs as go
+import psycopg2
+import os
+import flask
+import plotly
+from plotly.offline import init_notebook_mode, iplot
 
 from app import app
-from apps import app1
+from apps import app2, app3, app4
+
 
 
 app.layout = html.Div([
-    dcc.Location(id='url', refresh=False),
-    html.Div(id='page-content')
+    dcc.Location(
+        id='url',
+        refresh=False
+    ),
+
+    html.Div(
+        id='page-content'
+    )
 ])
+
 
 
 @app.callback(Output('page-content', 'children'),
               [Input('url', 'pathname')])
 def display_page(pathname):
-    if pathname == '/apps/app1':
-         return app1.layout
-    elif pathname == '/apps/app2':
+    if pathname == '/apps/app2':
          return app2.layout
+    elif pathname == '/apps/app3':
+         return app3.layout
+    elif pathname == '/apps/app4':
+         return app4.layout
     else:
         return '404'
 
