@@ -14,6 +14,7 @@ from app import app
 from apps import app4
 
 
+server = app.server
 
 app.layout = html.Div([
     dcc.Location(id='url', refresh=False),

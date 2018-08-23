@@ -211,8 +211,3 @@ def update_flag(period_comparison_name):
       # fig.append_trace({'x':df.Time,'y':df.Volume,'type':'bar','name':'Volume'},2,1)
         fig['layout'].update(title='Year to Date - YTD"'"17 vs YTD"'"18')
         return fig
-
-
-
-
-app.scripts.config.serve_locally = True
