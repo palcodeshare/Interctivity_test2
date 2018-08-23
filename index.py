@@ -13,10 +13,6 @@ from plotly.offline import init_notebook_mode, iplot
 from app import app
 from apps import app4
 
-app = dash.Dash(__name__)
-server=app.server
-server.secret_key = os.environ.get('secret_key', 'secret')
-app.config.supress_callback_exceptions = True
 
 
 app.layout = html.Div([
