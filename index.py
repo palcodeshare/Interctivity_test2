@@ -16,16 +16,9 @@ from apps import app4
 
 
 app.layout = html.Div([
-    dcc.Location(
-        id='url',
-        refresh=False
-    ),
-
-    html.Div(
-        id='page-content'
-    )
+    dcc.Location(id='url', refresh=False),
+    html.Div(id='page-content')
 ])
-
 
 
 @app.callback(Output('page-content', 'children'),
@@ -33,8 +26,6 @@ app.layout = html.Div([
 def display_page(pathname):
     if pathname == '/apps/app4':
          return app4.layout
-    # elif pathname == '/apps/app4':
-    #      return app4.layout
     else:
         return '404'
 
