@@ -3,10 +3,13 @@ import os
 import flask
 from flask import send_from_directory
 
-
-app = dash.Dash(__name__)
-server=app.server
+server = flask.Flask('app')
 server.secret_key = os.environ.get('secret_key', 'secret')
+
+app = dash.Dash('app', server=server)
+# app = dash.Dash(__name__)
+# server=app.server
+# server.secret_key = os.environ.get('secret_key', 'secret')
 app.config.supress_callback_exceptions = True
 
 external_css = [
