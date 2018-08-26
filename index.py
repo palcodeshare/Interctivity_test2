@@ -5,11 +5,12 @@ import dash_auth
 from app import app
 from apps import app4
 
-
+server = app.server
 auth = dash_auth.BasicAuth(
     app,
     (('abcde','1234',),)
 )
+
 app.layout = html.Div([
     dcc.Location(id='url', refresh=False),
     html.Div(id='page-content')
