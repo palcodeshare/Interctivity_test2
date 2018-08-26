@@ -1,13 +1,17 @@
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
-
+import dash_auth
 from app import app
 from apps import app4
 
 
 server = app.server
 
+auth = dash_auth.BasicAuth(
+    app,
+    (('abcde','1234',),)
+)
 app.layout = html.Div([
     dcc.Location(id='url', refresh=False),
     html.Div(id='page-content')
