@@ -1,11 +1,19 @@
 import dash
+import dash_auth
 # import os
 #
 # from flask import send_from_directory
 
 
 app = dash.Dash()
+
 server = app.server
+
+app = dash.Dash('auth')
+auth = dash_auth.BasicAuth(
+    app,
+    (('abcde','1234',),)
+)
 app.config.suppress_callback_exceptions = True
 
 # external_css = [

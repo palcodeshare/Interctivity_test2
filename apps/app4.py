@@ -113,6 +113,17 @@ layout = html.Div(
                         dcc.Dropdown(
                             id='channel',
                             placeholder="Channel",
+                        ),
+                        html.Br(),
+                        html.P('Select Fact :', style={'display': 'inline-block'}),
+                        dcc.Dropdown(
+                            id='fact',
+                            options=[
+                                {'label': 'Sales Value%', 'value': 'svalper_fact'},
+                                {'label': 'Sales Volume%', 'value': 'svolper_fact'}
+                            ],
+                            value='svalper_fact',
+                            placeholder="Bubble Fact"
                         )
                     ],className='two columns',style={'padding-top':'100px','verticalAlign': 'middle'}),
 
@@ -120,10 +131,21 @@ layout = html.Div(
                         id='bubble_chart',
                         config={'displayModeBar': False},
                         className='ten columns'
-                    ),
+                    )
             ],className='row')
 
-        ])
+        ]),
+
+        #Top 10 brands flags - same input as for bubble chart
+        html.Div([
+            html.Div([
+                dcc.Graph(
+                    id='flags_topbrands',
+                    config={'displayModeBar': False}
+                ),
+            ],className='row'),
+
+        ]),
     ],
     style={'font-family': 'Calibri Light'},className='ten columns offset-by-one'
 )
@@ -275,17 +297,19 @@ def update_flag(period_comparison_name):
     Output('bubble_chart','figure'),
     [Input('country','value'),
      Input('typeveh','value'),
-     Input('channel','value'),]
+     Input('channel','value'),
+     Input('fact','value')]
 )
 
 def bubble_update(country_name,
                   typeveh_name,
-                  channel_name):
+                  channel_name,
+                  fact_name):
 
-    SQL="SELECT brands, tos, wdist, svper FROM bubble WHERE country=(%s) AND typeveh=(%s) AND channel=(%s)"
+    SQL="SELECT brands, tos, wdist, svper, svolper FROM bubble WHERE country=(%s) AND typeveh=(%s) AND channel=(%s)"
     cur.execute(SQL,(country_name,typeveh_name,channel_name,))
     result=cur.fetchall()
-    brands_val, tos_val, wdist_val, svper_val = zip(*result)
+    brands_val, tos_val, wdist_val, svper_val, svolper_val = zip(*result)
 
     y1=np.array(brands_val)
     print(str(y1))
@@ -306,10 +330,66 @@ def bubble_update(country_name,
     color1[y1=='AXCL']='rgb(0, 0, 255)'
     color1[y1=='NISSAN']='rgb(248, 191, 157)'
 
-    trace1 = go.Scatter(x=wdist_val,y=tos_val,mode='markers',marker=dict(color=color1.tolist(),size=svper_val,),text=brands_val)
+    if(fact_name=='svalper_fact'):
+        trace1 = go.Scatter(x=wdist_val,y=tos_val,mode='markers',marker=dict(color=color1.tolist(),size=svper_val,),text=brands_val)
+    elif(fact_name=='svolper_fact'):
+        trace1 = go.Scatter(x=wdist_val,y=tos_val,mode='markers',marker=dict(color=color1.tolist(),size=svolper_val,),text=brands_val)
+
     fig = tls.make_subplots(rows=1, cols=1)
+    fig['layout']['margin'] = {'l': 150, 'r': 20, 'b': 40, 't': 100}
     fig.append_trace(trace1,1,1)
     fig['layout'].update(plot_bgcolor='#EFECEA',title='TOS Value vs W.Dist - Q2 2018',titlefont=dict(family='Calibri Light'))
     fig['layout']['xaxis1'].update(zeroline=False,gridcolor='#FFFFFF',ticks='outside',title='Weighted Distribution',titlefont=dict(family='Calibri Light'))
     fig['layout']['yaxis1'].update(zeroline=False,gridcolor='#FFFFFF',ticks='outside',title='TOS Value',titlefont=dict(family='Calibri Light'))
+    return fig
+
+@app.callback(
+    Output('flags_topbrands','figure'),
+    [Input('country','value'),
+     Input('typeveh','value'),
+     Input('channel','value')]
+)
+
+def update_flag_brands(country_name,
+                typeveh_name,
+                channel_name):
+
+    SQL="SELECT brands, qtrsvol, qtrsval, qtrprice FROM flagbrands WHERE country=(%s) AND typeveh=(%s) AND channel=(%s)"
+    cur.execute(SQL,(country_name,typeveh_name,channel_name,))
+    result=cur.fetchall()
+    brands_val, qtrsvol_val, qtrsval_val, qtrprice_val = zip(*result)
+
+    y1=np.array(qtrsvol_val)
+    y2=np.array(qtrsval_val)
+    y3=np.array(qtrprice_val)
+
+    color1=np.array(['rgba(255, 0, 0, 1)']*y1.shape[0])
+    color2=np.array(['rgba(255, 0, 0, 1)']*y2.shape[0])
+    color3=np.array(['rgba(255, 0, 0, 1)']*y3.shape[0])
+
+    color1[y1<0]='rgba(255, 0, 0, 1)'
+    color1[y1>=0]='rgba(0, 205, 0, 1)'
+    color2[y2<0]='rgba(255, 0, 0, 1)'
+    color2[y2>=0]='rgba(0, 205, 0, 1)'
+    color3[y3<0]='rgba(255, 0, 0, 1)'
+    color3[y3>=0]='rgba(0, 205, 0, 1)'
+
+    trace1 = go.Bar(y=brands_val,x=qtrsvol_val,name="Sales Volume",orientation='h',text=qtrsvol_val,textposition = 'auto',hoverinfo='skip',marker=dict(color=color1.tolist()),showlegend=False)
+    trace2 = go.Bar(y=brands_val,x=qtrsval_val,name="Sales Value",orientation='h',text=qtrsval_val,textposition = 'auto',hoverinfo='skip',marker=dict(color=color2.tolist()),showlegend=False)
+    trace3 = go.Bar(y=brands_val,x=qtrprice_val,name="price",orientation='h',text=qtrprice_val,textposition = 'auto',hoverinfo='skip',marker=dict(color=color3.tolist()),showlegend=False)
+    fig = tls.make_subplots(rows=1, cols=3, shared_yaxes=True,vertical_spacing=0.02,horizontal_spacing=0.05,subplot_titles=('Sales Volume', 'Sales Value USD','Price USD'))
+    fig['layout']['margin'] = {'l': 150, 'r': 40, 'b': 40, 't': 100}
+    fig['layout'].update(title='Quarterly Growth%',titlefont=dict(family='Calibri Light'))
+
+    fig.append_trace(trace1,1,1)
+    fig.append_trace(trace2,1,2)
+    fig.append_trace(trace3,1,3)
+
+    for i in fig['layout']['annotations']:
+        i['font'] = dict(family='Calibri Light',size=15)
+
+    fig['layout']['xaxis1'].update(showgrid=False,range=[-100,100],showticklabels=False)
+    fig['layout']['xaxis2'].update(showgrid=False,range=[-100,100],showticklabels=False)
+    fig['layout']['xaxis3'].update(showgrid=False,range=[-100,100],showticklabels=False)
+    fig['layout']['yaxis1'].update(showgrid=False,autorange='reversed')
     return fig
