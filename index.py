@@ -14,7 +14,7 @@ auth = dash_auth.BasicAuth(
 )
 
 app.layout = html.Div([
-    dcc.Location(id='url', refresh=False),
+    dcc.Location(id='url', refresh=False, pathname='/apps/app4'),
     html.Div(id='page-content')
 ])
 
