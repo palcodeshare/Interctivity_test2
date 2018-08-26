@@ -6,8 +6,6 @@ from app import app
 from apps import app4
 
 
-server = app.server
-
 auth = dash_auth.BasicAuth(
     app,
     (('abcde','1234',),)
