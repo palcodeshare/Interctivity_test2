@@ -4,8 +4,10 @@ from dash.dependencies import Input, Output
 import dash_auth
 from app import app
 from apps import app4
+import os
 
 server = app.server
+server.secret_key = os.environ.get('secret_key', 'secret')
 auth = dash_auth.BasicAuth(
     app,
     (('abcde','1234',),)

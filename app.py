@@ -7,7 +7,7 @@ import os
 
 app = dash.Dash()
 
-server.secret_key = os.environ.get('secret_key', 'secret')
+
 
 
 
