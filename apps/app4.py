@@ -115,7 +115,7 @@ layout = html.Div(
                             placeholder="Channel",
                         ),
                         html.Br(),
-                        html.P('Select Fact :', style={'display': 'inline-block'}),
+                        html.P('Select Fact (Bubble Size):', style={'display': 'inline-block'}),
                         dcc.Dropdown(
                             id='fact',
                             options=[
@@ -236,7 +236,7 @@ def update_flag(period_comparison_name):
         trace3 = go.Bar(y=ctr_tot_val,x=qtrprice_val,name="price",orientation='h',text=qtrprice_val,textposition = 'auto',hoverinfo='skip',marker=dict(color=color3.tolist()),showlegend=False)
         fig = tls.make_subplots(rows=1, cols=3, shared_yaxes=True,vertical_spacing=0.02,horizontal_spacing=0.05,subplot_titles=('Sales Volume', 'Sales Value USD','Price USD'))
         fig['layout']['margin'] = {'l': 150, 'r': 40, 'b': 40, 't': 100}
-        fig['layout'].update(title='Quarterly Growth%',titlefont=dict(family='Calibri Light'))
+        fig['layout'].update(title='Quarterly Growth% - Q2 2017 vs Q2 2018',titlefont=dict(family='Calibri Light'))
 
         fig.append_trace(trace1,1,1)
         fig.append_trace(trace2,1,2)
@@ -277,7 +277,7 @@ def update_flag(period_comparison_name):
         trace3 = go.Bar(y=ctr_tot_val,x=ytdprice_val,name="price",orientation='h',text=ytdprice_val,textposition = 'auto',hoverinfo='skip',marker=dict(color=color3.tolist()),showlegend=False)
         fig = tls.make_subplots(rows=1, cols=3, shared_yaxes=True,vertical_spacing=0.02,horizontal_spacing=0.05,subplot_titles=('Sales Volume', 'Sales Value USD','Price USD'))
         fig['layout']['margin'] = {'l': 150, 'r': 20, 'b': 40, 't': 100}
-        fig['layout'].update(title='Year to Date Growth%',titlefont=dict(family='Calibri Light'))
+        fig['layout'].update(title='Year to Date Growth% - YTD 2017 vs YTD 2018',titlefont=dict(family='Calibri Light'))
 
         fig.append_trace(trace1,1,1)
         fig.append_trace(trace2,1,2)
@@ -379,7 +379,7 @@ def update_flag_brands(country_name,
     trace3 = go.Bar(y=brands_val,x=qtrprice_val,name="price",orientation='h',text=qtrprice_val,textposition = 'auto',hoverinfo='skip',marker=dict(color=color3.tolist()),showlegend=False)
     fig = tls.make_subplots(rows=1, cols=3, shared_yaxes=True,vertical_spacing=0.02,horizontal_spacing=0.05,subplot_titles=('Sales Volume', 'Sales Value USD','Price USD'))
     fig['layout']['margin'] = {'l': 150, 'r': 40, 'b': 40, 't': 100}
-    fig['layout'].update(title='Quarterly Growth%',titlefont=dict(family='Calibri Light'))
+    fig['layout'].update(title='Quarterly Growth% - Q2 2017 vs Q2 2018',titlefont=dict(family='Calibri Light'))
 
     fig.append_trace(trace1,1,1)
     fig.append_trace(trace2,1,2)
