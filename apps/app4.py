@@ -96,7 +96,7 @@ layout = html.Div(
                             id='country',
                             options=[
                                 {'label': 'AE', 'value': 'United Arab Emirates'},
-                                {'label': 'KSA', 'value': 'Saudi Arabia'}
+                                # {'label': 'KSA', 'value': 'Saudi Arabia'}
                             ],
                             value='United Arab Emirates',
                             placeholder="Country",
