@@ -3,7 +3,7 @@ import dash_html_components as html
 from dash.dependencies import Input, Output
 import dash_auth
 from app import app
-from apps import app4
+from apps import dbspace
 import os
 
 server = app.server
@@ -14,7 +14,7 @@ auth = dash_auth.BasicAuth(
 )
 
 app.layout = html.Div([
-    dcc.Location(id='url', refresh=False, pathname='/apps/app4'),
+    dcc.Location(id='url', refresh=False, pathname='/apps/dbspace'),
     html.Div(id='page-content')
 ])
 
@@ -22,7 +22,7 @@ app.layout = html.Div([
 @app.callback(Output('page-content', 'children'),
               [Input('url', 'pathname')])
 def display_page(pathname):
-    if pathname == '/apps/app4':
+    if pathname == '/apps/dbspace':
          return app4.layout
     else:
         return '404'
