@@ -23,7 +23,7 @@ layout = html.Div([
             children='GfK POS DASHBOARD',
             style={'font-weight': 'bold'}
         )
-    ],style = {'font-family': 'insight Display screen','text-align' : 'center'}, className = "row"),
+    ],style = {'font-family': 'Calibri Light','text-align' : 'center'}, className = "row"),
 
     html.Br(),
     #Cockpit overview
@@ -75,14 +75,14 @@ layout = html.Div([
                 style={'color' : 'green'},
             )
         ],className= 'three columns',style={'text-align' : 'center'}),
-    ],style={'font-family': 'insight screen'}, className = "row"),
+    ],style={'font-family': 'Calibri Light'}, className = "row"),
 
 
     html.Div([
         html.H3(
             children='Select Region :'
         )
-    ],style={'font-family': 'insight display screen','text-align': 'center'},className = "row"),
+    ],style={'font-family': 'Calibri Light','text-align': 'center'},className = "row"),
 
     html.Div([
         dcc.Graph(
@@ -95,7 +95,7 @@ layout = html.Div([
                         lon = '45.0792',
                         mode = "markers",
                         marker = dict(size=200,color='rgb(242, 177, 172)',opacity=0.3),
-                        
+
                     )
                 ],
                 layout= dict(
@@ -115,9 +115,9 @@ layout = html.Div([
                 )
             ),
             style = {"height": "100%"},
-            config={'scrollZoom': False}
+            config={'scrollZoom': False,'zoomControl': false}
         )
-    ], style = {"border-style": "solid", "height": "60vh","border-width": "2px",'font-family': 'insight screen'},className = "row"),
+    ], style = {"border-style": "solid", "height": "60vh","border-width": "2px",'font-family': 'Calibri Light'},className = "row"),
 ])
 
 @app.callback(
