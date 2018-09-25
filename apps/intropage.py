@@ -95,7 +95,7 @@ layout = html.Div([
                         lon = '45.0792',
                         mode = "markers",
                         marker = dict(size=200,color='rgb(242, 177, 172)',opacity=0.3),
-                        text = text
+                        
                     )
                 ],
                 layout= dict(
