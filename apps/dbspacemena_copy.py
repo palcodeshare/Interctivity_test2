@@ -89,58 +89,87 @@ layout = html.Div(
 
         #bubble test
         html.Div([
-            html.Div([
-                    html.Div([
-                        html.P('Select country :', style={'display': 'inline-block'}),
-                        dcc.Dropdown(
-                            id='country',
-                            options=[
-                                {'label': 'AE', 'value': 'United Arab Emirates'},
-                                # {'label': 'KSA', 'value': 'Saudi Arabia'}
-                            ],
-                            value='United Arab Emirates',
-                            placeholder="Country",
+            # html.P('Select country :', style={'display': 'inline-block'}),
+            dcc.Dropdown(
+                id='country',
+                options=[
+                    {'label': 'AE', 'value': 'United Arab Emirates'},
+                    # {'label': 'KSA', 'value': 'Saudi Arabia'}
+                ],
+                value='United Arab Emirates',
+                placeholder="Country",
+                className='two columns'
 
-                        ),
-                        html.Br(),
-                        html.P('Select Type of Vehicle :', style={'display': 'inline-block'}),
-                        dcc.Dropdown(
-                            id='typeveh',
-                            placeholder="Type Of Vehicle",
-                        ),
-                        html.Br(),
-                        html.P('Select Channel :', style={'display': 'inline-block'}),
-                        dcc.Dropdown(
-                            id='channel',
-                            placeholder="Channel",
-                        ),
-                        html.Br(),
-                        html.P('Select Fact (Bubble Size):', style={'display': 'inline-block'}),
-                        dcc.Dropdown(
-                            id='fact',
-                            options=[
-                                {'label': 'Sales Value%', 'value': 'svalper_fact'},
-                                {'label': 'Sales Volume%', 'value': 'svolper_fact'}
-                            ],
-                            value='svalper_fact',
-                            placeholder="Bubble Fact"
-                        )
-                    ],className='two columns',style={'padding-top':'100px','verticalAlign': 'middle'}),
+            ),
+            # html.Br(),
+            # html.P('Select Type of Vehicle :', style={'display': 'inline-block'}),
+            dcc.Dropdown(
+                id='typeveh',
+                placeholder="Type Of Vehicle",
+                className='two columns'
+            ),
+            # html.Br(),
+            # html.P('Select Channel :', style={'display': 'inline-block'}),
+            dcc.Dropdown(
+                id='region',
+                placeholder="Region",
+                className='two columns'
+            ),
 
-                    dcc.Graph(
-                        id='bubble_chart',
-                        config={'displayModeBar': False},
-                        className='ten columns'
-                    )
-            ],className='row')
+            dcc.Dropdown(
+                id='channel',
+                placeholder="Channel",
+                className='two columns'
+            ),
+            # html.Br(),
+            # html.P('Select Fact (Bubble Size):', style={'display': 'inline-block'}),
+            dcc.Dropdown(
+                id='base',
+                placeholder="Base",
+                className='two columns'
+            ),
 
-        ]),
+            dcc.Dropdown(
+                id='usedfor',
+                placeholder="Used For",
+                className='two columns'
+            ),
+
+            dcc.Dropdown(
+                id='fact',
+                options=[
+                    {'label': 'Sales Value%', 'value': 'svalper_fact'},
+                    {'label': 'Sales Volume%', 'value': 'svolper_fact'}
+                ],
+                value='svalper_fact',
+                placeholder="Bubble Fact",
+                className='two columns'
+            )
+        ],className='row'),
+
+        html.Div([
+            dcc.Graph(
+                id='bubble_chart',
+                config={'displayModeBar': False},
+            )
+        ],className='row'),
 
         #Top 10 brands flags - same input as for bubble chart
         html.Div([
             html.Div([
                 dcc.Graph(
                     id='flags_topbrands',
+                    config={'displayModeBar': False}
+                ),
+            ],className='row'),
+
+        ]),
+
+        #Top 10 brands brandshares - same input as for bubble chart
+        html.Div([
+            html.Div([
+                dcc.Graph(
+                    id='BS_topbrands',
                     config={'displayModeBar': False}
                 ),
             ],className='row'),
@@ -176,9 +205,9 @@ def update_typeveh(selected_country):
 def set_typeveh_value(available_options):
     return available_options[1]['value']
 
-#Channel button options
+#region button options
 @app.callback(
-    Output('channel','options'),
+    Output('region','options'),
     [Input('country','value'),
      Input('typeveh','value')]
 )
@@ -186,8 +215,37 @@ def set_typeveh_value(available_options):
 def update_typeveh(selected_country,
                    selected_typeveh):
 
-    SQL="SELECT DISTINCT(channel) FROM bubble WHERE country=(%s) AND typeveh=(%s)"
+    SQL="SELECT DISTINCT(region) FROM bubble WHERE country=(%s) AND typeveh=(%s)"
     cur.execute(SQL,(selected_country,selected_typeveh,))
+    result=cur.fetchall()
+    region_options = zip(*result)
+    print(region_options)
+    opt=np.array(list(region_options))
+    print(opt)
+    return [{'label': i, 'value': i} for i in opt[0]]
+
+@app.callback(Output('region', 'value'),
+              [Input('region', 'options')]
+)
+
+def set_typeveh_value(available_options):
+    return available_options[1]['value']
+
+
+#Channel button options
+@app.callback(
+    Output('channel','options'),
+    [Input('country','value'),
+     Input('typeveh','value'),
+     Input('region','value')]
+)
+
+def update_typeveh(selected_country,
+                   selected_typeveh,
+                   selected_region):
+
+    SQL="SELECT DISTINCT(channel) FROM bubble WHERE country=(%s) AND typeveh=(%s) AND region=(%s)"
+    cur.execute(SQL,(selected_country,selected_typeveh,selected_region,))
     result=cur.fetchall()
     channel_options = zip(*result)
     print(channel_options)
@@ -200,7 +258,70 @@ def update_typeveh(selected_country,
 )
 
 def set_typeveh_value(available_options):
-    return available_options[2]['value']
+    return available_options[1]['value']
+
+#Base button options
+@app.callback(
+    Output('base','options'),
+    [Input('country','value'),
+     Input('typeveh','value'),
+     Input('region','value'),
+     Input('channel','value')]
+)
+
+def update_typeveh(selected_country,
+                   selected_typeveh,
+                   selected_region,
+                   selected_channel):
+
+    SQL="SELECT DISTINCT(base) FROM bubble WHERE country=(%s) AND typeveh=(%s) AND region=(%s) AND channel=(%s)"
+    cur.execute(SQL,(selected_country,selected_typeveh,selected_region,selected_channel,))
+    result=cur.fetchall()
+    base_options = zip(*result)
+    print(base_options)
+    opt=np.array(list(base_options))
+    print(opt)
+    return [{'label': i, 'value': i} for i in opt[0]]
+
+@app.callback(Output('base', 'value'),
+              [Input('base', 'options')]
+)
+
+def set_typeveh_value(available_options):
+    return available_options[1]['value']
+
+#Used For button options
+@app.callback(
+    Output('usedfor','options'),
+    [Input('country','value'),
+     Input('typeveh','value'),
+     Input('region','value'),
+     Input('channel','value'),
+     Input('base','value')]
+)
+
+def update_typeveh(selected_country,
+                   selected_typeveh,
+                   selected_region,
+                   selected_channel,
+                   selected_base):
+
+    SQL="SELECT DISTINCT(usedfor) FROM bubble WHERE country=(%s) AND typeveh=(%s) AND region=(%s) AND channel=(%s) AND base=(%s)"
+    cur.execute(SQL,(selected_country,selected_typeveh,selected_region,selected_channel,selected_base,))
+    result=cur.fetchall()
+    usedfor_options = zip(*result)
+    print(usedfor_options)
+    opt=np.array(list(usedfor_options))
+    print(opt)
+    return [{'label': i, 'value': i} for i in opt[0]]
+
+@app.callback(Output('usedfor', 'value'),
+              [Input('usedfor', 'options')]
+)
+
+def set_typeveh_value(available_options):
+    return available_options[0]['value']
+
 
 ########<Flag Chart Callbacks>########
 @app.callback(
@@ -236,7 +357,7 @@ def update_flag(period_comparison_name):
         trace3 = go.Bar(y=ctr_tot_val,x=qtrprice_val,name="price",orientation='h',text=qtrprice_val,textposition = 'auto',hoverinfo='skip',marker=dict(color=color3.tolist()),showlegend=False)
         fig = tls.make_subplots(rows=1, cols=3, shared_yaxes=True,vertical_spacing=0.02,horizontal_spacing=0.05,subplot_titles=('Sales Volume', 'Sales Value USD','Price USD'))
         fig['layout']['margin'] = {'l': 150, 'r': 40, 'b': 40, 't': 100}
-        fig['layout'].update(title='Quarterly Growth% - Q2 2017 vs Q2 2018',titlefont=dict(family='Calibri Light'))
+        fig['layout'].update(title='Quarterly Growth% - Q1 2018 vs Q2 2018',titlefont=dict(family='Calibri Light'))
 
         fig.append_trace(trace1,1,1)
         fig.append_trace(trace2,1,2)
@@ -298,16 +419,22 @@ def update_flag(period_comparison_name):
     [Input('country','value'),
      Input('typeveh','value'),
      Input('channel','value'),
-     Input('fact','value')]
+     Input('fact','value'),
+     Input('region','value'),
+     Input('base','value'),
+     Input('usedfor','value')]
 )
 
 def bubble_update(country_name,
                   typeveh_name,
                   channel_name,
-                  fact_name):
+                  fact_name,
+                  region_name,
+                  base_name,
+                  usedfor_name):
 
-    SQL="SELECT brands, tos, wdist, svper, svolper FROM bubble WHERE country=(%s) AND typeveh=(%s) AND channel=(%s)"
-    cur.execute(SQL,(country_name,typeveh_name,channel_name,))
+    SQL="SELECT brands, tos, wdist, svper, svolper FROM bubble WHERE country=(%s) AND typeveh=(%s) AND channel=(%s) AND region=(%s) AND base=(%s) AND usedfor=(%s) "
+    cur.execute(SQL,(country_name,typeveh_name,channel_name,region_name,base_name,usedfor_name,))
     result=cur.fetchall()
     brands_val, tos_val, wdist_val, svper_val, svolper_val = zip(*result)
 
@@ -343,19 +470,26 @@ def bubble_update(country_name,
     fig['layout']['yaxis1'].update(zeroline=False,gridcolor='#FFFFFF',ticks='outside',title='TOS Value',titlefont=dict(family='Calibri Light'))
     return fig
 
+########<Flag Chart Callbacks - Top Brands>########
 @app.callback(
     Output('flags_topbrands','figure'),
     [Input('country','value'),
      Input('typeveh','value'),
-     Input('channel','value')]
+     Input('channel','value'),
+     Input('region','value'),
+     Input('base','value'),
+     Input('usedfor','value')]
 )
 
 def update_flag_brands(country_name,
                 typeveh_name,
-                channel_name):
+                channel_name,
+                region_name,
+                base_name,
+                usedfor_name):
 
-    SQL="SELECT brands, qtrsvol, qtrsval, qtrprice FROM flagbrands WHERE country=(%s) AND typeveh=(%s) AND channel=(%s)"
-    cur.execute(SQL,(country_name,typeveh_name,channel_name,))
+    SQL="SELECT brands, qtrsvol, qtrsval, qtrprice FROM bubble WHERE country=(%s) AND typeveh=(%s) AND channel=(%s) AND region=(%s) AND base=(%s) AND usedfor=(%s)"
+    cur.execute(SQL,(country_name,typeveh_name,channel_name,region_name,base_name,usedfor_name,))
     result=cur.fetchall()
     brands_val, qtrsvol_val, qtrsval_val, qtrprice_val = zip(*result)
 
@@ -379,7 +513,7 @@ def update_flag_brands(country_name,
     trace3 = go.Bar(y=brands_val,x=qtrprice_val,name="price",orientation='h',text=qtrprice_val,textposition = 'auto',hoverinfo='skip',marker=dict(color=color3.tolist()),showlegend=False)
     fig = tls.make_subplots(rows=1, cols=3, shared_yaxes=True,vertical_spacing=0.02,horizontal_spacing=0.05,subplot_titles=('Sales Volume', 'Sales Value USD','Price USD'))
     fig['layout']['margin'] = {'l': 150, 'r': 40, 'b': 40, 't': 100}
-    fig['layout'].update(title='Quarterly Growth% - Q2 2017 vs Q2 2018',titlefont=dict(family='Calibri Light'))
+    fig['layout'].update(title='Quarterly Growth% - Q1 2018 vs Q2 2018',titlefont=dict(family='Calibri Light'))
 
     fig.append_trace(trace1,1,1)
     fig.append_trace(trace2,1,2)
@@ -392,4 +526,90 @@ def update_flag_brands(country_name,
     fig['layout']['xaxis2'].update(showgrid=False,range=[-100,100],showticklabels=False)
     fig['layout']['xaxis3'].update(showgrid=False,range=[-100,100],showticklabels=False)
     fig['layout']['yaxis1'].update(showgrid=False,autorange='reversed')
+    return fig
+
+########<Brand Share Chart Callbacks - Top Brands>########
+@app.callback(
+    Output('BS_topbrands','figure'),
+    [Input('country','value'),
+     Input('typeveh','value'),
+     Input('channel','value')
+     ]
+)
+#
+def update_BS_brands(country_name,
+            typeveh_name,
+            channel_name):
+
+    # SQL="SELECT brands, qtrsvol, qtrsval, qtrprice FROM flagbrands WHERE country=(%s) AND typeveh=(%s) AND channel=(%s)"
+    # cur.execute(SQL,(country_name,typeveh_name,channel_name,))
+    # result=cur.fetchall()
+    # brands_val, qtrsvol_val, qtrsval_val, qtrprice_val = zip(*result)
+
+
+    trial_y=['AC Delco', 'ZIC', 'SHELL']
+    periods=['Q1','Q2','Q3']
+    trial_x1=[34,23,11]
+    trial_x2=[34,23,11]
+    trial_x3=[34,23,11]
+    trial_x4=[34,23,11]
+
+    colors = ['#42A5B3'] + ['#D15A86'] + ['#5C8100']
+
+    def make_trace(x, name, color):
+        return go.Bar(
+            x=periods,   # cities name on the y-axis
+            y=x,        # monthly total on x-axis
+            name=name,  # label for hover
+            orientation='v',   # (!) for horizontal bars, default is 'v'
+            marker= go.Marker(
+                color=color,        # set bar colors
+                line= go.Line(
+                    color='white',  # set bar border color
+                    width=1         # set bar border width
+                )
+            )
+        )
+
+    data = go.Data([
+        make_trace([trial_x1[i], trial_x2[i], trial_x3[i], trial_x4[i]], trial_y[i], colors[i])
+        for i in range(3)
+    ])
+
+    layout = go.Layout(
+        barmode='stack',  # (!) bars are stacked on this plot
+        bargap=0.6,       # (!) spacing (norm. w.r.t axis) between bars
+        # title=title,        # set plot title
+        showlegend=False,   # remove legend
+        # xaxis= go.XAxis(
+        #     title='Precipitation [in mm of rain]', # x-axis title
+        #     gridcolor='white',  # white grid lines
+        #     gridwidth=2,        # bigger grid lines
+        #     zeroline=False,     # remove thick zero line
+        #     ticks='outside',    # draw ticks outside axes
+        #     autotick=False,     # (!) overwrite default tick options
+        #     dtick=100,          # (!) set distance between ticks
+        #     ticklen=8,          # (!) set tick length
+        #     tickwidth=1.5       #     and width
+        # ),
+        plot_bgcolor='rgb(233,233,233)',  # set plot color to grey
+    )
+
+    # trace[i] = go.Bar(
+    #     x=['giraffes', 'orangutans', 'monkeys'],
+    #     y=trial_x[i],
+    #     name=trial[i]
+    # )
+    # trace2 = go.Bar(
+    #     x=['giraffes', 'orangutans', 'monkeys'],
+    #     y=[12, 18, 29],
+    #     name='LA Zoo'
+    # )
+    #
+    # data = [trace1, trace2]
+    # layout = go.Layout(
+    #     barmode='stack'
+    # )
+
+    fig = go.Figure(data=data, layout=layout)
     return fig

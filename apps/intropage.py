@@ -91,8 +91,8 @@ layout = html.Div([
                 data=[
                     dict(
                         type = "scattermapbox",
-                        lat = '23.8859',
-                        lon = '45.0792',
+                        lat = ['23.8859'],
+                        lon = ['45.0792'],
                         mode = "markers",
                         marker = dict(size=200,color='rgb(242, 177, 172)',opacity=0.3),
 
@@ -115,7 +115,7 @@ layout = html.Div([
                 )
             ),
             style = {"height": "100%"},
-            config={'scrollZoom': False,'zoomControl': false}
+            config={'scrollZoom': False,'zoomControl': False}
         )
     ], style = {"border-style": "solid", "height": "60vh","border-width": "2px",'font-family': 'Calibri Light'},className = "row"),
 ])
@@ -127,8 +127,8 @@ layout = html.Div([
 
 def change_page(clickData):
     print(str(clickData['points'][0]['pointNumber']))
-    if str(clickData['points'][0]['pointNumber'])==str(1):
-        return '/apps/dbspace_mena'
+    if str(clickData['points'][0]['pointNumber'])==str(0):
+        return '/apps/dbspacemena'
 
 if __name__ == "__main__":
     app.run_server(debug=True)
