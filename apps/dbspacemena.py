@@ -315,14 +315,12 @@ def update_typeveh(analysistype_val,
     Output('channel','options'),
     [Input('analysistype','value'),
      Input('country','value'),
-     Input('typeveh','value'),
-     Input('region','value')]
+     Input('typeveh','value')]
 )
 
 def update_typeveh(analysistype_val,
                    selected_country,
-                   selected_typeveh,
-                   selected_region):
+                   selected_typeveh):
 
     if analysistype_val=='region_analysis':
         return 'disabled'
