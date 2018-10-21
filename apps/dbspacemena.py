@@ -718,8 +718,8 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
     trace1 = go.Bar(x=brands_val,y=wdpq_val,name="Q1",text=wdpq_val,textposition = 'auto',marker=dict(color='rgba(172,191,233,1)'))
     trace2 = go.Bar(x=brands_val,y=wdcq_val,name="Q2",text=wdcq_val,textposition = 'auto',marker=dict(color='rgba(255,139,164,1)'))
 
-    trace3 = go.Bar(x=brands_val,y=uwdpq_val,name="Q1",text=uwdpq_val,textposition = 'auto',marker=dict(color='rgba(172,191,233,1)'))
-    trace4 = go.Bar(x=brands_val,y=uwdcq_val,name="Q2",text=uwdcq_val,textposition = 'auto',marker=dict(color='rgba(255,139,164,1)'))
+    trace3 = go.Bar(x=brands_val,y=uwdpq_val,name="Q1",text=uwdpq_val,textposition = 'auto',marker=dict(color='rgba(172,191,233,1)'),showlegend=False)
+    trace4 = go.Bar(x=brands_val,y=uwdcq_val,name="Q2",text=uwdcq_val,textposition = 'auto',marker=dict(color='rgba(255,139,164,1)'),showlegend=False)
 
     fig = tls.make_subplots(rows=2, cols=1,shared_xaxes=True,subplot_titles=('Weighted Distribution', 'Unweighted Distribution'))
     fig['layout']['margin'] = {'l': 100, 'r': 120, 'b': 150, 't': 70}
