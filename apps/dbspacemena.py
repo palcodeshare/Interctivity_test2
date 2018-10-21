@@ -864,10 +864,9 @@ def update_flag(ctry_name):
 
     fig['layout'].update(title='Top 15 SKUs By Country (Mio.) - Q2 2018',titlefont=dict(family='Calibri Light'),barmode='group',hovermode='closest')
 
-    fig.append_trace(trace1,1,1)
-    fig.append_trace(trace2,1,1)
-    fig.append_trace(trace3,2,1)
-    fig.append_trace(trace4,2,1)
+    fig.append_trace(trace1,2,1)
+    fig.append_trace(trace3,1,1)
+    fig.append_trace(trace4,1,1)
     fig.append_trace(trace5,1,1)
     fig.append_trace(trace6,1,1)
 
