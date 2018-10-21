@@ -772,7 +772,7 @@ def update_BS_brands(globalregion_name):
             }
         ],
         'layout': {
-            'title':'Pie Chart - Country Split',
+            'title':'Pie Chart - Country Split (Volume% & Value%)',
         }
     }
     return fig
