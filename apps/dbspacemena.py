@@ -302,12 +302,13 @@ def update_typeveh(analysistype_val,
         opt=np.array(list(region_options))
         print(opt)
         return [{'label': i, 'value': i} for i in opt[0]]
-        @app.callback(Output('region', 'value'),
-                      [Input('region', 'options')]
-        )
 
-        def set_region_value(available_options):
-            return available_options[3]['value']
+    @app.callback(Output('region', 'value'),
+                  [Input('region', 'options')]
+    )
+
+    def set_region_value(available_options):
+        return available_options[3]['value']
 
 
 #Channel button options
@@ -333,12 +334,13 @@ def update_typeveh(analysistype_val,
         opt=np.array(list(channel_options))
         print(opt)
         return [{'label': i, 'value': i} for i in opt[0]]
-        @app.callback(Output('channel', 'value'),
-                      [Input('channel', 'options')]
-        )
 
-        def set_typeveh_value(available_options):
-            return available_options[1]['value']
+    @app.callback(Output('channel', 'value'),
+                  [Input('channel', 'options')]
+    )
+
+    def set_typeveh_value(available_options):
+        return available_options[1]['value']
 
 #Base button options
 @app.callback(
@@ -448,7 +450,7 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
     result=cur.fetchall()
     brand_val, salesplkpq_val, salesplkcq_val = zip(*result)
     trial_y=brand_val
-    periods=['Q1','Q2']
+    periods=['Q1 2018','Q2 2018']
     trial_x1=salesplkpq_val
     trial_x2=salesplkcq_val
 
@@ -515,7 +517,7 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
     brand_val, valplkpq_val, valplkcq_val = zip(*result)
 
     trial_y=brand_val
-    periods=['Q1','Q2']
+    periods=['Q1 2018','Q2 2018']
 
     trial_x3=valplkpq_val
     trial_x4=valplkcq_val
@@ -581,7 +583,7 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
     brand_val, salesplkpy_val, salesplkcy_val = zip(*result)
 
     trial_y=brand_val
-    periods=['Q1','Q2']
+    periods=['YTD 2017','YTD 2018']
     trial_x1=salesplkpy_val
     trial_x2=salesplkcy_val
 
@@ -613,7 +615,7 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
     layout = go.Layout(
         barmode='stack',  # (!) bars are stacked on this plot
         bargap=0,       # (!) spacing (norm. w.r.t axis) between bars
-        title='Absolute Brandshares Y-o-Y : Sales Volume',        # set plot title
+        title='Absolute Brandshares Y-o-Y (Till June 2018) : Sales Volume',        # set plot title
         showlegend=False,   # remove legend
 
     )
@@ -646,7 +648,7 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
     brand_val, valplkpy_val, valplkcy_val = zip(*result)
 
     trial_y=brand_val
-    periods=['Q1','Q2']
+    periods=['YTD 2017','YTD 2018']
 
     trial_x3=valplkpy_val
     trial_x4=valplkcy_val
@@ -678,7 +680,7 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
     layout = go.Layout(
         barmode='stack',  # (!) bars are stacked on this plot
         bargap=0.1,       # (!) spacing (norm. w.r.t axis) between bars
-        title='Absolute Brandshares Y-o-Y : Sales Value USD',        # set plot title
+        title='Absolute Brandshares Y-o-Y (Till June 2018) : Sales Value USD',        # set plot title
         showlegend=False,   # remove legend
 
     )
@@ -691,7 +693,8 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
 
 @app.callback(
     Output('distbrand','figure'),
-    [Input('country','value'),
+    [Input('analysistype','value'),
+     Input('country','value'),
      Input('typeveh','value'),
      Input('region','value'),
      Input('channel','value'),
@@ -700,10 +703,15 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
     ]
 )
 
-def update_BS_brands(country_name, typeveh_name, region_name, channel_name, base_name, usedfor_name):
+def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, channel_name, base_name, usedfor_name):
 
-    SQL="SELECT brands, wdpq, wdcq, uwdpq, uwdcq FROM distbrand WHERE ctry=(%s) AND typeveh=(%s) AND region=(%s) AND channel=(%s) AND base=(%s) AND usedfor=(%s)"
-    cur.execute(SQL,(country_name,typeveh_name,region_name,channel_name,base_name,usedfor_name,))
+    if analysistype_val=='region_analysis':
+        SQL="SELECT brands, wdpq, wdcq, uwdpq, uwdcq FROM distbrand_region WHERE ctry=(%s) AND typeveh=(%s) AND region=(%s) AND base=(%s) AND usedfor=(%s)"
+        cur.execute(SQL,(country_name,typeveh_name,region_name,base_name,usedfor_name,))
+    elif analysistype_val=='channel_analysis':
+        SQL="SELECT brands, wdpq, wdcq, uwdpq, uwdcq FROM distbrand_channel WHERE ctry=(%s) AND typeveh=(%s) AND channel=(%s) AND base=(%s) AND usedfor=(%s)"
+        cur.execute(SQL,(country_name,typeveh_name,channel_name,base_name,usedfor_name,))
+
     result=cur.fetchall()
     brands_val, wdpq_val, wdcq_val, uwdpq_val, uwdcq_val = zip(*result)
 
@@ -783,17 +791,17 @@ def update_flag(globalregion_name):
     result=cur.fetchall()
     ctry_val, salesplkq1_val, salesplkq2_val, shellsalesplkq1_val, shellsalesplkq2_val, valplkq1_val, valplkq2_val, shellvalplkq1_val, shellvalplkq2_val = zip(*result)
 
-    trace1 = go.Bar(y=ctry_val,x=salesplkq1_val,name="Q1",orientation='h',text=salesplkq1_val,textposition = 'auto',hoverinfo='skip')
-    trace2 = go.Bar(y=ctry_val,x=salesplkq2_val,name="Q2",orientation='h',text=salesplkq2_val,textposition = 'auto',hoverinfo='skip')
+    trace1 = go.Bar(y=ctry_val,x=salesplkq1_val,name="Q1",orientation='h',text=salesplkq1_val,textposition = 'auto',hoverinfo='skip',marker=dict(color='rgba(255,122,66,1)'))
+    trace2 = go.Bar(y=ctry_val,x=salesplkq2_val,name="Q2",orientation='h',text=salesplkq2_val,textposition = 'auto',hoverinfo='skip',marker=dict(color='rgba(90,151,2016,1)'))
 
-    trace3 = go.Bar(y=ctry_val,x=shellsalesplkq1_val,name="Sales Volume",orientation='h',text=shellsalesplkq1_val,textposition = 'auto',hoverinfo='skip',showlegend=False)
-    trace4 = go.Bar(y=ctry_val,x=shellsalesplkq2_val,name="Sales Value",orientation='h',text=shellsalesplkq2_val,textposition = 'auto',hoverinfo='skip',showlegend=False)
+    trace3 = go.Bar(y=ctry_val,x=shellsalesplkq1_val,name="Sales Volume",orientation='h',text=shellsalesplkq1_val,textposition = 'auto',hoverinfo='skip',showlegend=False,marker=dict(color='rgba(255,122,66,1)'))
+    trace4 = go.Bar(y=ctry_val,x=shellsalesplkq2_val,name="Sales Value",orientation='h',text=shellsalesplkq2_val,textposition = 'auto',hoverinfo='skip',showlegend=False,marker=dict(color='rgba(90,151,2016,1)'))
 
-    trace5 = go.Bar(y=ctry_val,x=valplkq1_val,name="Sales Volume",orientation='h',text=valplkq1_val,textposition = 'auto',hoverinfo='skip',showlegend=False)
-    trace6 = go.Bar(y=ctry_val,x=valplkq2_val,name="Sales Value",orientation='h',text=valplkq2_val,textposition = 'auto',hoverinfo='skip',showlegend=False)
+    trace5 = go.Bar(y=ctry_val,x=valplkq1_val,name="Sales Volume",orientation='h',text=valplkq1_val,textposition = 'auto',hoverinfo='skip',showlegend=False,marker=dict(color='rgba(255,122,66,1)'))
+    trace6 = go.Bar(y=ctry_val,x=valplkq2_val,name="Sales Value",orientation='h',text=valplkq2_val,textposition = 'auto',hoverinfo='skip',showlegend=False,marker=dict(color='rgba(90,151,2016,1)'))
 
-    trace7 = go.Bar(y=ctry_val,x=shellvalplkq1_val,name="Sales Volume",orientation='h',text=shellvalplkq1_val,textposition = 'auto',hoverinfo='skip',showlegend=False)
-    trace8 = go.Bar(y=ctry_val,x=shellvalplkq2_val,name="Sales Value",orientation='h',text=shellvalplkq2_val,textposition = 'auto',hoverinfo='skip',showlegend=False)
+    trace7 = go.Bar(y=ctry_val,x=shellvalplkq1_val,name="Sales Volume",orientation='h',text=shellvalplkq1_val,textposition = 'auto',hoverinfo='skip',showlegend=False,marker=dict(color='rgba(255,122,66,1)'))
+    trace8 = go.Bar(y=ctry_val,x=shellvalplkq2_val,name="Sales Value",orientation='h',text=shellvalplkq2_val,textposition = 'auto',hoverinfo='skip',showlegend=False,marker=dict(color='rgba(90,151,2016,1)'))
 
     fig = tls.make_subplots(rows=1, cols=4, shared_yaxes=True,vertical_spacing=0.02,horizontal_spacing=0.05,subplot_titles=('Sales Volume', 'Shell Sales Volume', 'Sales Value USD', 'Shell Sales Value USD'))
     fig['layout']['margin'] = {'l': 150, 'r': 20, 'b': 40, 't': 100}
@@ -841,14 +849,14 @@ def update_flag(ctry_name):
     y5=pricepq_val
     y6=pricecq_val
 
-    trace1 = go.Bar(x=itemname_val,y=y1,name="Q1",text=salesplkpq_val,textposition = 'auto')
-    trace2 = go.Bar(x=itemname_val,y=y2,name="Q2",text=salesplkcq_val,textposition = 'auto')
+    trace1 = go.Bar(x=itemname_val,y=y1,name="Q1",text=salesplkpq_val,textposition = 'auto',marker=dict(color='rgba(0,169,184,1)'))
+    trace2 = go.Bar(x=itemname_val,y=y2,name="Q2",text=salesplkcq_val,textposition = 'auto',marker=dict(color='rgba(255,205,42,1)'))
 
-    trace3 = go.Bar(x=itemname_val,y=y3,name="Q1",text=valplkpq_val,textposition = 'auto')
-    trace4 = go.Bar(x=itemname_val,y=y4,name="Q2",text=valplkcq_val,textposition = 'auto')
+    trace3 = go.Bar(x=itemname_val,y=y3,name="Q1",text=valplkpq_val,textposition = 'auto',marker=dict(color='rgba(0,169,184,1)'),showlegend=False)
+    trace4 = go.Bar(x=itemname_val,y=y4,name="Q2",text=valplkcq_val,textposition = 'auto',marker=dict(color='rgba(255,205,42,1)'),showlegend=False)
 
-    trace5 = go.Scatter(x=itemname_val,y=y5,name="Q1",text=pricepq_val)
-    trace6 = go.Scatter(x=itemname_val,y=y6,name="Q2",text=pricecq_val)
+    trace5 = go.Scatter(x=itemname_val,y=y5,name="Q1 Price USD",text=pricepq_val)
+    trace6 = go.Scatter(x=itemname_val,y=y6,name="Q2 Price USD",text=pricecq_val)
 
     fig = tls.make_subplots(rows=2, cols=1,shared_xaxes=True,subplot_titles=('Sales Volume', 'Sales Value USD'))
     fig['layout']['margin'] = {'l': 100, 'r': 120, 'b': 150, 't': 70}
