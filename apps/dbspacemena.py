@@ -852,8 +852,8 @@ def update_flag(ctry_name):
     trace1 = go.Bar(x=itemname_val,y=y1,name="Q1",text=salesplkpq_val,textposition = 'auto',marker=dict(color='rgba(0,169,184,1)'))
     trace2 = go.Bar(x=itemname_val,y=y2,name="Q2",text=salesplkcq_val,textposition = 'auto',marker=dict(color='rgba(255,205,42,1)'))
 
-    trace3 = go.Bar(x=itemname_val,y=y3,name="Q1",text=valplkpq_val,textposition = 'auto',marker=dict(color='rgba(0,169,184,1)'),showlegend=False)
-    trace4 = go.Bar(x=itemname_val,y=y4,name="Q2",text=valplkcq_val,textposition = 'auto',marker=dict(color='rgba(255,205,42,1)'),showlegend=False)
+    trace3 = go.Bar(x=itemname_val,y=y3,name="Q1",text=valplkpq_val,textposition = 'auto',marker=dict(color='rgba(0,169,184,1)'))
+    trace4 = go.Bar(x=itemname_val,y=y4,name="Q2",text=valplkcq_val,textposition = 'auto',marker=dict(color='rgba(255,205,42,1)'))
 
     trace5 = go.Scatter(x=itemname_val,y=y5,name="Q1 Price USD",text=pricepq_val)
     trace6 = go.Scatter(x=itemname_val,y=y6,name="Q2 Price USD",text=pricecq_val)
