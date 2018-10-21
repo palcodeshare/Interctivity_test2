@@ -858,16 +858,16 @@ def update_flag(ctry_name):
     trace5 = go.Scatter(x=itemname_val,y=y5,name="Q1 Price USD",text=pricepq_val)
     trace6 = go.Scatter(x=itemname_val,y=y6,name="Q2 Price USD",text=pricecq_val)
 
-    fig = tls.make_subplots(rows=2, cols=1,shared_xaxes=True,subplot_titles=('Sales Volume', 'Sales Value USD'))
+    fig = tls.make_subplots(rows=2, cols=1,shared_xaxes=False,subplot_titles=('Sales Volume', 'Sales Value USD'))
     fig['layout']['margin'] = {'l': 100, 'r': 120, 'b': 150, 't': 70}
     fig['layout']['xaxis'].update(tickfont=dict(size=10))
 
     fig['layout'].update(title='Top 15 SKUs By Country (Mio.) - Q2 2018',titlefont=dict(family='Calibri Light'),barmode='group',hovermode='closest')
 
-    fig.append_trace(trace1,2,1)
-    fig.append_trace(trace2,2,1)
-    fig.append_trace(trace3,1,1)
-    fig.append_trace(trace4,1,1)
+    fig.append_trace(trace1,1,1)
+    fig.append_trace(trace2,1,1)
+    fig.append_trace(trace3,2,1)
+    fig.append_trace(trace4,2,1)
     fig.append_trace(trace5,1,1)
     fig.append_trace(trace6,1,1)
 
