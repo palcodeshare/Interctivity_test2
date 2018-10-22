@@ -669,6 +669,8 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
             y=x,        # monthly total on x-axis
             name=name,  # label for hover
             text=x,
+            hoverinfo='text',
+            hovermode='closest',
             textposition = 'auto',
             orientation='v', # (!) for horizontal bars, default is 'v'
             marker= go.Marker(
