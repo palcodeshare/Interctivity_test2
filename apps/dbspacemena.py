@@ -462,7 +462,9 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
         return go.Bar(
             x=periods,   # cities name on the y-axis
             y=x,        # monthly total on x-axis
-            name=name,  # label for hover
+            name=name,
+            text=x,
+            textposition = 'auto',  # label for hover
             orientation='v', # (!) for horizontal bars, default is 'v'
             marker= go.Marker(
                 # color=color,        # set bar colors
@@ -483,7 +485,7 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
         barmode='stack',  # (!) bars are stacked on this plot
         bargap=0,       # (!) spacing (norm. w.r.t axis) between bars
         title='Absolute Brandshares Q-o-Q : Sales Volume',        # set plot title
-        showlegend=False,   # remove legend
+        showlegend=True,   # remove legend
 
     )
 
@@ -530,7 +532,9 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
         return go.Bar(
             x=periods,   # cities name on the y-axis
             y=x,        # monthly total on x-axis
-            name=name,  # label for hover
+            name=name,
+            text=x,
+            textposition = 'auto',  # label for hover
             orientation='v', # (!) for horizontal bars, default is 'v'
             marker= go.Marker(
                 # color=color,        # set bar colors
@@ -550,7 +554,7 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
         barmode='stack',  # (!) bars are stacked on this plot
         bargap=0.1,       # (!) spacing (norm. w.r.t axis) between bars
         title='Absolute Brandshares Q-o-Q : Sales Value USD',        # set plot title
-        showlegend=False,   # remove legend
+        showlegend=True,   # remove legend
 
     )
 
@@ -595,7 +599,9 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
         return go.Bar(
             x=periods,   # cities name on the y-axis
             y=x,        # monthly total on x-axis
-            name=name,  # label for hover
+            name=name,
+            text=x,
+            textposition = 'auto',  # label for hover
             orientation='v', # (!) for horizontal bars, default is 'v'
             marker= go.Marker(
                 # color=color,        # set bar colors
@@ -616,7 +622,7 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
         barmode='stack',  # (!) bars are stacked on this plot
         bargap=0,       # (!) spacing (norm. w.r.t axis) between bars
         title='Absolute Brandshares Y-o-Y (Till June 2018) : Sales Volume',        # set plot title
-        showlegend=False,   # remove legend
+        showlegend=True,   # remove legend
 
     )
 
@@ -662,6 +668,8 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
             x=periods,   # cities name on the y-axis
             y=x,        # monthly total on x-axis
             name=name,  # label for hover
+            text=x,
+            textposition = 'auto',
             orientation='v', # (!) for horizontal bars, default is 'v'
             marker= go.Marker(
                 # color=color,        # set bar colors
@@ -681,7 +689,7 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
         barmode='stack',  # (!) bars are stacked on this plot
         bargap=0.1,       # (!) spacing (norm. w.r.t axis) between bars
         title='Absolute Brandshares Y-o-Y (Till June 2018) : Sales Value USD',        # set plot title
-        showlegend=False,   # remove legend
+        showlegend=True,   # remove legend
 
     )
 
@@ -721,15 +729,15 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
     trace3 = go.Bar(x=brands_val,y=uwdpq_val,name="Q1",text=uwdpq_val,textposition = 'auto',marker=dict(color='rgba(172,191,233,1)'),showlegend=False)
     trace4 = go.Bar(x=brands_val,y=uwdcq_val,name="Q2",text=uwdcq_val,textposition = 'auto',marker=dict(color='rgba(255,139,164,1)'),showlegend=False)
 
-    fig = tls.make_subplots(rows=2, cols=1,shared_xaxes=True,subplot_titles=('Weighted Distribution', 'Unweighted Distribution'))
+    fig = tls.make_subplots(rows=1, cols=2,shared_xaxes=True,subplot_titles=('Weighted Distribution', 'Unweighted Distribution'))
     fig['layout']['margin'] = {'l': 100, 'r': 120, 'b': 150, 't': 70}
 
     fig['layout'].update(title='Distribution Performance - Brands In Focus',titlefont=dict(family='Calibri Light'),barmode='group',hovermode='closest')
 
     fig.append_trace(trace1,1,1)
     fig.append_trace(trace2,1,1)
-    fig.append_trace(trace3,2,1)
-    fig.append_trace(trace4,2,1)
+    fig.append_trace(trace3,1,2)
+    fig.append_trace(trace4,1,2)
 
     for i in fig['layout']['annotations']:
         i['font'] = dict(family='Calibri Light',size=16)
