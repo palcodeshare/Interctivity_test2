@@ -670,7 +670,6 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
             name=name,  # label for hover
             text=x,
             hoverinfo='text',
-            hovermode='closest',
             textposition = 'auto',
             orientation='v', # (!) for horizontal bars, default is 'v'
             marker= go.Marker(
@@ -692,6 +691,7 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
         bargap=0.1,       # (!) spacing (norm. w.r.t axis) between bars
         title='Absolute Brandshares Y-o-Y (Till June 2018) : Sales Value USD',        # set plot title
         showlegend=True,   # remove legend
+        hovermode='closest',
 
     )
 
