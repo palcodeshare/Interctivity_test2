@@ -89,45 +89,83 @@ layout = html.Div(
                 labelStyle={'display': 'inline-block'}
             )
         ],className='row'),
+        # html.Br(),
+        # html.Div([
+        #     html.Div([
+        #         html.P('Select Analysis Type:')
+        #     ],className='two columns'),
+        #
+        #     html.Div([
+        #         html.P('Select Analysis Type:')
+        #     ],className='two columns'),
+        #
+        #     html.Div([
+        #         html.P('Select Analysis Type:')
+        #     ],className='two columns'),
+        #
+        #     html.Div([
+        #         html.P('Select Analysis Type:')
+        #     ],className='two columns'),
+        #
+        #     html.Div([
+        #         html.P('Select Analysis Type:')
+        #     ],className='two columns'),
+        #
+        #     html.Div([
+        #         html.P('Select Analysis Type:')
+        #     ],className='two columns'),
+        # ],className='row'),
+
 
         html.Br(),
         html.Div([
-            dcc.Dropdown(
-                id='country',
-                placeholder="Country",
-                className='two columns'
+            html.Div([
+                html.P('Select Country:'),
+                dcc.Dropdown(
+                    id='country',
+                    placeholder="Country",
+                ),
+            ],className='two columns'),
 
-            ),
+            html.Div([
+                html.P('Select Engine Oil Type:'),
+                dcc.Dropdown(
+                    id='typeveh',
+                    placeholder="Type Of Vehicle",
+                ),
+            ],className='two columns'),
 
-            dcc.Dropdown(
-                id='typeveh',
-                placeholder="Type Of Vehicle",
-                className='two columns'
-            ),
+            html.Div([
+                html.P('Select Region:'),
+                dcc.Dropdown(
+                    id='region',
+                    placeholder="Region",
+                ),
+            ],className='two columns'),
 
-            dcc.Dropdown(
-                id='region',
-                placeholder="Region",
-                className='two columns'
-            ),
+            html.Div([
+                html.P('Select Channel:'),
+                dcc.Dropdown(
+                    id='channel',
+                    placeholder="Channel",
+                ),
+            ],className='two columns'),
 
-            dcc.Dropdown(
-                id='channel',
-                placeholder="Channel",
-                className='two columns'
-            ),
+            html.Div([
+                html.P('Select Oil Base:'),
+                dcc.Dropdown(
+                    id='base',
+                    placeholder="Base",
+                ),
+            ],className='two columns'),
 
-            dcc.Dropdown(
-                id='base',
-                placeholder="Base",
-                className='two columns'
-            ),
-
-            dcc.Dropdown(
-                id='usedfor',
-                placeholder="Used For",
-                className='two columns'
-            ),
+            html.Div([
+                html.P('Select Petrol/Diesel Oil:'),
+                dcc.Dropdown(
+                    id='usedfor',
+                    placeholder="Used For",
+                ),
+            ],className='two columns'),
         ],className='row'),
 
         #QoQ Brandshares Div
@@ -292,7 +330,7 @@ def update_typeveh(analysistype_val,
                    selected_typeveh):
 
     if analysistype_val=='channel_analysis':
-        return 'disabled'
+        return [{'label': 'Disabled', 'value': 'Disabled'}]
     elif analysistype_val=='region_analysis':
         SQL="SELECT DISTINCT(region) FROM brandshares_region WHERE ctry=(%s) AND typeveh=(%s)"
         cur.execute(SQL,(selected_country,selected_typeveh,))
@@ -303,11 +341,17 @@ def update_typeveh(analysistype_val,
         print(opt)
         return [{'label': i, 'value': i} for i in opt[0]]
 
-    @app.callback(Output('region', 'value'),
-                  [Input('region', 'options')]
-    )
+@app.callback(Output('region', 'value'),
+              [Input('analysistype','value'),
+               Input('region', 'options')]
+)
 
-    def set_region_value(available_options):
+def set_region_value(analysistype_val,available_options):
+
+    if analysistype_val=='channel_analysis':
+        return available_options[0]['value']
+
+    elif analysistype_val=='region_analysis':
         return available_options[3]['value']
 
 
@@ -324,7 +368,7 @@ def update_typeveh(analysistype_val,
                    selected_typeveh):
 
     if analysistype_val=='region_analysis':
-        return 'disabled'
+        return [{'label': 'Disabled', 'value': 'Disabled'}]
     elif analysistype_val=='channel_analysis':
         SQL="SELECT DISTINCT(channel) FROM brandshares_channel WHERE ctry=(%s) AND typeveh=(%s)"
         cur.execute(SQL,(selected_country,selected_typeveh,))
@@ -335,12 +379,18 @@ def update_typeveh(analysistype_val,
         print(opt)
         return [{'label': i, 'value': i} for i in opt[0]]
 
-    @app.callback(Output('channel', 'value'),
-                  [Input('channel', 'options')]
-    )
+@app.callback(Output('channel', 'value'),
+              [Input('analysistype','value'),
+               Input('channel', 'options')]
+)
 
-    def set_typeveh_value(available_options):
-        return available_options[1]['value']
+def set_region_value(analysistype_val,available_options):
+
+    if analysistype_val=='region_analysis':
+        return available_options[0]['value']
+
+    elif analysistype_val=='channel_analysis':
+        return available_options[3]['value']
 
 #Base button options
 @app.callback(
@@ -485,7 +535,7 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
     layout = go.Layout(
         barmode='stack',  # (!) bars are stacked on this plot
         bargap=0,       # (!) spacing (norm. w.r.t axis) between bars
-        title='Absolute Brandshares Q-o-Q : Sales Volume',        # set plot title
+        title='Brandshares Q-o-Q : Sales Volume',        # set plot title
         showlegend=True,   # remove legend
         hovermode='closest',
 
@@ -556,7 +606,7 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
     layout = go.Layout(
         barmode='stack',  # (!) bars are stacked on this plot
         bargap=0.1,       # (!) spacing (norm. w.r.t axis) between bars
-        title='Absolute Brandshares Q-o-Q : Sales Value USD',        # set plot title
+        title='Brandshares Q-o-Q : Sales Value USD',        # set plot title
         showlegend=True,   # remove legend
         hovermode='closest',
 
@@ -626,7 +676,7 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
     layout = go.Layout(
         barmode='stack',  # (!) bars are stacked on this plot
         bargap=0,       # (!) spacing (norm. w.r.t axis) between bars
-        title='Absolute Brandshares Y-o-Y (Till June 2018) : Sales Volume',        # set plot title
+        title='Brandshares Y-o-Y (Till June 2018) : Sales Volume',        # set plot title
         showlegend=True,   # remove legend
         hovermode='closest',
 
@@ -695,7 +745,7 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
     layout = go.Layout(
         barmode='stack',  # (!) bars are stacked on this plot
         bargap=0.1,       # (!) spacing (norm. w.r.t axis) between bars
-        title='Absolute Brandshares Y-o-Y (Till June 2018) : Sales Value USD',        # set plot title
+        title='Brandshares Y-o-Y (Till June 2018) : Sales Value USD',        # set plot title
         showlegend=True,   # remove legend
         hovermode='closest',
 
