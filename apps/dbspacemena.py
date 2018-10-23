@@ -87,35 +87,11 @@ layout = html.Div(
                     {'label': 'By Region  ', 'value': 'region_analysis'}
                 ],
                 labelStyle={'display': 'inline-block'}
-            )
+            ),
+            html.Div([
+                html.P('Note: Selecting an option will disable the other. For example, selecting By Region will disable Select Channel dropdown')
+            ],className='nine columns', style= {'display': 'inline-block','color': 'red'}),
         ],className='row'),
-        # html.Br(),
-        # html.Div([
-        #     html.Div([
-        #         html.P('Select Analysis Type:')
-        #     ],className='two columns'),
-        #
-        #     html.Div([
-        #         html.P('Select Analysis Type:')
-        #     ],className='two columns'),
-        #
-        #     html.Div([
-        #         html.P('Select Analysis Type:')
-        #     ],className='two columns'),
-        #
-        #     html.Div([
-        #         html.P('Select Analysis Type:')
-        #     ],className='two columns'),
-        #
-        #     html.Div([
-        #         html.P('Select Analysis Type:')
-        #     ],className='two columns'),
-        #
-        #     html.Div([
-        #         html.P('Select Analysis Type:')
-        #     ],className='two columns'),
-        # ],className='row'),
-
 
         html.Br(),
         html.Div([
@@ -872,7 +848,7 @@ def update_flag(globalregion_name):
     fig = tls.make_subplots(rows=1, cols=4, shared_yaxes=True,vertical_spacing=0.02,horizontal_spacing=0.05,subplot_titles=('Sales Volume', 'Shell Sales Volume', 'Sales Value USD', 'Shell Sales Value USD'))
     fig['layout']['margin'] = {'l': 150, 'r': 20, 'b': 40, 't': 100}
 
-    fig['layout'].update(title='Absolute Figures (Mio.) - Q1 2018 vs Q2 2018',titlefont=dict(family='Calibri Light'),barmode='group')
+    fig['layout'].update(title='Absolute Volume & Value Figures (Mio.) - Q1 2018 vs Q2 2018',titlefont=dict(family='Calibri Light'),barmode='group')
 
     fig.append_trace(trace1,1,1)
     fig.append_trace(trace2,1,1)
