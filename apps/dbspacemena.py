@@ -73,7 +73,10 @@ layout = html.Div(
                     {'label': 'EU  ', 'value': 'eu'}
                 ],
                 labelStyle={'display': 'inline-block'}
-            )
+            ),
+            html.Div([
+                html.P('Note: Only MENA & Russia operational for brandshares and distribution performance charts. All countries and region data available for all other charts.')
+            ],className='nine columns', style= {'display': 'inline-block','color': 'red'}),
         ],className='row'),
 
         html.Div([
