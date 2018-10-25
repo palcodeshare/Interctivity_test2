@@ -66,10 +66,11 @@ layout = html.Div(
             dcc.RadioItems(
                 id='globalregion',
                 options=[
-                    {'label': 'ALL  ', 'value': 'allreg'},
-                    {'label': 'MENA  ', 'value': 'mena'},
+                    {'label': 'GLOBAL  ', 'value': 'allreg'},
+                    {'label': 'MESA  ', 'value': 'mena'},
                     {'label': 'APAC  ', 'value': 'apac'},
                     {'label': 'RUSSIA  ', 'value': 'rus'},
+                    {'label': 'CHINA  ', 'value': 'china'},
                     {'label': 'EU  ', 'value': 'eu'}
                 ],
                 labelStyle={'display': 'inline-block'}
@@ -136,15 +137,7 @@ layout = html.Div(
                     id='base',
                     placeholder="Base",
                 ),
-            ],className='two columns'),
-
-            html.Div([
-                html.P('Select Petrol/Diesel Oil:'),
-                dcc.Dropdown(
-                    id='usedfor',
-                    placeholder="Used For",
-                ),
-            ],className='two columns'),
+            ],className='two columns')
         ],className='row'),
 
         #QoQ Brandshares Div
@@ -251,6 +244,7 @@ def update_typeveh(selected_globalregion):
         ]
     elif(selected_globalregion=='mena'):
         return [
+            {'label': 'MESA', 'value': ' '},
             {'label': 'Oman', 'value': 'Oman'},
             {'label': 'Saudi Arabia', 'value': 'Saudi Arabia'},
             {'label': 'United Arab Emirates', 'value': 'United Arab Emirates'},
@@ -258,10 +252,14 @@ def update_typeveh(selected_globalregion):
         ]
     elif(selected_globalregion=='apac'):
         return [
-            {'label': 'China', 'value': 'China'},
+            {'label': 'APAC', 'value': 'APAC'},
             {'label': 'Indonesia', 'value': 'Indonesia'},
             {'label': 'Thailand', 'value': 'Thailand'},
             {'label': 'Malaysia', 'value': 'Malaysia'},
+        ]
+    elif(selected_globalregion=='china'):
+        return [
+            {'label': 'China', 'value': 'China'},
         ]
     if(selected_globalregion=='rus'):
         return [
@@ -408,48 +406,6 @@ def update_typeveh(analysistype_val,
 def set_typeveh_value(available_options):
     return available_options[4]['value']
 
-#Used For button options
-@app.callback(
-    Output('usedfor','options'),
-    [Input('analysistype','value'),
-     Input('country','value'),
-     Input('typeveh','value'),
-     Input('region','value'),
-     Input('channel','value'),
-     Input('base','value')]
-)
-
-def update_typeveh(analysistype_val,
-                   selected_country,
-                   selected_typeveh,
-                   selected_region,
-                   selected_channel,
-                   selected_base):
-
-    if analysistype_val=='region_analysis':
-        SQL="SELECT DISTINCT(usedfor) FROM brandshares_region WHERE ctry=(%s) AND typeveh=(%s) AND region=(%s) AND base=(%s)"
-        cur.execute(SQL,(selected_country,selected_typeveh,selected_region,selected_base,))
-    elif analysistype_val=='channel_analysis':
-        SQL="SELECT DISTINCT(usedfor) FROM brandshares_channel WHERE ctry=(%s) AND typeveh=(%s) AND channel=(%s) AND base=(%s)"
-        cur.execute(SQL,(selected_country,selected_typeveh,selected_channel,selected_base,))
-
-    result=cur.fetchall()
-    usedfor_options = zip(*result)
-    print(usedfor_options)
-    opt=np.array(list(usedfor_options))
-    print(opt)
-    return [{'label': i, 'value': i} for i in opt[0]]
-
-@app.callback(Output('usedfor', 'value'),
-              [Input('usedfor', 'options')]
-)
-
-def set_typeveh_value(available_options):
-    return available_options[2]['value']
-
-
-
-
 ########<CHARTS>########
 
 ########<Brand Share Chart Callbacks - Top Brands>########
@@ -462,19 +418,18 @@ def set_typeveh_value(available_options):
      Input('typeveh','value'),
      Input('region','value'),
      Input('channel','value'),
-     Input('base','value'),
-     Input('usedfor','value')
+     Input('base','value')
      ]
 )
 
 def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, channel_name, base_name, usedfor_name):
 
     if analysistype_val=='region_analysis':
-        SQL="SELECT  brands, salesplkpq, salesplkcq FROM brandshares_region WHERE ctry=(%s) AND typeveh=(%s) AND region=(%s) AND base=(%s) AND usedfor=(%s)"
-        cur.execute(SQL,(country_name,typeveh_name,region_name,base_name,usedfor_name,))
+        SQL="SELECT  brands, salesplkpq, salesplkcq FROM brandshares_region WHERE ctry=(%s) AND typeveh=(%s) AND region=(%s) AND base=(%s)"
+        cur.execute(SQL,(country_name,typeveh_name,region_name,base_name,))
     elif analysistype_val=='channel_analysis':
-        SQL="SELECT  brands, salesplkpq, salesplkcq FROM brandshares_channel WHERE ctry=(%s) AND typeveh=(%s) AND channel=(%s) AND base=(%s) AND usedfor=(%s)"
-        cur.execute(SQL,(country_name,typeveh_name,channel_name,base_name,usedfor_name,))
+        SQL="SELECT  brands, salesplkpq, salesplkcq FROM brandshares_channel WHERE ctry=(%s) AND typeveh=(%s) AND channel=(%s) AND base=(%s)"
+        cur.execute(SQL,(country_name,typeveh_name,channel_name,base_name,))
 
     result=cur.fetchall()
     brand_val, salesplkpq_val, salesplkcq_val = zip(*result)
@@ -514,7 +469,7 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
     layout = go.Layout(
         barmode='stack',  # (!) bars are stacked on this plot
         bargap=0,       # (!) spacing (norm. w.r.t axis) between bars
-        title='Brandshares Q-o-Q : Sales Volume',        # set plot title
+        title='Brand Volume Share Q-o-Q',        # set plot title
         showlegend=True,   # remove legend
         hovermode='closest',
 
@@ -531,8 +486,7 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
      Input('typeveh','value'),
      Input('region','value'),
      Input('channel','value'),
-     Input('base','value'),
-     Input('usedfor','value')
+     Input('base','value')
      ]
 )
 
@@ -540,11 +494,11 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
 
 
     if analysistype_val=='region_analysis':
-        SQL="SELECT  brands, valplkpq, valplkcq FROM brandshares_region WHERE ctry=(%s) AND typeveh=(%s) AND region=(%s) AND base=(%s) AND usedfor=(%s)"
-        cur.execute(SQL,(country_name,typeveh_name,region_name,base_name,usedfor_name,))
+        SQL="SELECT  brands, valplkpq, valplkcq FROM brandshares_region WHERE ctry=(%s) AND typeveh=(%s) AND region=(%s) AND base=(%s)"
+        cur.execute(SQL,(country_name,typeveh_name,region_name,base_name,))
     elif analysistype_val=='channel_analysis':
-        SQL="SELECT  brands, valplkpq, valplkcq FROM brandshares_channel WHERE ctry=(%s) AND typeveh=(%s) AND channel=(%s) AND base=(%s) AND usedfor=(%s)"
-        cur.execute(SQL,(country_name,typeveh_name,channel_name,base_name,usedfor_name,))
+        SQL="SELECT  brands, valplkpq, valplkcq FROM brandshares_channel WHERE ctry=(%s) AND typeveh=(%s) AND channel=(%s) AND base=(%s)"
+        cur.execute(SQL,(country_name,typeveh_name,channel_name,base_name,))
 
     result=cur.fetchall()
     brand_val, valplkpq_val, valplkcq_val = zip(*result)
@@ -585,7 +539,7 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
     layout = go.Layout(
         barmode='stack',  # (!) bars are stacked on this plot
         bargap=0.1,       # (!) spacing (norm. w.r.t axis) between bars
-        title='Brandshares Q-o-Q : Sales Value USD',        # set plot title
+        title='Brand Value Share Q-o-Q (USD)',        # set plot title
         showlegend=True,   # remove legend
         hovermode='closest',
 
@@ -602,19 +556,18 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
      Input('typeveh','value'),
      Input('region','value'),
      Input('channel','value'),
-     Input('base','value'),
-     Input('usedfor','value')
-     ]
+     Input('base','value')
+    ]
 )
 
 def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, channel_name, base_name, usedfor_name):
 
     if analysistype_val=='region_analysis':
-        SQL="SELECT  brands, salesplkpy, salesplkcy FROM brandshares_region WHERE ctry=(%s) AND typeveh=(%s) AND region=(%s) AND base=(%s) AND usedfor=(%s)"
-        cur.execute(SQL,(country_name,typeveh_name,region_name,base_name,usedfor_name,))
+        SQL="SELECT  brands, salesplkpy, salesplkcy FROM brandshares_region WHERE ctry=(%s) AND typeveh=(%s) AND region=(%s) AND base=(%s)"
+        cur.execute(SQL,(country_name,typeveh_name,region_name,base_name,))
     elif analysistype_val=='channel_analysis':
-        SQL="SELECT  brands, salesplkpy, salesplkcy FROM brandshares_channel WHERE ctry=(%s) AND typeveh=(%s) AND channel=(%s) AND base=(%s) AND usedfor=(%s)"
-        cur.execute(SQL,(country_name,typeveh_name,channel_name,base_name,usedfor_name,))
+        SQL="SELECT  brands, salesplkpy, salesplkcy FROM brandshares_channel WHERE ctry=(%s) AND typeveh=(%s) AND channel=(%s) AND base=(%s)"
+        cur.execute(SQL,(country_name,typeveh_name,channel_name,base_name,))
 
     result=cur.fetchall()
     brand_val, salesplkpy_val, salesplkcy_val = zip(*result)
@@ -655,7 +608,7 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
     layout = go.Layout(
         barmode='stack',  # (!) bars are stacked on this plot
         bargap=0,       # (!) spacing (norm. w.r.t axis) between bars
-        title='Brandshares Y-o-Y (Till June 2018) : Sales Volume',        # set plot title
+        title='Brand Volume Share Y-o-Y (Till June 2018)',        # set plot title
         showlegend=True,   # remove legend
         hovermode='closest',
 
@@ -671,19 +624,18 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
      Input('typeveh','value'),
      Input('region','value'),
      Input('channel','value'),
-     Input('base','value'),
-     Input('usedfor','value')
-     ]
+     Input('base','value')
+    ]
 )
 
 def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, channel_name, base_name, usedfor_name):
 
     if analysistype_val=='region_analysis':
-        SQL="SELECT  brands, valplkpy, valplkcy FROM brandshares_region WHERE ctry=(%s) AND typeveh=(%s) AND region=(%s) AND base=(%s) AND usedfor=(%s)"
-        cur.execute(SQL,(country_name,typeveh_name,region_name,base_name,usedfor_name,))
+        SQL="SELECT  brands, valplkpy, valplkcy FROM brandshares_region WHERE ctry=(%s) AND typeveh=(%s) AND region=(%s) AND base=(%s)"
+        cur.execute(SQL,(country_name,typeveh_name,region_name,base_name,))
     elif analysistype_val=='channel_analysis':
-        SQL="SELECT  brands, valplkpy, valplkcy FROM brandshares_channel WHERE ctry=(%s) AND typeveh=(%s) AND channel=(%s) AND base=(%s) AND usedfor=(%s)"
-        cur.execute(SQL,(country_name,typeveh_name,channel_name,base_name,usedfor_name,))
+        SQL="SELECT  brands, valplkpy, valplkcy FROM brandshares_channel WHERE ctry=(%s) AND typeveh=(%s) AND channel=(%s) AND base=(%s)"
+        cur.execute(SQL,(country_name,typeveh_name,channel_name,base_name,))
 
     result=cur.fetchall()
     brand_val, valplkpy_val, valplkcy_val = zip(*result)
@@ -724,7 +676,7 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
     layout = go.Layout(
         barmode='stack',  # (!) bars are stacked on this plot
         bargap=0.1,       # (!) spacing (norm. w.r.t axis) between bars
-        title='Brandshares Y-o-Y (Till June 2018) : Sales Value USD',        # set plot title
+        title='Brand Value Share Y-o-Y (Till June 2018)(USD)',        # set plot title
         showlegend=True,   # remove legend
         hovermode='closest',
 
@@ -743,19 +695,18 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
      Input('typeveh','value'),
      Input('region','value'),
      Input('channel','value'),
-     Input('base','value'),
-     Input('usedfor','value')
+     Input('base','value')
     ]
 )
 
 def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, channel_name, base_name, usedfor_name):
 
     if analysistype_val=='region_analysis':
-        SQL="SELECT brands, wdpq, wdcq, uwdpq, uwdcq FROM distbrand_region WHERE ctry=(%s) AND typeveh=(%s) AND region=(%s) AND base=(%s) AND usedfor=(%s)"
-        cur.execute(SQL,(country_name,typeveh_name,region_name,base_name,usedfor_name,))
+        SQL="SELECT brands, wdpq, wdcq, uwdpq, uwdcq FROM distbrand_region WHERE ctry=(%s) AND typeveh=(%s) AND region=(%s) AND base=(%s)"
+        cur.execute(SQL,(country_name,typeveh_name,region_name,base_name,))
     elif analysistype_val=='channel_analysis':
-        SQL="SELECT brands, wdpq, wdcq, uwdpq, uwdcq FROM distbrand_channel WHERE ctry=(%s) AND typeveh=(%s) AND channel=(%s) AND base=(%s) AND usedfor=(%s)"
-        cur.execute(SQL,(country_name,typeveh_name,channel_name,base_name,usedfor_name,))
+        SQL="SELECT brands, wdpq, wdcq, uwdpq, uwdcq FROM distbrand_channel WHERE ctry=(%s) AND typeveh=(%s) AND channel=(%s) AND base=(%s)"
+        cur.execute(SQL,(country_name,typeveh_name,channel_name,base_name,))
 
     result=cur.fetchall()
     brands_val, wdpq_val, wdcq_val, uwdpq_val, uwdcq_val = zip(*result)
@@ -769,7 +720,7 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
     fig = tls.make_subplots(rows=1, cols=2,shared_xaxes=True,subplot_titles=('Weighted Distribution', 'Unweighted Distribution'))
     fig['layout']['margin'] = {'l': 100, 'r': 120, 'b': 150, 't': 70}
 
-    fig['layout'].update(title='Distribution Performance - Brands In Focus',titlefont=dict(family='Calibri Light'),barmode='group',hovermode='closest')
+    fig['layout'].update(title='Distribution Performance',titlefont=dict(family='Calibri Light'),barmode='group',hovermode='closest')
 
     fig.append_trace(trace1,1,1)
     fig.append_trace(trace2,1,1)
@@ -817,7 +768,7 @@ def update_BS_brands(globalregion_name):
             }
         ],
         'layout': {
-            'title':'Pie Chart - Country Split (Volume% & Value%)',
+            'title':'Country Split (Volume% & Value%)',
         }
     }
     return fig
@@ -848,10 +799,10 @@ def update_flag(globalregion_name):
     trace7 = go.Bar(y=ctry_val,x=shellvalplkq1_val,name="Sales Volume",orientation='h',text=shellvalplkq1_val,textposition = 'auto',hoverinfo='skip',showlegend=False,marker=dict(color='rgba(255,122,66,1)'))
     trace8 = go.Bar(y=ctry_val,x=shellvalplkq2_val,name="Sales Value",orientation='h',text=shellvalplkq2_val,textposition = 'auto',hoverinfo='skip',showlegend=False,marker=dict(color='rgba(90,151,2016,1)'))
 
-    fig = tls.make_subplots(rows=1, cols=4, shared_yaxes=True,vertical_spacing=0.02,horizontal_spacing=0.05,subplot_titles=('Sales Volume', 'Shell Sales Volume', 'Sales Value USD', 'Shell Sales Value USD'))
+    fig = tls.make_subplots(rows=1, cols=4, shared_yaxes=True,vertical_spacing=0.02,horizontal_spacing=0.05,subplot_titles=('Total Market Sales Volume', 'Shell Sales Volume', 'Total Market Sales Value USD', 'Shell Sales Value USD'))
     fig['layout']['margin'] = {'l': 150, 'r': 20, 'b': 40, 't': 100}
 
-    fig['layout'].update(title='Absolute Volume & Value Figures (Mio.) - Q1 2018 vs Q2 2018',titlefont=dict(family='Calibri Light'),barmode='group')
+    fig['layout'].update(title='Absolute Volume & Value Figures (Millions) - Q1 2018 vs Q2 2018',titlefont=dict(family='Calibri Light'),barmode='group')
 
     fig.append_trace(trace1,1,1)
     fig.append_trace(trace2,1,1)
@@ -866,10 +817,6 @@ def update_flag(globalregion_name):
     for i in fig['layout']['annotations']:
         i['font'] = dict(family='Calibri Light',size=15)
 
-    # fig['layout']['xaxis1'].update(showgrid=False,showticklabels=False)
-    # fig['layout']['xaxis2'].update(showgrid=False,showticklabels=False)
-    # fig['layout']['xaxis3'].update(showgrid=False,showticklabels=False)
-    # fig['layout']['xaxis4'].update(showgrid=False,showticklabels=False)
     fig['layout']['yaxis1'].update(showgrid=False,autorange='reversed')
     return fig
 
@@ -907,7 +854,7 @@ def update_flag(ctry_name):
     fig['layout']['margin'] = {'l': 100, 'r': 120, 'b': 150, 't': 70}
     # fig['layout']['xaxis'].update(tickfont=dict(size=10))
 
-    fig['layout'].update(title='Top 15 SKUs By Country (Mio.) - Q2 2018',titlefont=dict(family='Calibri Light'),barmode='group',hovermode='closest')
+    fig['layout'].update(title='Top 15 SKUs By Country (Millions) - Q2 2018',titlefont=dict(family='Calibri Light'),barmode='group',hovermode='closest')
 
     fig.append_trace(trace1,1,1)
     fig.append_trace(trace2,1,1)
