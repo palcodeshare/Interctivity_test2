@@ -32,240 +32,779 @@ DATABASE_URL = os.environ['DATABASE_URL']
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 cur = conn.cursor()
 
+tabs_styles = {
+    'height': '44px'
+}
+tab_style = {
+    'borderBottom': '1px solid #d6d6d6',
+    'padding': '6px',
+    'font-family': 'Calibri Light'
+}
 
+tab_selected_style = {
+    'borderTop': '1px solid #d6d6d6',
+    'borderBottom': '1px solid #d6d6d6',
+    'backgroundColor': '#FF8C00',
+    'color': 'white',
+    'padding': '6px',
+    'fontWeight': 'bold',
+    'font-family': 'Calibri Light'
+}
 # Global chart template
 
 # App layout
 layout = html.Div(
     [
-        #Title and Gfk Image
-        html.Div(
-            [
+        html.Div([
+            html.Div([
                 html.H1(
                     'GfK POS DASHBOARD',
                     className='eleven columns',
-                ),
-                html.Img(
-                    src="https://www.gfk.com/fileadmin/fe/gfktheme/images/favicons/apple-touch-icon-72x72.png",
-                    className='one columns',
-                    style={
-                        'height': '70',
-                        'width': '70',
-                        'float': 'right',
-                        'position': 'relative',
-                    },
-                ),
-            ],
-            className='row'
-        ),
-        html.Br(),
-        html.Div([
-            html.Div([
-                html.P('Select Global Region:')
-            ],className='two columns'),
-            dcc.RadioItems(
-                id='globalregion',
-                options=[
-                    {'label': 'GLOBAL  ', 'value': 'allreg'},
-                    {'label': 'MESA  ', 'value': 'mena'},
-                    {'label': 'APAC  ', 'value': 'apac'},
-                    {'label': 'RUSSIA  ', 'value': 'rus'},
-                    {'label': 'CHINA  ', 'value': 'china'},
-                    {'label': 'EU  ', 'value': 'eu'}
-                ],
-                labelStyle={'display': 'inline-block'}
+                )
+            ],style={'color': '#FF8C00'}),
+            html.Img(
+                src="https://www.gfk.com/fileadmin/fe/gfktheme/images/favicons/apple-touch-icon-72x72.png",
+                className='one columns',
+                style={
+                    'height': '70',
+                    'width': '70',
+                    'float': 'right',
+                    'position': 'relative',
+                },
             ),
-            html.Div([
-                html.P('Note: Only MENA & Russia operational for brandshares and distribution performance charts. All countries and region data available for all other charts.')
-            ],className='nine columns', style= {'display': 'inline-block','color': 'red'}),
         ],className='row'),
-
-        html.Div([
-            html.Div([
-                html.P('Select Analysis Type:')
-            ],className='two columns'),
-            dcc.RadioItems(
-                id='analysistype',
-                options=[
-                    {'label': 'By Channel  ', 'value': 'channel_analysis'},
-                    {'label': 'By Region  ', 'value': 'region_analysis'}
-                ],
-                labelStyle={'display': 'inline-block'}
-            ),
-            html.Div([
-                html.P('Note: Selecting an option will disable the other. For example, selecting By Region will disable Select Channel dropdown')
-            ],className='nine columns', style= {'display': 'inline-block','color': 'red'}),
-        ],className='row'),
-
         html.Br(),
-        html.Div([
-            html.Div([
-                html.P('Select Country:'),
-                dcc.Dropdown(
-                    id='country',
-                    placeholder="Country",
-                ),
-            ],className='two columns'),
-
-            html.Div([
-                html.P('Select Engine Oil Type:'),
-                dcc.Dropdown(
-                    id='typeveh',
-                    placeholder="Type Of Vehicle",
-                ),
-            ],className='two columns'),
-
-            html.Div([
-                html.P('Select Region:'),
-                dcc.Dropdown(
-                    id='region',
-                    placeholder="Region",
-                ),
-            ],className='two columns'),
-
-            html.Div([
-                html.P('Select Channel:'),
-                dcc.Dropdown(
-                    id='channel',
-                    placeholder="Channel",
-                ),
-            ],className='two columns'),
-
-            html.Div([
-                html.P('Select Oil Base:'),
-                dcc.Dropdown(
-                    id='base',
-                    placeholder="Base",
-                ),
-            ],className='two columns')
-        ],className='row'),
-
-        #QoQ Brandshares Div
-        html.Div([
-            html.Div([
-                dcc.Graph(
-                    id='brandshares',
-                    config={'displayModeBar': False},
-                )
-            ],className='six columns'),
-
-            html.Div([
-                dcc.Graph(
-                    id='brandshares2',
-                    config={'displayModeBar': False},
-                )
-            ],className='six columns')
-        ],className='row'),
-
-        #YoY Brandshares Div
-        html.Div([
-            html.Div([
-                dcc.Graph(
-                    id='brandshares3',
-                    config={'displayModeBar': False},
-                )
-            ],className='six columns'),
-
-            html.Div([
-                dcc.Graph(
-                    id='brandshares4',
-                    config={'displayModeBar': False},
-                )
-            ],className='six columns')
-        ],className='row'),
-
-        html.Div([
-            html.Div([
-                dcc.Graph(
-                    id='distbrand',
-                    config={'displayModeBar': False}
-                ),
-            ],className='row'),
-
+        dcc.Tabs(id="shelldbtabs", value='global', children=[
+            dcc.Tab(label='GLOBAL', value='global', style=tab_style, selected_style=tab_selected_style),
+            dcc.Tab(label='MESA', value='mesa', style=tab_style, selected_style=tab_selected_style),
+            dcc.Tab(label='RUSSIA', value='russia', style=tab_style, selected_style=tab_selected_style),
+            dcc.Tab(label='APAC', value='apac', style=tab_style, selected_style=tab_selected_style),
+            dcc.Tab(label='CHINA', value='china', style=tab_style, selected_style=tab_selected_style),
+            dcc.Tab(label='EU', value='eu', style=tab_style, selected_style=tab_selected_style)
         ]),
-
-        html.Div([
-            html.Div([
-                dcc.Graph(
-                    id='pie',
-                    config={'displayModeBar': False}
-                ),
-            ],className='row'),
-
-        ]),
-
-        html.Div([
-            html.Div([
-                dcc.Graph(
-                    id='horizbar',
-                    config={'displayModeBar': False}
-                ),
-            ],className='row'),
-
-        ]),
-
         html.Br(),
-        html.Br(),
-        html.Div([
-            html.Div([
-                dcc.Graph(
-                    style={'height': '700px'},
-                    id='skubar',
-                    config={'displayModeBar': False}
-                ),
-            ]),
-        ],className='row'),
-        html.Br(),
-        html.Br(),
-    ],
-    style={'font-family': 'Calibri Light'},className='ten columns offset-by-one'
+        html.Div(id='shelldbcontent')
+    ],style={'font-family': 'Calibri Light'},className='ten columns offset-by-one'
 )
+
+@app.callback(Output('shelldbcontent', 'children'),
+              [Input('shelldbtabs', 'value')])
+
+def render_content(tab):
+    if tab == 'global':
+        return html.Div([
+                html.Div([
+                    html.Div([
+                        html.P('Select Analysis Type:')
+                    ],className='two columns'),
+                    dcc.RadioItems(
+                        id='analysistype',
+                        options=[
+                            {'label': 'By Channel  ', 'value': 'channel_analysis'},
+                            {'label': 'By Region  ', 'value': 'region_analysis'}
+                        ],
+                        value='channel_analysis',
+                        labelStyle={'display': 'inline-block'}
+                    ),
+                    html.Div([
+                        html.P('Note: Selecting an option will disable the other. For example, selecting By Region will disable Select Channel dropdown')
+                    ],className='nine columns', style= {'display': 'inline-block','color': 'red'}),
+                ],className='row',style={'display': 'none'}),
+                html.Br(),
+                html.Div([
+                    dcc.Dropdown(
+                        id='country',
+                        value='Global',
+                    )
+                ],style={'display': 'none'}),
+                html.Div([
+                    html.Div([
+                        html.P('Select Engine Oil Type:'),
+                        dcc.Dropdown(
+                            id='typeveh',
+                            value='TOTAL',
+                            placeholder="Type Of Vehicle",
+                        ),
+                    ],className='two columns'),
+
+                    html.Div([
+                        html.P('Select Region:'),
+                        dcc.Dropdown(
+                            id='region',
+                            value='TOTAL',
+                            placeholder="Region",
+                        ),
+                    ],className='two columns',style={'display': 'none'}),
+
+                    html.Div([
+                        html.P('Select Channel:'),
+                        dcc.Dropdown(
+                            id='channel',
+                            value='TOTAL',
+                            placeholder="Channel",
+                        ),
+                    ],className='two columns',style={'display': 'none'}),
+
+                    html.Div([
+                        html.P('Select Oil Base:'),
+                        dcc.Dropdown(
+                            id='base',
+                            value='TOTAL',
+                            placeholder="Base",
+                        ),
+                    ],className='two columns')
+                ],className='row'),
+
+                #QoQ Brandshares Div
+                html.Div([
+                    html.Div([
+                        dcc.Graph(
+                            id='brandshares',
+                            config={'displayModeBar': False},
+                        )
+                    ],className='six columns'),
+                    html.Div([
+                        dcc.Graph(
+                            id='brandshares2',
+                            config={'displayModeBar': False},
+                        )
+                    ],className='six columns')
+                ],className='row'),
+
+                #YoY Brandshares Div
+                html.Div([
+                    html.Div([
+                        dcc.Graph(
+                            id='brandshares3',
+                            config={'displayModeBar': False},
+                        )
+                    ],className='six columns'),
+                    html.Div([
+                        dcc.Graph(
+                            id='brandshares4',
+                            config={'displayModeBar': False},
+                        )
+                    ],className='six columns')
+                ],className='row'),
+
+                html.Div([
+                    html.Div([
+                        dcc.Graph(
+                            id='pie',
+                            config={'displayModeBar': False}
+                        ),
+                    ],className='row'),
+                ]),
+
+                html.Div([
+                    html.Div([
+                        dcc.Graph(
+                            style={'height': '1200px'},
+                            id='horizbar',
+                            config={'displayModeBar': False}
+                        ),
+                    ],className='row'),
+                ]),
+            ],style={'font-family': 'Calibri Light'})
+    if tab == 'mesa':
+        return html.Div([
+                html.Div([
+                    html.Div([
+                        html.P('Select Analysis Type:')
+                    ],className='two columns'),
+                    dcc.RadioItems(
+                        id='analysistype',
+                        options=[
+                            {'label': 'By Channel  ', 'value': 'channel_analysis'},
+                            {'label': 'By Region  ', 'value': 'region_analysis'}
+                        ],
+                        value='channel_analysis',
+                        labelStyle={'display': 'inline-block'}
+                    ),
+                    html.Div([
+                        html.P('Note: Selecting an option will disable the other. For example, selecting By Region will disable Select Channel dropdown')
+                    ],className='nine columns', style= {'display': 'inline-block','color': 'red'}),
+                ],className='row'),
+                html.Br(),
+                html.Div([
+                    html.Div([
+                        html.P('Select Country:'),
+                        dcc.Dropdown(
+                            id='country', #Left it is as country since i didnt want to change all the code again. What it really means is region
+                            value='MENA',
+                            options=[
+                                {'label': 'MESA Total', 'value': 'MENA'},
+                                {'label': 'Oman', 'value': 'Oman'},
+                                {'label': 'Saudi Arabia', 'value': 'Saudi Arabia'},
+                                {'label': 'United Arab Emirates', 'value': 'United Arab Emirates'},
+                                {'label': 'Egypt', 'value': 'Egypt'},
+                            ],
+                            placeholder="Country",
+                        ),
+                    ],className='two columns'),
+
+                    html.Div([
+                        html.P('Select Engine Oil Type:'),
+                        dcc.Dropdown(
+                            id='typeveh',
+                            value='TOTAL',
+                            placeholder="Type Of Vehicle",
+                        ),
+                    ],className='two columns'),
+
+                    html.Div([
+                        html.P('Select Region:'),
+                        dcc.Dropdown(
+                            id='region',
+                            value='TOTAL',
+                            placeholder="Region",
+                        ),
+                    ],className='two columns'),
+
+                    html.Div([
+                        html.P('Select Channel:'),
+                        dcc.Dropdown(
+                            id='channel',
+                            value='TOTAL',
+                            placeholder="Channel",
+                        ),
+                    ],className='two columns'),
+
+                    html.Div([
+                        html.P('Select Oil Base:'),
+                        dcc.Dropdown(
+                            id='base',
+                            value='TOTAL',
+                            placeholder="Base",
+                        ),
+                    ],className='two columns')
+                ],className='row'),
+
+                #QoQ Brandshares Div
+                html.Div([
+                    html.Div([
+                        dcc.Graph(
+                            id='brandshares',
+                            config={'displayModeBar': False},
+                        )
+                    ],className='six columns'),
+                    html.Div([
+                        dcc.Graph(
+                            id='brandshares2',
+                            config={'displayModeBar': False},
+                        )
+                    ],className='six columns')
+                ],className='row'),
+
+                #YoY Brandshares Div
+                html.Div([
+                    html.Div([
+                        dcc.Graph(
+                            id='brandshares3',
+                            config={'displayModeBar': False},
+                        )
+                    ],className='six columns'),
+                    html.Div([
+                        dcc.Graph(
+                            id='brandshares4',
+                            config={'displayModeBar': False},
+                        )
+                    ],className='six columns')
+                ],className='row'),
+
+                html.Div([
+                    html.Div([
+                        dcc.Graph(
+                            id='distbrand',
+                            config={'displayModeBar': False}
+                        ),
+                    ],className='row'),
+                ]),
+
+                html.Div([
+                    dcc.Graph(
+                        style={'height': '700px'},
+                        id='skubar',
+                        config={'displayModeBar': False}
+                    ),
+                ],className='row'),
+            ],style={'font-family': 'Calibri Light'})
+    if tab == 'russia':
+        return html.Div([
+                html.Div([
+                    html.Div([
+                        html.P('Select Analysis Type:')
+                    ],className='two columns'),
+                    dcc.RadioItems(
+                        id='analysistype',
+                        options=[
+                            {'label': 'By Channel  ', 'value': 'channel_analysis'},
+                            {'label': 'By Region  ', 'value': 'region_analysis'}
+                        ],
+                        value='channel_analysis',
+                        labelStyle={'display': 'inline-block'}
+                    ),
+                    html.Div([
+                        html.P('Note: Selecting an option will disable the other. For example, selecting By Region will disable Select Channel dropdown')
+                    ],className='nine columns', style= {'display': 'inline-block','color': 'red'}),
+                ],className='row'),
+                html.Br(),
+                html.Div([
+                    dcc.Dropdown(
+                        id='country',
+                        value='Russia',
+                    )
+                ],style={'display': 'none'}),
+                html.Div([
+                    html.Div([
+                        html.P('Select Engine Oil Type:'),
+                        dcc.Dropdown(
+                            id='typeveh',
+                            value='TOTAL',
+                            placeholder="Type Of Vehicle",
+                        ),
+                    ],className='two columns'),
+
+                    html.Div([
+                        html.P('Select Region:'),
+                        dcc.Dropdown(
+                            id='region',
+                            value='TOTAL',
+                            placeholder="Region",
+                        ),
+                    ],className='two columns'),
+
+                    html.Div([
+                        html.P('Select Channel:'),
+                        dcc.Dropdown(
+                            id='channel',
+                            value='TOTAL',
+                            placeholder="Channel",
+                        ),
+                    ],className='two columns'),
+
+                    html.Div([
+                        html.P('Select Oil Base:'),
+                        dcc.Dropdown(
+                            id='base',
+                            value='TOTAL',
+                            placeholder="Base",
+                        ),
+                    ],className='two columns')
+                ],className='row'),
+
+                #QoQ Brandshares Div
+                html.Div([
+                    html.Div([
+                        dcc.Graph(
+                            id='brandshares',
+                            config={'displayModeBar': False},
+                        )
+                    ],className='six columns'),
+                    html.Div([
+                        dcc.Graph(
+                            id='brandshares2',
+                            config={'displayModeBar': False},
+                        )
+                    ],className='six columns')
+                ],className='row'),
+
+                #YoY Brandshares Div
+                html.Div([
+                    html.Div([
+                        dcc.Graph(
+                            id='brandshares3',
+                            config={'displayModeBar': False},
+                        )
+                    ],className='six columns'),
+                    html.Div([
+                        dcc.Graph(
+                            id='brandshares4',
+                            config={'displayModeBar': False},
+                        )
+                    ],className='six columns')
+                ],className='row'),
+
+                html.Div([
+                    dcc.Graph(
+                        id='distbrand',
+                        config={'displayModeBar': False}
+                    ),
+                ],className='row'),
+
+                html.Div([
+                    dcc.Graph(
+                        style={'height': '700px'},
+                        id='skubar',
+                        config={'displayModeBar': False}
+                    ),
+                ],className='row'),
+            ],style={'font-family': 'Calibri Light'})
+    if tab == 'apac':
+        return html.Div([
+                html.Div([
+                    html.Div([
+                        html.P('Select Analysis Type:')
+                    ],className='two columns'),
+                    dcc.RadioItems(
+                        id='analysistype',
+                        options=[
+                            {'label': 'By Channel  ', 'value': 'channel_analysis'},
+                            {'label': 'By Region  ', 'value': 'region_analysis'}
+                        ],
+                        value='channel_analysis',
+                        labelStyle={'display': 'inline-block'}
+                    ),
+                    html.Div([
+                        html.P('Note: Selecting an option will disable the other. For example, selecting By Region will disable Select Channel dropdown')
+                    ],className='nine columns', style= {'display': 'inline-block','color': 'red'}),
+                ],className='row'),
+                html.Br(),
+                html.Div([
+                    html.Div([
+                        html.P('Select Country:'),
+                        dcc.Dropdown(
+                            id='country', #Left it is as country since i didnt want to change all the code again. What it really means is region
+                            value='APAC',
+                            options=[
+                                {'label': 'APAC Total', 'value': 'APAC'},
+                                {'label': 'Indonesia', 'value': 'Indonesia'},
+                                {'label': 'Thailand', 'value': 'Thailand'},
+                                {'label': 'Malaysia', 'value': 'Malaysia'},
+                            ],
+                            placeholder="Country",
+                        ),
+                    ],className='two columns'),
+
+                    html.Div([
+                        html.P('Select Engine Oil Type:'),
+                        dcc.Dropdown(
+                            id='typeveh',
+                            value='TOTAL',
+                            placeholder="Type Of Vehicle",
+                        ),
+                    ],className='two columns'),
+
+                    html.Div([
+                        html.P('Select Region:'),
+                        dcc.Dropdown(
+                            id='region',
+                            value='TOTAL',
+                            placeholder="Region",
+                        ),
+                    ],className='two columns'),
+
+                    html.Div([
+                        html.P('Select Channel:'),
+                        dcc.Dropdown(
+                            id='channel',
+                            value='TOTAL',
+                            placeholder="Channel",
+                        ),
+                    ],className='two columns'),
+
+                    html.Div([
+                        html.P('Select Oil Base:'),
+                        dcc.Dropdown(
+                            id='base',
+                            value='TOTAL',
+                            placeholder="Base",
+                        ),
+                    ],className='two columns')
+                ],className='row'),
+
+                #QoQ Brandshares Div
+                html.Div([
+                    html.Div([
+                        dcc.Graph(
+                            id='brandshares',
+                            config={'displayModeBar': False},
+                        )
+                    ],className='six columns'),
+                    html.Div([
+                        dcc.Graph(
+                            id='brandshares2',
+                            config={'displayModeBar': False},
+                        )
+                    ],className='six columns')
+                ],className='row'),
+
+                #YoY Brandshares Div
+                html.Div([
+                    html.Div([
+                        dcc.Graph(
+                            id='brandshares3',
+                            config={'displayModeBar': False},
+                        )
+                    ],className='six columns'),
+                    html.Div([
+                        dcc.Graph(
+                            id='brandshares4',
+                            config={'displayModeBar': False},
+                        )
+                    ],className='six columns')
+                ],className='row'),
+
+                html.Div([
+                    html.Div([
+                        dcc.Graph(
+                            id='distbrand',
+                            config={'displayModeBar': False}
+                        ),
+                    ],className='row'),
+                ]),
+
+                html.Div([
+                    dcc.Graph(
+                        style={'height': '700px'},
+                        id='skubar',
+                        config={'displayModeBar': False}
+                    ),
+                ],className='row'),
+            ],style={'font-family': 'Calibri Light'})
+    if tab == 'china':
+        return html.Div([
+                html.Div([
+                    html.Div([
+                        html.P('Select Analysis Type:')
+                    ],className='two columns'),
+                    dcc.RadioItems(
+                        id='analysistype',
+                        options=[
+                            {'label': 'By Channel  ', 'value': 'channel_analysis'},
+                            {'label': 'By Region  ', 'value': 'region_analysis'}
+                        ],
+                        value='channel_analysis',
+                        labelStyle={'display': 'inline-block'}
+                    ),
+                    html.Div([
+                        html.P('Note: Selecting an option will disable the other. For example, selecting By Region will disable Select Channel dropdown')
+                    ],className='nine columns', style= {'display': 'inline-block','color': 'red'}),
+                ],className='row'),
+                html.Br(),
+                html.Div([
+                    dcc.Dropdown(
+                        id='country',
+                        value='China',
+                    )
+                ],style={'display': 'none'}),
+                html.Div([
+                    html.Div([
+                        html.P('Select Engine Oil Type:'),
+                        dcc.Dropdown(
+                            id='typeveh',
+                            value='TOTAL',
+                            placeholder="Type Of Vehicle",
+                        ),
+                    ],className='two columns'),
+
+                    html.Div([
+                        html.P('Select Region:'),
+                        dcc.Dropdown(
+                            id='region',
+                            value='TOTAL',
+                            placeholder="Region",
+                        ),
+                    ],className='two columns'),
+
+                    html.Div([
+                        html.P('Select Channel:'),
+                        dcc.Dropdown(
+                            id='channel',
+                            value='TOTAL',
+                            placeholder="Channel",
+                        ),
+                    ],className='two columns'),
+
+                    html.Div([
+                        html.P('Select Oil Base:'),
+                        dcc.Dropdown(
+                            id='base',
+                            value='TOTAL',
+                            placeholder="Base",
+                        ),
+                    ],className='two columns')
+                ],className='row'),
+
+                #QoQ Brandshares Div
+                html.Div([
+                    html.Div([
+                        dcc.Graph(
+                            id='brandshares',
+                            config={'displayModeBar': False},
+                        )
+                    ],className='six columns'),
+                    html.Div([
+                        dcc.Graph(
+                            id='brandshares2',
+                            config={'displayModeBar': False},
+                        )
+                    ],className='six columns')
+                ],className='row'),
+
+                #YoY Brandshares Div
+                html.Div([
+                    html.Div([
+                        dcc.Graph(
+                            id='brandshares3',
+                            config={'displayModeBar': False},
+                        )
+                    ],className='six columns'),
+                    html.Div([
+                        dcc.Graph(
+                            id='brandshares4',
+                            config={'displayModeBar': False},
+                        )
+                    ],className='six columns')
+                ],className='row'),
+
+                html.Div([
+                    html.Div([
+                        dcc.Graph(
+                            id='distbrand',
+                            config={'displayModeBar': False}
+                        ),
+                    ],className='row'),
+                ]),
+
+                html.Div([
+                    dcc.Graph(
+                        style={'height': '700px'},
+                        id='skubar',
+                        config={'displayModeBar': False}
+                    ),
+                ],className='row'),
+            ],style={'font-family': 'Calibri Light'})
+    if tab == 'eu':
+        return html.Div([
+                html.Div([
+                    html.Div([
+                        html.P('Select Analysis Type:')
+                    ],className='two columns'),
+                    dcc.RadioItems(
+                        id='analysistype',
+                        options=[
+                            {'label': 'By Channel  ', 'value': 'channel_analysis'},
+                            {'label': 'By Region  ', 'value': 'region_analysis'}
+                        ],
+                        value='channel_analysis',
+                        labelStyle={'display': 'inline-block'}
+                    ),
+                    html.Div([
+                        html.P('Note: Selecting an option will disable the other. For example, selecting By Region will disable Select Channel dropdown')
+                    ],className='nine columns', style= {'display': 'inline-block','color': 'red'}),
+                ],className='row'),
+                html.Br(),
+                html.Div([
+                    html.Div([
+                        html.P('Select Country:'),
+                        dcc.Dropdown(
+                            id='country', #Left it is as country since i didnt want to change all the code again. What it really means is region
+                            value='EU',
+                            options=[
+                                {'label': 'EU Total', 'value': 'EU'},
+                                {'label': 'Italy', 'value': 'Italy'},
+                                {'label': 'Great Britain', 'value': 'Great Britain'},
+                                {'label': 'Spain', 'value': 'Spain'},
+                                {'label': 'Germany', 'value': 'Germany'},
+                                {'label': 'Portugal', 'value': 'Portugal'},
+                            ],
+                            placeholder="Country",
+                        ),
+                    ],className='two columns'),
+
+                    html.Div([
+                        html.P('Select Engine Oil Type:'),
+                        dcc.Dropdown(
+                            id='typeveh',
+                            value='TOTAL',
+                            placeholder="Type Of Vehicle",
+                        ),
+                    ],className='two columns'),
+
+                    html.Div([
+                        html.P('Select Region:'),
+                        dcc.Dropdown(
+                            id='region',
+                            value='TOTAL',
+                            placeholder="Region",
+                        ),
+                    ],className='two columns'),
+
+                    html.Div([
+                        html.P('Select Channel:'),
+                        dcc.Dropdown(
+                            id='channel',
+                            value='TOTAL',
+                            placeholder="Channel",
+                        ),
+                    ],className='two columns'),
+
+                    html.Div([
+                        html.P('Select Subgroup:'),
+                        dcc.Dropdown(
+                            id='base',
+                            value='TOTAL',
+                            placeholder="Base",
+                        ),
+                    ],className='two columns')
+                ],className='row'),
+
+                #QoQ Brandshares Div
+                html.Div([
+                    html.Div([
+                        dcc.Graph(
+                            id='brandshares',
+                            config={'displayModeBar': False},
+                        )
+                    ],className='six columns'),
+                    html.Div([
+                        dcc.Graph(
+                            id='brandshares2',
+                            config={'displayModeBar': False},
+                        )
+                    ],className='six columns')
+                ],className='row'),
+
+                #YoY Brandshares Div
+                html.Div([
+                    html.Div([
+                        dcc.Graph(
+                            id='brandshares3',
+                            config={'displayModeBar': False},
+                        )
+                    ],className='six columns'),
+                    html.Div([
+                        dcc.Graph(
+                            id='brandshares4',
+                            config={'displayModeBar': False},
+                        )
+                    ],className='six columns')
+                ],className='row'),
+
+                html.Div([
+                    html.Div([
+                        dcc.Graph(
+                            id='distbrand',
+                            config={'displayModeBar': False}
+                        ),
+                    ],className='row'),
+                ]),
+
+                html.Div([
+                    dcc.Graph(
+                        style={'height': '700px'},
+                        id='skubar',
+                        config={'displayModeBar': False}
+                    ),
+                ],className='row'),
+            ],style={'font-family': 'Calibri Light'})
+
 
 ########<Options for dropdowns Callbacks>########
 
-@app.callback(
-    Output('country','options'),
-    [Input('globalregion','value')]
-)
-
-def update_typeveh(selected_globalregion):
-
-    if(selected_globalregion=='allreg'):
-        return [
-            {'label': 'China', 'value': 'China'},
-            {'label': 'Indonesia', 'value': 'Indonesia'},
-            {'label': 'Thailand', 'value': 'Thailand'},
-            {'label': 'Malaysia', 'value': 'Malaysia'},
-            {'label': 'Oman', 'value': 'Oman'},
-            {'label': 'Saudi Arabia', 'value': 'Saudi Arabia'},
-            {'label': 'United Arab Emirates', 'value': 'United Arab Emirates'},
-            {'label': 'Egypt', 'value': 'Egypt'},
-            {'label': 'Russia', 'value': 'Russia'}
-        ]
-    elif(selected_globalregion=='mena'):
-        return [
-            {'label': 'MESA', 'value': ' '},
-            {'label': 'Oman', 'value': 'Oman'},
-            {'label': 'Saudi Arabia', 'value': 'Saudi Arabia'},
-            {'label': 'United Arab Emirates', 'value': 'United Arab Emirates'},
-            {'label': 'Egypt', 'value': 'Egypt'},
-        ]
-    elif(selected_globalregion=='apac'):
-        return [
-            {'label': 'APAC', 'value': 'APAC'},
-            {'label': 'Indonesia', 'value': 'Indonesia'},
-            {'label': 'Thailand', 'value': 'Thailand'},
-            {'label': 'Malaysia', 'value': 'Malaysia'},
-        ]
-    elif(selected_globalregion=='china'):
-        return [
-            {'label': 'China', 'value': 'China'},
-        ]
-    if(selected_globalregion=='rus'):
-        return [
-            {'label': 'Russia', 'value': 'Russia'},
-        ]
 #Vehicle type button options
+
 @app.callback(
     Output('typeveh','options'),
     [Input('analysistype','value'),
@@ -286,13 +825,6 @@ def update_typeveh(analysistype_val,selected_country):
     opt=np.array(list(typeveh_options))
     print(opt)
     return [{'label': i, 'value': i} for i in opt[0]]
-
-@app.callback(Output('typeveh', 'value'),
-              [Input('typeveh', 'options')]
-)
-
-def set_typeveh_value(available_options):
-    return available_options[2]['value']
 
 #region button options
 @app.callback(
@@ -317,19 +849,6 @@ def update_typeveh(analysistype_val,
         opt=np.array(list(region_options))
         print(opt)
         return [{'label': i, 'value': i} for i in opt[0]]
-
-@app.callback(Output('region', 'value'),
-              [Input('analysistype','value'),
-               Input('region', 'options')]
-)
-
-def set_region_value(analysistype_val,available_options):
-
-    if analysistype_val=='channel_analysis':
-        return available_options[0]['value']
-
-    elif analysistype_val=='region_analysis':
-        return available_options[3]['value']
 
 
 #Channel button options
@@ -356,18 +875,6 @@ def update_typeveh(analysistype_val,
         print(opt)
         return [{'label': i, 'value': i} for i in opt[0]]
 
-@app.callback(Output('channel', 'value'),
-              [Input('analysistype','value'),
-               Input('channel', 'options')]
-)
-
-def set_region_value(analysistype_val,available_options):
-
-    if analysistype_val=='region_analysis':
-        return available_options[0]['value']
-
-    elif analysistype_val=='channel_analysis':
-        return available_options[3]['value']
 
 #Base button options
 @app.callback(
@@ -399,13 +906,6 @@ def update_typeveh(analysistype_val,
     print(opt)
     return [{'label': i, 'value': i} for i in opt[0]]
 
-@app.callback(Output('base', 'value'),
-              [Input('base', 'options')]
-)
-
-def set_typeveh_value(available_options):
-    return available_options[4]['value']
-
 ########<CHARTS>########
 
 ########<Brand Share Chart Callbacks - Top Brands>########
@@ -422,7 +922,7 @@ def set_typeveh_value(available_options):
      ]
 )
 
-def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, channel_name, base_name, usedfor_name):
+def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, channel_name, base_name):
 
     if analysistype_val=='region_analysis':
         SQL="SELECT  brands, salesplkpq, salesplkcq FROM brandshares_region WHERE ctry=(%s) AND typeveh=(%s) AND region=(%s) AND base=(%s)"
@@ -441,25 +941,86 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
     m=len(brand_val)
     print(m)
 
-
     def make_trace(x, name):
-        return go.Bar(
-            x=periods,   # cities name on the y-axis
-            y=x,        # monthly total on x-axis
-            name=name,
-            text=x,
-            hoverinfo='text',
-            textposition = 'auto',  # label for hover
-            orientation='v', # (!) for horizontal bars, default is 'v'
-            marker= go.Marker(
-                # color=color,        # set bar colors
-                line= go.Line(
-                    color='white',  # set bar border color
-                    width=1         # set bar border width
-                )
-            ),
-            width = 0.3
-        )
+        if name=='SHELL':
+            color1='rgb(255, 213, 0)'
+        elif name=='ADNOC':
+            color1='rgb(0, 102, 203)'
+        elif name=='MOBIL':
+            color1='rgb(225, 129, 129)'
+        elif name=='TOTAL':
+            color1='rgb(84, 84, 169)'
+        elif name=='CALTEX':
+            color1='rgb(1, 129, 129)'
+        elif name=='ENOC':
+            color1='rgb(135, 8, 135)'
+        elif name=='TOYOTA':
+            color1='rgb(160, 212, 255)'
+        elif name=='CASTROL':
+            color1='rgb(255, 0, 0)'
+        elif name=='LEXUS':
+            color1='rgb(246, 202, 154)'
+        elif name=='ZIC':
+            color1='rgb(6, 204, 104)'
+        elif name=='AC DELCO':
+            color1='rgb(133, 47, 226)'
+        elif name=='VOLVO':
+            color1='rgb(247, 189, 155)'
+        elif name=='VALVOLINE':
+            color1='rgb(135, 135, 7)'
+        elif name=='GULF':
+            color1='rgb(2, 255, 2)'
+        elif name=='AXCL':
+            color1='rgb(0, 0, 255)'
+        elif name=='NISSAN':
+            color1='rgb(248, 191, 157)'
+        elif name=='<Others>':
+            color1='rgb(134, 136, 138)'
+        else:
+            color1='nomatch'
+
+        if color1=='nomatch':
+            return go.Bar(
+                x=periods,   # cities name on the y-axis
+                y=x,        # monthly total on x-axis
+                name=name,
+                text=x,
+                hoverinfo='text',
+                textposition = 'inside',  # label for hover
+                orientation='v', # (!) for horizontal bars, default is 'v'
+
+
+
+                marker= go.Marker(
+                            # set bar colors
+                    line= go.Line(
+                        color='white',  # set bar border color
+                        width=1         # set bar border width
+                    )
+                ),
+                width = 0.3
+            )
+        else:
+            return go.Bar(
+                x=periods,   # cities name on the y-axis
+                y=x,        # monthly total on x-axis
+                name=name,
+                text=x,
+                hoverinfo='text',
+                textposition = 'inside',  # label for hover
+                orientation='v', # (!) for horizontal bars, default is 'v'
+
+
+
+                marker= go.Marker(
+                    color=color1,        # set bar colors
+                    line= go.Line(
+                        color='white',  # set bar border color
+                        width=1         # set bar border width
+                    )
+                ),
+                width = 0.3
+            )
 
     data = go.Data([
         make_trace([trial_x1[i], trial_x2[i]], trial_y[i])
@@ -490,7 +1051,7 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
      ]
 )
 
-def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, channel_name, base_name, usedfor_name):
+def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, channel_name, base_name):
 
 
     if analysistype_val=='region_analysis':
@@ -514,23 +1075,85 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
 
 
     def make_trace(x, name):
-        return go.Bar(
-            x=periods,   # cities name on the y-axis
-            y=x,        # monthly total on x-axis
-            name=name,
-            text=x,
-            hoverinfo='text',
-            textposition = 'auto',  # label for hover
-            orientation='v', # (!) for horizontal bars, default is 'v'
-            marker= go.Marker(
-                # color=color,        # set bar colors
-                line= go.Line(
-                    color='white',  # set bar border color
-                    width=1         # set bar border width
-                )
-            ),
-            width = 0.3
-        )
+        if name=='SHELL':
+            color1='rgb(255, 213, 0)'
+        elif name=='ADNOC':
+            color1='rgb(0, 102, 203)'
+        elif name=='MOBIL':
+            color1='rgb(225, 129, 129)'
+        elif name=='TOTAL':
+            color1='rgb(84, 84, 169)'
+        elif name=='CALTEX':
+            color1='rgb(1, 129, 129)'
+        elif name=='ENOC':
+            color1='rgb(135, 8, 135)'
+        elif name=='TOYOTA':
+            color1='rgb(160, 212, 255)'
+        elif name=='CASTROL':
+            color1='rgb(255, 0, 0)'
+        elif name=='LEXUS':
+            color1='rgb(246, 202, 154)'
+        elif name=='ZIC':
+            color1='rgb(6, 204, 104)'
+        elif name=='AC DELCO':
+            color1='rgb(133, 47, 226)'
+        elif name=='VOLVO':
+            color1='rgb(247, 189, 155)'
+        elif name=='VALVOLINE':
+            color1='rgb(135, 135, 7)'
+        elif name=='GULF':
+            color1='rgb(2, 255, 2)'
+        elif name=='AXCL':
+            color1='rgb(0, 0, 255)'
+        elif name=='NISSAN':
+            color1='rgb(248, 191, 157)'
+        elif name=='<Others>':
+            color1='rgb(134, 136, 138)'
+        else:
+            color1='nomatch'
+
+        if color1=='nomatch':
+            return go.Bar(
+                x=periods,   # cities name on the y-axis
+                y=x,        # monthly total on x-axis
+                name=name,
+                text=x,
+                hoverinfo='text',
+                textposition = 'inside',  # label for hover
+                orientation='v', # (!) for horizontal bars, default is 'v'
+
+
+
+                marker= go.Marker(
+                            # set bar colors
+                    line= go.Line(
+                        color='white',  # set bar border color
+                        width=1         # set bar border width
+                    )
+                ),
+                width = 0.3
+            )
+        else:
+            return go.Bar(
+                x=periods,   # cities name on the y-axis
+                y=x,        # monthly total on x-axis
+                name=name,
+                text=x,
+                hoverinfo='text',
+                textposition = 'inside',  # label for hover
+                orientation='v', # (!) for horizontal bars, default is 'v'
+
+
+
+                marker= go.Marker(
+                    color=color1,        # set bar colors
+                    line= go.Line(
+                        color='white',  # set bar border color
+                        width=1         # set bar border width
+                    )
+                ),
+                width = 0.3
+            )
 
     data = go.Data([
         make_trace([trial_x3[i], trial_x4[i]], trial_y[i]) for i in range(m)
@@ -560,7 +1183,7 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
     ]
 )
 
-def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, channel_name, base_name, usedfor_name):
+def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, channel_name, base_name):
 
     if analysistype_val=='region_analysis':
         SQL="SELECT  brands, salesplkpy, salesplkcy FROM brandshares_region WHERE ctry=(%s) AND typeveh=(%s) AND region=(%s) AND base=(%s)"
@@ -582,23 +1205,85 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
 
 
     def make_trace(x, name):
-        return go.Bar(
-            x=periods,   # cities name on the y-axis
-            y=x,        # monthly total on x-axis
-            name=name,
-            text=x,
-            hoverinfo='text',
-            textposition = 'auto',  # label for hover
-            orientation='v', # (!) for horizontal bars, default is 'v'
-            marker= go.Marker(
-                # color=color,        # set bar colors
-                line= go.Line(
-                    color='white',  # set bar border color
-                    width=1         # set bar border width
-                )
-            ),
-            width = 0.3
-        )
+        if name=='SHELL':
+            color1='rgb(255, 213, 0)'
+        elif name=='ADNOC':
+            color1='rgb(0, 102, 203)'
+        elif name=='MOBIL':
+            color1='rgb(225, 129, 129)'
+        elif name=='TOTAL':
+            color1='rgb(84, 84, 169)'
+        elif name=='CALTEX':
+            color1='rgb(1, 129, 129)'
+        elif name=='ENOC':
+            color1='rgb(135, 8, 135)'
+        elif name=='TOYOTA':
+            color1='rgb(160, 212, 255)'
+        elif name=='CASTROL':
+            color1='rgb(255, 0, 0)'
+        elif name=='LEXUS':
+            color1='rgb(246, 202, 154)'
+        elif name=='ZIC':
+            color1='rgb(6, 204, 104)'
+        elif name=='AC DELCO':
+            color1='rgb(133, 47, 226)'
+        elif name=='VOLVO':
+            color1='rgb(247, 189, 155)'
+        elif name=='VALVOLINE':
+            color1='rgb(135, 135, 7)'
+        elif name=='GULF':
+            color1='rgb(2, 255, 2)'
+        elif name=='AXCL':
+            color1='rgb(0, 0, 255)'
+        elif name=='NISSAN':
+            color1='rgb(248, 191, 157)'
+        elif name=='<Others>':
+            color1='rgb(134, 136, 138)'
+        else:
+            color1='nomatch'
+
+        if color1=='nomatch':
+            return go.Bar(
+                x=periods,   # cities name on the y-axis
+                y=x,        # monthly total on x-axis
+                name=name,
+                text=x,
+                hoverinfo='text',
+                textposition = 'inside',  # label for hover
+                orientation='v', # (!) for horizontal bars, default is 'v'
+
+
+
+                marker= go.Marker(
+                            # set bar colors
+                    line= go.Line(
+                        color='white',  # set bar border color
+                        width=1         # set bar border width
+                    )
+                ),
+                width = 0.3
+            )
+        else:
+            return go.Bar(
+                x=periods,   # cities name on the y-axis
+                y=x,        # monthly total on x-axis
+                name=name,
+                text=x,
+                hoverinfo='text',
+                textposition = 'inside',  # label for hover
+                orientation='v', # (!) for horizontal bars, default is 'v'
+
+
+
+                marker= go.Marker(
+                    color=color1,        # set bar colors
+                    line= go.Line(
+                        color='white',  # set bar border color
+                        width=1         # set bar border width
+                    )
+                ),
+                width = 0.3
+            )
 
     data = go.Data([
         make_trace([trial_x1[i], trial_x2[i]], trial_y[i])
@@ -628,7 +1313,7 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
     ]
 )
 
-def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, channel_name, base_name, usedfor_name):
+def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, channel_name, base_name):
 
     if analysistype_val=='region_analysis':
         SQL="SELECT  brands, valplkpy, valplkcy FROM brandshares_region WHERE ctry=(%s) AND typeveh=(%s) AND region=(%s) AND base=(%s)"
@@ -651,23 +1336,85 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
 
 
     def make_trace(x, name):
-        return go.Bar(
-            x=periods,   # cities name on the y-axis
-            y=x,        # monthly total on x-axis
-            name=name,  # label for hover
-            text=x,
-            hoverinfo='text',
-            textposition = 'auto',
-            orientation='v', # (!) for horizontal bars, default is 'v'
-            marker= go.Marker(
-                # color=color,        # set bar colors
-                line= go.Line(
-                    color='white',  # set bar border color
-                    width=1         # set bar border width
-                )
-            ),
-            width = 0.3
-        )
+        if name=='SHELL':
+            color1='rgb(255, 213, 0)'
+        elif name=='ADNOC':
+            color1='rgb(0, 102, 203)'
+        elif name=='MOBIL':
+            color1='rgb(225, 129, 129)'
+        elif name=='TOTAL':
+            color1='rgb(84, 84, 169)'
+        elif name=='CALTEX':
+            color1='rgb(1, 129, 129)'
+        elif name=='ENOC':
+            color1='rgb(135, 8, 135)'
+        elif name=='TOYOTA':
+            color1='rgb(160, 212, 255)'
+        elif name=='CASTROL':
+            color1='rgb(255, 0, 0)'
+        elif name=='LEXUS':
+            color1='rgb(246, 202, 154)'
+        elif name=='ZIC':
+            color1='rgb(6, 204, 104)'
+        elif name=='AC DELCO':
+            color1='rgb(133, 47, 226)'
+        elif name=='VOLVO':
+            color1='rgb(247, 189, 155)'
+        elif name=='VALVOLINE':
+            color1='rgb(135, 135, 7)'
+        elif name=='GULF':
+            color1='rgb(2, 255, 2)'
+        elif name=='AXCL':
+            color1='rgb(0, 0, 255)'
+        elif name=='NISSAN':
+            color1='rgb(248, 191, 157)'
+        elif name=='<Others>':
+            color1='rgb(134, 136, 138)'
+        else:
+            color1='nomatch'
+
+        if color1=='nomatch':
+            return go.Bar(
+                x=periods,   # cities name on the y-axis
+                y=x,        # monthly total on x-axis
+                name=name,
+                text=x,
+                hoverinfo='text',
+                textposition = 'inside',  # label for hover
+                orientation='v', # (!) for horizontal bars, default is 'v'
+
+
+
+                marker= go.Marker(
+                            # set bar colors
+                    line= go.Line(
+                        color='white',  # set bar border color
+                        width=1         # set bar border width
+                    )
+                ),
+                width = 0.3
+            )
+        else:
+            return go.Bar(
+                x=periods,   # cities name on the y-axis
+                y=x,        # monthly total on x-axis
+                name=name,
+                text=x,
+                hoverinfo='text',
+                textposition = 'inside',  # label for hover
+                orientation='v', # (!) for horizontal bars, default is 'v'
+
+
+
+                marker= go.Marker(
+                    color=color1,        # set bar colors
+                    line= go.Line(
+                        color='white',  # set bar border color
+                        width=1         # set bar border width
+                    )
+                ),
+                width = 0.3
+            )
 
     data = go.Data([
         make_trace([trial_x3[i], trial_x4[i]], trial_y[i]) for i in range(m)
@@ -699,7 +1446,7 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
     ]
 )
 
-def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, channel_name, base_name, usedfor_name):
+def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, channel_name, base_name):
 
     if analysistype_val=='region_analysis':
         SQL="SELECT brands, wdpq, wdcq, uwdpq, uwdcq FROM distbrand_region WHERE ctry=(%s) AND typeveh=(%s) AND region=(%s) AND base=(%s)"
@@ -735,7 +1482,7 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
 ########<Pie Charts Callbacks>########
 @app.callback(
     Output('pie','figure'),
-    [Input('globalregion','value'),
+    [Input('country','value'),
     ]
 )
 
@@ -776,7 +1523,7 @@ def update_BS_brands(globalregion_name):
 ########<Horizontal Bar Charts Callbacks>########
 @app.callback(
     Output('horizbar','figure'),
-    [Input('globalregion','value'),
+    [Input('country','value'),
     ]
 )
 
@@ -800,7 +1547,7 @@ def update_flag(globalregion_name):
     trace8 = go.Bar(y=ctry_val,x=shellvalplkq2_val,name="Sales Value",orientation='h',text=shellvalplkq2_val,textposition = 'auto',hoverinfo='skip',showlegend=False,marker=dict(color='rgba(90,151,2016,1)'))
 
     fig = tls.make_subplots(rows=1, cols=4, shared_yaxes=True,vertical_spacing=0.02,horizontal_spacing=0.05,subplot_titles=('Total Market Sales Volume', 'Shell Sales Volume', 'Total Market Sales Value USD', 'Shell Sales Value USD'))
-    fig['layout']['margin'] = {'l': 150, 'r': 20, 'b': 40, 't': 100}
+    fig['layout']['margin'] = {'l': 150, 'r': 20, 'b': 150, 't': 70}
 
     fig['layout'].update(title='Absolute Volume & Value Figures (Millions) - Q1 2018 vs Q2 2018',titlefont=dict(family='Calibri Light'),barmode='group')
 
