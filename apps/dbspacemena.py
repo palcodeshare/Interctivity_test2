@@ -38,12 +38,14 @@ tabs_styles = {
 tab_style = {
     'borderBottom': '1px solid #d6d6d6',
     'padding': '6px',
-    'font-family': 'Calibri Light'
+    'font-family': 'Calibri Light',
+    'color': '#FF8C00',
+    'fontWeight': 'bold'
 }
 
 tab_selected_style = {
-    'borderTop': '1px solid #d6d6d6',
-    'borderBottom': '1px solid #d6d6d6',
+    'borderTop': '3px solid #d6d6d6',
+    'borderBottom': '0px solid #d6d6d6',
     'backgroundColor': '#FF8C00',
     'color': 'white',
     'padding': '6px',
@@ -59,9 +61,10 @@ layout = html.Div(
             html.Div([
                 html.H1(
                     'GfK POS DASHBOARD',
-                    className='eleven columns',
+                    className='five columns',
                 )
             ],style={'color': '#FF8C00'}),
+
             html.Img(
                 src="https://www.gfk.com/fileadmin/fe/gfktheme/images/favicons/apple-touch-icon-72x72.png",
                 className='one columns',
@@ -74,6 +77,11 @@ layout = html.Div(
             ),
         ],className='row'),
         html.Br(),
+        html.Div([
+            html.Button('How To Use', id='button', style={'width':'180px','color': '#FF8C00','fontWeight': 'bold','font-family': 'Calibri Light','fontSize':'14'}, className='one column'),
+            html.Button('Notes', id='button', style={'width':'180px','color': '#FF8C00','fontWeight': 'bold','font-family': 'Calibri Light','fontSize':'14'}, className='one column'),
+        ],className='row'),
+        dcc.Markdown('''---'''),
         dcc.Tabs(id="shelldbtabs", value='global', children=[
             dcc.Tab(label='GLOBAL', value='global', style=tab_style, selected_style=tab_selected_style),
             dcc.Tab(label='MESA', value='mesa', style=tab_style, selected_style=tab_selected_style),
@@ -154,8 +162,11 @@ def render_content(tab):
                         ),
                     ],className='two columns')
                 ],className='row'),
+                html.Br(),
 
                 #QoQ Brandshares Div
+
+
                 html.Div([
                     html.Div([
                         dcc.Graph(
@@ -186,6 +197,7 @@ def render_content(tab):
                         )
                     ],className='six columns')
                 ],className='row'),
+                dcc.Markdown('''---'''),
 
                 html.Div([
                     html.Div([
@@ -195,6 +207,7 @@ def render_content(tab):
                         ),
                     ],className='row'),
                 ]),
+                dcc.Markdown('''---'''),
 
                 html.Div([
                     html.Div([
@@ -279,8 +292,12 @@ def render_content(tab):
                         ),
                     ],className='two columns')
                 ],className='row'),
+                html.Br(),
 
                 #QoQ Brandshares Div
+
+
+
                 html.Div([
                     html.Div([
                         dcc.Graph(
@@ -392,8 +409,12 @@ def render_content(tab):
                         ),
                     ],className='two columns')
                 ],className='row'),
+                html.Br(),
 
                 #QoQ Brandshares Div
+
+
+
                 html.Div([
                     html.Div([
                         dcc.Graph(
@@ -434,7 +455,7 @@ def render_content(tab):
 
                 html.Div([
                     dcc.Graph(
-                        style={'height': '700px'},
+                        style={'height': '900px'},
                         id='skubar',
                         config={'displayModeBar': False}
                     ),
@@ -512,8 +533,11 @@ def render_content(tab):
                         ),
                     ],className='two columns')
                 ],className='row'),
+                html.Br(),
 
                 #QoQ Brandshares Div
+
+
                 html.Div([
                     html.Div([
                         dcc.Graph(
@@ -556,7 +580,7 @@ def render_content(tab):
 
                 html.Div([
                     dcc.Graph(
-                        style={'height': '700px'},
+                        style={'height': '900px'},
                         id='skubar',
                         config={'displayModeBar': False}
                     ),
@@ -625,8 +649,10 @@ def render_content(tab):
                         ),
                     ],className='two columns')
                 ],className='row'),
+                html.Br(),
 
                 #QoQ Brandshares Div
+
                 html.Div([
                     html.Div([
                         dcc.Graph(
@@ -669,7 +695,7 @@ def render_content(tab):
 
                 html.Div([
                     dcc.Graph(
-                        style={'height': '700px'},
+                        style={'height': '900px'},
                         id='skubar',
                         config={'displayModeBar': False}
                     ),
@@ -693,7 +719,7 @@ def render_content(tab):
                     html.Div([
                         html.P('Note: Selecting an option will disable the other. For example, selecting By Region will disable Select Channel dropdown')
                     ],className='nine columns', style= {'display': 'inline-block','color': 'red'}),
-                ],className='row'),
+                ],className='row',style={'display': 'none'}),
                 html.Br(),
                 html.Div([
                     html.Div([
@@ -729,7 +755,7 @@ def render_content(tab):
                             value='TOTAL',
                             placeholder="Region",
                         ),
-                    ],className='two columns'),
+                    ],className='two columns',style={'display': 'none'}),
 
                     html.Div([
                         html.P('Select Channel:'),
@@ -749,8 +775,12 @@ def render_content(tab):
                         ),
                     ],className='two columns')
                 ],className='row'),
+                html.Br(),
 
                 #QoQ Brandshares Div
+
+
+
                 html.Div([
                     html.Div([
                         dcc.Graph(
@@ -793,7 +823,7 @@ def render_content(tab):
 
                 html.Div([
                     dcc.Graph(
-                        style={'height': '700px'},
+                        style={'height': '900px'},
                         id='skubar',
                         config={'displayModeBar': False}
                     ),
@@ -1576,7 +1606,7 @@ def update_flag(globalregion_name):
 
 def update_flag(ctry_name):
 
-    SQL="SELECT itemname, salesplkpq, salesplkcq, valplkpq, valplkcq, pricepq, pricecq FROM skubardat WHERE ctry=(%s)"
+    SQL="SELECT itemname, salesplkpq, salesplkcq, valplkpq, valplkcq, pricepq, pricecq FROM skubardat2 WHERE ctry=(%s)"
     cur.execute(SQL,(ctry_name,))
     result=cur.fetchall()
     itemname_val, salesplkpq_val, salesplkcq_val, valplkpq_val, valplkcq_val, pricepq_val, pricecq_val = zip(*result)
@@ -1598,8 +1628,7 @@ def update_flag(ctry_name):
     trace6 = go.Scatter(x=itemname_val,y=y6,name="Q2 Price USD",text=pricecq_val)
 
     fig = tls.make_subplots(rows=2, cols=1,shared_xaxes=True,subplot_titles=('Sales Volume', 'Sales Value USD'))
-    fig['layout']['margin'] = {'l': 100, 'r': 120, 'b': 200, 't': 70}
-    # fig['layout']['xaxis'].update(tickfont=dict(size=10))
+    fig['layout']['margin'] = {'l': 100, 'r': 120, 'b': 250, 't': 70}
 
     fig['layout'].update(title='Top 15 SKUs By Country (Millions) - Q2 2018',titlefont=dict(family='Calibri Light'),barmode='group',hovermode='closest')
 
@@ -1612,7 +1641,7 @@ def update_flag(ctry_name):
 
     fig['data'][4].update(yaxis='y3')
     fig['data'][5].update(yaxis='y3')
-    fig['layout']['yaxis3'] = dict(range=[1, 10], overlaying='y1', anchor='x1', side='right', showgrid=False)
+    fig['layout']['yaxis3'] = dict(overlaying='y1', anchor='x1', side='right', showgrid=False)
 
     for i in fig['layout']['annotations']:
         i['font'] = dict(family='Calibri Light',size=16)
