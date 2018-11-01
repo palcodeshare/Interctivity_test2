@@ -323,7 +323,7 @@ def render_content(tab):
 
                 html.Div([
                     dcc.Graph(
-                        style={'height': '700px'},
+                        style={'height': '900px'},
                         id='skubar',
                         config={'displayModeBar': False}
                     ),
@@ -1598,7 +1598,7 @@ def update_flag(ctry_name):
     trace6 = go.Scatter(x=itemname_val,y=y6,name="Q2 Price USD",text=pricecq_val)
 
     fig = tls.make_subplots(rows=2, cols=1,shared_xaxes=True,subplot_titles=('Sales Volume', 'Sales Value USD'))
-    fig['layout']['margin'] = {'l': 100, 'r': 120, 'b': 150, 't': 70}
+    fig['layout']['margin'] = {'l': 100, 'r': 120, 'b': 200, 't': 70}
     # fig['layout']['xaxis'].update(tickfont=dict(size=10))
 
     fig['layout'].update(title='Top 15 SKUs By Country (Millions) - Q2 2018',titlefont=dict(family='Calibri Light'),barmode='group',hovermode='closest')
