@@ -167,7 +167,7 @@ def render_content(tab):
                     ],className='two columns',style={'display': 'none'}),
 
                     html.Div([
-                        html.P('Select Oil Base:'),
+                        html.P('Select Subgroup:'),
                         dcc.Dropdown(
                             id='base',
                             value='TOTAL',
@@ -297,7 +297,7 @@ def render_content(tab):
                     ],className='two columns'),
 
                     html.Div([
-                        html.P('Select Oil Base:'),
+                        html.P('Select Subgroup:'),
                         dcc.Dropdown(
                             id='base',
                             value='TOTAL',
@@ -414,7 +414,7 @@ def render_content(tab):
                     ],className='two columns'),
 
                     html.Div([
-                        html.P('Select Oil Base:'),
+                        html.P('Select Subgroup:'),
                         dcc.Dropdown(
                             id='base',
                             value='TOTAL',
@@ -538,7 +538,7 @@ def render_content(tab):
                     ],className='two columns'),
 
                     html.Div([
-                        html.P('Select Oil Base:'),
+                        html.P('Select Subgroup:'),
                         dcc.Dropdown(
                             id='base',
                             value='TOTAL',
@@ -654,7 +654,7 @@ def render_content(tab):
                     ],className='two columns'),
 
                     html.Div([
-                        html.P('Select Oil Base:'),
+                        html.P('Select Subgroup:'),
                         dcc.Dropdown(
                             id='base',
                             value='TOTAL',
