@@ -108,6 +108,13 @@ def render_content(clickData):
     if clickData > 0:
         return '/apps/howtouse'
 
+@app.callback(Output('url1', 'pathname'),
+              [Input('button2', 'n_clicks')])
+
+def render_content(clickData):
+    if clickData > 0:
+        return '/apps/notes'
+
 @app.callback(Output('shelldbcontent', 'children'),
               [Input('shelldbtabs', 'value')])
 
@@ -341,7 +348,7 @@ def render_content(tab):
                         )
                     ],className='six columns')
                 ],className='row'),
-
+                dcc.Markdown('''---'''),
                 html.Div([
                     html.Div([
                         dcc.Graph(
@@ -350,7 +357,7 @@ def render_content(tab):
                         ),
                     ],className='row'),
                 ]),
-
+                dcc.Markdown('''---'''),
                 html.Div([
                     dcc.Graph(
                         style={'height': '900px'},
@@ -458,14 +465,14 @@ def render_content(tab):
                         )
                     ],className='six columns')
                 ],className='row'),
-
+                dcc.Markdown('''---'''),
                 html.Div([
                     dcc.Graph(
                         id='distbrand',
                         config={'displayModeBar': False}
                     ),
                 ],className='row'),
-
+                dcc.Markdown('''---'''),
                 html.Div([
                     dcc.Graph(
                         style={'height': '900px'},
@@ -581,7 +588,7 @@ def render_content(tab):
                         )
                     ],className='six columns')
                 ],className='row'),
-
+                dcc.Markdown('''---'''),
                 html.Div([
                     html.Div([
                         dcc.Graph(
@@ -590,7 +597,7 @@ def render_content(tab):
                         ),
                     ],className='row'),
                 ]),
-
+                dcc.Markdown('''---'''),
                 html.Div([
                     dcc.Graph(
                         style={'height': '900px'},
@@ -696,7 +703,7 @@ def render_content(tab):
                         )
                     ],className='six columns')
                 ],className='row'),
-
+                dcc.Markdown('''---'''),
                 html.Div([
                     html.Div([
                         dcc.Graph(
@@ -705,7 +712,7 @@ def render_content(tab):
                         ),
                     ],className='row'),
                 ]),
-
+                dcc.Markdown('''---'''),
                 html.Div([
                     dcc.Graph(
                         style={'height': '900px'},
@@ -824,7 +831,7 @@ def render_content(tab):
                         )
                     ],className='six columns')
                 ],className='row'),
-
+                dcc.Markdown('''---'''),
                 html.Div([
                     html.Div([
                         dcc.Graph(
@@ -833,7 +840,7 @@ def render_content(tab):
                         ),
                     ],className='row'),
                 ]),
-
+                dcc.Markdown('''---'''),
                 html.Div([
                     dcc.Graph(
                         style={'height': '900px'},

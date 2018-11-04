@@ -37,21 +37,21 @@ layout = html.Div(
         html.Br(),
         html.Div([
             html.Button('Dashboard', id='button1', style={'width':'180px','color': '#FF8C00','fontWeight': 'bold','font-family': 'Calibri Light','fontSize':'14'}, className='one column'),
-            html.Button('Notes', id='button2', style={'width':'180px','color': '#FF8C00','fontWeight': 'bold','font-family': 'Calibri Light','fontSize':'14'}, className='one column'),
+            html.Button('How To Use', id='button2', style={'width':'180px','color': '#FF8C00','fontWeight': 'bold','font-family': 'Calibri Light','fontSize':'14'}, className='one column'),
         ],className='row'),
         dcc.Markdown('''---'''),
         html.Div([
             html.H2(
-                'Navigating The Dashboard',
+                'Regions & Countries Coverage',
                 className='five columns',
             )
         ],className='row',style={'color': '#FF8C00'}),
         html.Br(),
         html.Div([
-            html.P('1. Select a desired region from the horizontal tab on top of the page. By default, the dashboard views the global overview.'),
-            html.P('2. For all regions (MESA/RUSSIA/APAC/CHINA/EU) select the analysis type (By Channel/By Region). Data is viewable in terms of channels or regions but not both simultaneously. At any point, any single option can be active.'),
-            html.P('3. Select the desired values from the dropdown menus. Choosing dropdown values sequentially from left to right is advised as available options are displayed as per preceeding selections.'),
-            html.P('4. Charts can be zoomed in by clicking and dragging the zoom box on the desired location on the chart. Subsequently, you can zoom out to default view by double clicking anywhere on the chart.'),
+            html.P('The dashboard currently operates on 13 countries segmenteted into 5 regions. The countries covered are:'),
+            # html.P('2. For all regions (MESA/RUSSIA/APAC/CHINA/EU) select the analysis type (By Channel/By Region). Data is viewable in terms of channels or regions but not both simultaneously. At any point, any single option can be active.'),
+            # html.P('3. Select the desired values from the dropdown menus. Choosing dropdown values sequentially from left to right is advised as available options are displayed as per preceeding selections.'),
+            # html.P('4. Charts can be zoomed in by clicking and dragging the zoom box on the desired location on the chart. Subsequently, you can zoom out to default view by double clicking anywhere on the chart.'),
             html.Br(),
             html.Br(),
             html.P('For any queries please email to nilay.doshi@gfk.com',style={'color': '#FF8C00'})
@@ -73,4 +73,4 @@ def render_content(clickData):
 
 def render_content(clickData):
     if clickData > 0:
-        return '/apps/notes'
+        return '/apps/howtouse'
