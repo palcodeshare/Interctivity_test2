@@ -3,7 +3,7 @@ import dash_html_components as html
 from dash.dependencies import Input, Output
 import dash_auth
 from app import app
-from apps import shelldashboard,howtouse
+from apps import shelldashboard,howtouse,notes
 import os
 
 server = app.server
@@ -25,6 +25,8 @@ def display_page(pathname):
          return shelldashboard.layout
     elif pathname == '/apps/howtouse':
          return howtouse.layout
+    elif pathname == '/apps/notes':
+         return notes.layout
     else:
         return shelldashboard.layout
 

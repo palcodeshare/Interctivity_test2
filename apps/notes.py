@@ -12,7 +12,11 @@ from app import app
 layout = html.Div(
     [
         dcc.Location(
-             id='url2'
+             id='url3'
+        ),
+
+        dcc.Location(
+             id='url4'
         ),
 
         html.Div([
@@ -61,14 +65,14 @@ layout = html.Div(
     ],style={'font-family': 'Calibri Light'},className='ten columns offset-by-one'
 )
 
-@app.callback(Output('url2', 'pathname'),
+@app.callback(Output('url3', 'pathname'),
               [Input('button1', 'n_clicks')])
 
 def render_content(clickData):
     if clickData > 0:
         return '/apps/shelldashboard'
 
-@app.callback(Output('url2', 'pathname'),
+@app.callback(Output('url4', 'pathname'),
               [Input('button2', 'n_clicks')])
 
 def render_content(clickData):

@@ -61,6 +61,10 @@ layout = html.Div(
              id='url1'
         ),
 
+        dcc.Location(
+             id='url2'
+        ),
+
         html.Div([
             html.Div([
                 html.H1(
@@ -108,7 +112,7 @@ def render_content(clickData):
     if clickData > 0:
         return '/apps/howtouse'
 
-@app.callback(Output('url1', 'pathname'),
+@app.callback(Output('url2', 'pathname'),
               [Input('button2', 'n_clicks')])
 
 def render_content(clickData):
