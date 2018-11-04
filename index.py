@@ -3,7 +3,7 @@ import dash_html_components as html
 from dash.dependencies import Input, Output
 import dash_auth
 from app import app
-from apps import dbspacemena
+from apps import shelldashboard,howtouse
 import os
 
 server = app.server
@@ -14,7 +14,7 @@ auth = dash_auth.BasicAuth(
 )
 
 app.layout = html.Div([
-    dcc.Location(id='url',pathname='/apps/dbspacemena'),
+    dcc.Location(id='url',refresh=False),
     html.Div(id='page-content')
 ])
 
@@ -22,8 +22,10 @@ app.layout = html.Div([
 @app.callback(Output('page-content', 'children'),
               [Input('url', 'pathname')])
 def display_page(pathname):
-    if pathname == '/apps/dbspacemena':
-         return dbspacemena.layout
+    if pathname == '/apps/shelldashboard':
+         return shelldashboard.layout
+    elif pathname == '/apps/howtouse':
+         return howtouse.layout
     else:
         return '404'
 

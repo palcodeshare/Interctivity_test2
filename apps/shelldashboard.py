@@ -57,10 +57,14 @@ tab_selected_style = {
 # App layout
 layout = html.Div(
     [
+        dcc.Location(
+             id='url1'
+        ),
+
         html.Div([
             html.Div([
                 html.H1(
-                    'GfK POS DASHBOARD',
+                    'GfK ONE - POS DASHBOARD',
                     className='five columns',
                 )
             ],style={'color': '#FF8C00'}),
@@ -76,12 +80,15 @@ layout = html.Div(
                 },
             ),
         ],className='row'),
+
         html.Br(),
         html.Div([
-            html.Button('How To Use', id='button', style={'width':'180px','color': '#FF8C00','fontWeight': 'bold','font-family': 'Calibri Light','fontSize':'14'}, className='one column'),
-            html.Button('Notes', id='button', style={'width':'180px','color': '#FF8C00','fontWeight': 'bold','font-family': 'Calibri Light','fontSize':'14'}, className='one column'),
+            html.Button('How To Use', id='button1', style={'width':'180px','color': '#FF8C00','fontWeight': 'bold','font-family': 'Calibri Light','fontSize':'14'}, className='one column'),
+            html.Button('Notes', id='button2', style={'width':'180px','color': '#FF8C00','fontWeight': 'bold','font-family': 'Calibri Light','fontSize':'14'}, className='one column'),
         ],className='row'),
+
         dcc.Markdown('''---'''),
+
         dcc.Tabs(id="shelldbtabs", value='global', children=[
             dcc.Tab(label='GLOBAL', value='global', style=tab_style, selected_style=tab_selected_style),
             dcc.Tab(label='MESA', value='mesa', style=tab_style, selected_style=tab_selected_style),
@@ -94,6 +101,12 @@ layout = html.Div(
         html.Div(id='shelldbcontent')
     ],style={'font-family': 'Calibri Light'},className='ten columns offset-by-one'
 )
+@app.callback(Output('url1', 'pathname'),
+              [Input('button1', 'n_clicks')])
+
+def render_content(clickData):
+    if clickData > 0:
+        return '/apps/howtouse'
 
 @app.callback(Output('shelldbcontent', 'children'),
               [Input('shelldbtabs', 'value')])
