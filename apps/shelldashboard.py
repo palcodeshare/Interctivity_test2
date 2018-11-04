@@ -752,8 +752,7 @@ def render_content(tab):
                                 {'label': 'Italy', 'value': 'Italy'},
                                 {'label': 'Great Britain', 'value': 'Great Britain'},
                                 {'label': 'Spain', 'value': 'Spain'},
-                                {'label': 'Germany', 'value': 'Germany'},
-                                {'label': 'Portugal', 'value': 'Portugal'},
+                                {'label': 'Germany', 'value': 'Germany'}
                             ],
                             placeholder="Country",
                         ),
