@@ -1,9 +1,12 @@
 import dash
+import os
+import config
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 import plotly
 import plotly.tools as tls
+import base64
 
 from app import app
 
@@ -43,7 +46,19 @@ layout = html.Div(
                 'Navigating The Dashboard',
                 className='five columns',
             )
-        ],style={'color': '#FF8C00'}),
+        ],className='row',style={'color': '#FF8C00'}),
+        html.Br(),
+        html.Div([
+            html.P('1. Select a desired region from the horizontal tab on top of the page. By default, the dashboard views the global overview.'),
+            html.Img(src='image/tabs.png'),
+            html.P('2. For all regions (MESA/RUSSIA/APAC/CHINA/EU) select the analysis type (By Channel/By Region). Data is viewable in terms of channels or regions but not both simultaneously. At any point, any single option can be active.'),
+            html.P('3. Select the desired values from the dropdown menus. Choosing dropdown values sequentially from left to right is advised as available options are displayed as per preceeding selections.'),
+            html.P('4. Charts can be zoomed in by clicking and dragging the zoom box on the desired location on the chart. Subsequently, you can zoom out to default view by double clicking anywhere on the chart.'),
+            html.Br(),
+            html.Br(),
+            html.P('For any queries please email to nilay.doshi@gfk.com')
+
+        ]),
 
     ],style={'font-family': 'Calibri Light'},className='ten columns offset-by-one'
 )
