@@ -54,7 +54,7 @@ layout = html.Div(
             html.P('4. Charts can be zoomed in by clicking and dragging the zoom box on the desired location on the chart. Subsequently, you can zoom out to default view by double clicking anywhere on the chart.'),
             html.Br(),
             html.Br(),
-            html.P('For any queries please email to nilay.doshi@gfk.com')
+            html.P('For any queries please email to nilay.doshi@gfk.com',style={'color': '#FF8C00'})
 
         ]),
 
