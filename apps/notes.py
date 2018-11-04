@@ -68,13 +68,13 @@ layout = html.Div(
 @app.callback(Output('url3', 'pathname'),
               [Input('button1', 'n_clicks')])
 
-def render_content(clickData):
+def render_content(3clickData):
     if clickData > 0:
         return '/apps/shelldashboard'
 
 @app.callback(Output('url4', 'pathname'),
               [Input('button2', 'n_clicks')])
 
-def render_content(clickData):
+def render_content4(clickData):
     if clickData > 0:
         return '/apps/howtouse'
