@@ -115,8 +115,8 @@ def render_content1(clickData):
 @app.callback(Output('url2', 'pathname'),
               [Input('button2', 'n_clicks')])
 
-def render_content2(clickData):
-    if clickData > 0:
+def render_content2(clickData2):
+    if clickData2 > 0:
         return '/apps/notes'
 
 @app.callback(Output('shelldbcontent', 'children'),
