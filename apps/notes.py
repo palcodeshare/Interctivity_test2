@@ -22,7 +22,7 @@ layout = html.Div(
         html.Div([
             html.Div([
                 html.H1(
-                    'GfK ONE - POS DASHBOARD',
+                    'GfK ONE - PoS DASHBOARD',
                     className='five columns',
                 )
             ],style={'color': '#FF8C00'}),
