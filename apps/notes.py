@@ -52,10 +52,13 @@ layout = html.Div(
         ],className='row',style={'color': '#FF8C00'}),
         html.Br(),
         html.Div([
-            html.P('The dashboard currently operates on 13 countries segmenteted into 5 regions. The countries covered are:'),
-            # html.P('2. For all regions (MESA/RUSSIA/APAC/CHINA/EU) select the analysis type (By Channel/By Region). Data is viewable in terms of channels or regions but not both simultaneously. At any point, any single option can be active.'),
-            # html.P('3. Select the desired values from the dropdown menus. Choosing dropdown values sequentially from left to right is advised as available options are displayed as per preceeding selections.'),
-            # html.P('4. Charts can be zoomed in by clicking and dragging the zoom box on the desired location on the chart. Subsequently, you can zoom out to default view by double clicking anywhere on the chart.'),
+            html.P('The dashboard currently operates on 13 countries segmenteted into 5 regions as below:'),
+            html.P('1. MESA (Middle East And South Africa) - United Arab Emirates, Saudi Arabia, Oman, Egypt '),
+            html.P('2. RUSSIA '),
+            html.P('3. APAC (Asia Pacific) - Indonesia, Malaysia, Thailand '),
+            html.P('4. China '),
+            html.P('5. EU (Europe) - Italy, Spain, Great Britain, Germany '),
+            dcc.Markdown('''---'''),
             html.Br(),
             html.Br(),
             html.P('For any queries please email to nilay.doshi@gfk.com',style={'color': '#FF8C00'})
