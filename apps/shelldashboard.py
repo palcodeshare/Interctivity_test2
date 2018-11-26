@@ -755,7 +755,6 @@ def render_content(tab):
                                 {'label': 'EU Total', 'value': 'EU'},
                                 {'label': 'Italy', 'value': 'Italy'},
                                 {'label': 'Great Britain', 'value': 'Great Britain'},
-                                {'label': 'Spain', 'value': 'Spain'},
                                 {'label': 'Germany', 'value': 'Germany'}
                             ],
                             placeholder="Country",
@@ -987,7 +986,7 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
     result=cur.fetchall()
     brand_val, salesplkpq_val, salesplkcq_val = zip(*result)
     trial_y=brand_val
-    periods=['Q1 2018','Q2 2018']
+    periods=['Q2 2018','Q3 2018']
     trial_x1=salesplkpq_val
     trial_x2=salesplkcq_val
 
@@ -1118,7 +1117,7 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
     brand_val, valplkpq_val, valplkcq_val = zip(*result)
 
     trial_y=brand_val
-    periods=['Q1 2018','Q2 2018']
+    periods=['Q2 2018','Q3 2018']
 
     trial_x3=valplkpq_val
     trial_x4=valplkcq_val
@@ -1346,7 +1345,7 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
     layout = go.Layout(
         barmode='stack',  # (!) bars are stacked on this plot
         bargap=0,       # (!) spacing (norm. w.r.t axis) between bars
-        title='Brand Volume Share Y-o-Y (Till June 2018)',        # set plot title
+        title='Brand Volume Share Y-o-Y (Till Sept 2018)',        # set plot title
         showlegend=True,   # remove legend
         hovermode='closest',
 
@@ -1476,7 +1475,7 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
     layout = go.Layout(
         barmode='stack',  # (!) bars are stacked on this plot
         bargap=0.1,       # (!) spacing (norm. w.r.t axis) between bars
-        title='Brand Value Share Y-o-Y (Till June 2018)(USD)',        # set plot title
+        title='Brand Value Share Y-o-Y (Till Sept 2018)(USD)',        # set plot title
         showlegend=True,   # remove legend
         hovermode='closest',
 
@@ -1601,7 +1600,7 @@ def update_flag(globalregion_name):
     fig = tls.make_subplots(rows=1, cols=4, shared_yaxes=True,vertical_spacing=0.02,horizontal_spacing=0.05,subplot_titles=('Total Market Sales Volume', 'Shell Sales Volume', 'Total Market Sales Value USD', 'Shell Sales Value USD'))
     fig['layout']['margin'] = {'l': 150, 'r': 20, 'b': 150, 't': 70}
 
-    fig['layout'].update(title='Absolute Volume & Value Figures (Millions) - Q1 2018 vs Q2 2018',titlefont=dict(family='Calibri Light'),barmode='group')
+    fig['layout'].update(title='Absolute Volume & Value Figures (Millions) - Q2 2018 vs Q3 2018',titlefont=dict(family='Calibri Light'),barmode='group')
 
     fig.append_trace(trace1,1,1)
     fig.append_trace(trace2,1,1)
@@ -1652,7 +1651,7 @@ def update_flag(ctry_name):
     fig = tls.make_subplots(rows=2, cols=1,shared_xaxes=True,subplot_titles=('Sales Volume', 'Sales Value USD'))
     fig['layout']['margin'] = {'l': 100, 'r': 120, 'b': 250, 't': 70}
 
-    fig['layout'].update(title='Top 15 SKUs By Country (Millions) - Q2 2018',titlefont=dict(family='Calibri Light'),barmode='group',hovermode='closest')
+    fig['layout'].update(title='Top 15 SKUs By Country (Millions) - Q3 2018',titlefont=dict(family='Calibri Light'),barmode='group',hovermode='closest')
 
     fig.append_trace(trace1,1,1)
     fig.append_trace(trace2,1,1)
