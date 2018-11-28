@@ -59,6 +59,19 @@ layout = html.Div(
             html.P('4. China '),
             html.P('5. EU (Europe) - Italy, Spain, Great Britain, Germany '),
             dcc.Markdown('''---'''),
+
+        ]),
+        html.Div([
+            html.H2(
+                'Important Notes',
+                className='five columns',
+            )
+        ],className='row',style={'color': '#FF8C00'}),
+        html.Br(),
+        html.Div([
+            html.P('Please find critical information on certain data features available in the dashboard'),
+            html.P('1. SKU information excludes all tradebrands and exclusives from rankings to maintain retailer confidentiality'),
+            dcc.Markdown('''---'''),
             html.Br(),
             html.Br(),
             html.P('For any queries please email to nilay.doshi@gfk.com',style={'color': '#FF8C00'})

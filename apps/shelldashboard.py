@@ -1580,7 +1580,7 @@ def update_BS_brands(globalregion_name):
 
 def update_flag(globalregion_name):
 
-    SQL="SELECT ctry, salesplkq1, salesplkq2, shellsalesplkq1, shellsalesplkq2, valplkq1, valplkq2, shellvalplkq1, shellvalplkq2 FROM pieandbar WHERE globalreg=(%s)"
+    SQL="SELECT ctry, salesplkq1, salesplkq2, shellsalesplkq1, shellsalesplkq2, valplkq1, valplkq2, shellvalplkq1, shellvalplkq2 FROM pieandbar2 WHERE globalreg=(%s)"
     cur.execute(SQL,(globalregion_name,))
     result=cur.fetchall()
     ctry_val, salesplkq1_val, salesplkq2_val, shellsalesplkq1_val, shellsalesplkq2_val, valplkq1_val, valplkq2_val, shellvalplkq1_val, shellvalplkq2_val = zip(*result)
