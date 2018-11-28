@@ -1539,7 +1539,7 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
 
 def update_BS_brands(globalregion_name):
 
-    SQL="SELECT ctry, salesplkq2, valplkq2 FROM pieandbar WHERE globalreg=(%s)"
+    SQL="SELECT ctry, salesplkq2, valplkq2 FROM pieandbar2 WHERE globalreg=(%s)"
     cur.execute(SQL,(globalregion_name,))
     result=cur.fetchall()
     ctry_val, salesplkq2_val, valplkq2_val = zip(*result)
