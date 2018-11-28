@@ -1566,7 +1566,7 @@ def update_BS_brands(globalregion_name):
             }
         ],
         'layout': {
-            'title':'Country Split (Volume% & Value%)',
+            'title':'Country Split Q3 2018 (Volume% & Value%)',
         }
     }
     return fig
