@@ -1627,7 +1627,7 @@ def update_flag(globalregion_name):
 
 def update_flag(ctry_name):
 
-    SQL="SELECT itemname, salesplkpq, salesplkcq, valplkpq, valplkcq, pricepq, pricecq FROM skubardat WHERE ctry=(%s)"
+    SQL="SELECT itemname, salesplkpq, salesplkcq, valplkpq, valplkcq, pricepq, pricecq FROM skubardat2 WHERE ctry=(%s)"
     cur.execute(SQL,(ctry_name,))
     result=cur.fetchall()
     itemname_val, salesplkpq_val, salesplkcq_val, valplkpq_val, valplkcq_val, pricepq_val, pricecq_val = zip(*result)
