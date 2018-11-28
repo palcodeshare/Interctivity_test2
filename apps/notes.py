@@ -69,8 +69,23 @@ layout = html.Div(
         ],className='row',style={'color': '#FF8C00'}),
         html.Br(),
         html.Div([
-            html.P('Please find critical information on certain data features available in the dashboard'),
-            html.P('1. SKU information excludes all tradebrands and exclusives from rankings to maintain retailer confidentiality'),
+            html.P('Please find critical information on certain data features available in the dashboard below:'),
+            html.P('1. SKU information excludes all tradebrands and exclusives from rankings to maintain retailer confidentiality.'),
+            html.P('2. EU doesnt have the region functionality as shell is not being reported by regions in the EU countries.'),
+            dcc.Markdown('''---'''),
+        ]),
+        html.Div([
+            html.H2(
+                'Updates',
+                className='five columns',
+            )
+        ],className='row',style={'color': '#FF8C00'}),
+        html.Br(),
+        html.Div([
+            html.P('[UPDATE] 11/28/2018, 9:03 GMT'),
+            html.P('1. Q3 data loaded with Q2 as reference'),
+            html.P('2. Spain removed as country. End of reporting period.'),
+            html.P('3. Minor bugs fixed to improve loading speed.'),
             dcc.Markdown('''---'''),
             html.Br(),
             html.Br(),
