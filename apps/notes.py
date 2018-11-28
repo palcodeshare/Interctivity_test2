@@ -57,7 +57,7 @@ layout = html.Div(
             html.P('2. RUSSIA '),
             html.P('3. APAC (Asia Pacific) - Indonesia, Malaysia, Thailand '),
             html.P('4. China '),
-            html.P('5. EU (Europe) - Italy, Spain, Great Britain, Germany '),
+            html.P('5. EU (Europe) - Italy, Great Britain, Germany '),
             dcc.Markdown('''---'''),
 
         ]),
@@ -82,7 +82,7 @@ layout = html.Div(
         ],className='row',style={'color': '#FF8C00'}),
         html.Br(),
         html.Div([
-            html.P('[UPDATE] 11/28/2018, 9:03 GMT'),
+            html.P('[UPDATE] 11/28/2018, 9:03 GMT',style={'color': '#FF8C00','fontWeight': 'bold'}),
             html.P('1. Q3 data loaded with Q2 as reference'),
             html.P('2. Spain removed as country. End of reporting period.'),
             html.P('3. Minor bugs fixed to improve loading speed.'),
