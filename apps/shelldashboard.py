@@ -382,13 +382,13 @@ def render_content(tab):
                             {'label': 'By Channel  ', 'value': 'channel_analysis'},
                             {'label': 'By Region  ', 'value': 'region_analysis'}
                         ],
-                        value='channel_analysis',
+                        value='region_analysis',
                         labelStyle={'display': 'inline-block'}
                     ),
                     html.Div([
                         html.P('Note: Selecting an option will disable the other. For example, selecting By Region will disable Select Channel dropdown')
                     ],className='nine columns', style= {'display': 'inline-block','color': 'red'}),
-                ],className='row'),
+                ],className='row',style={'display': 'none'}),
                 html.Br(),
                 html.Div([
                     dcc.Dropdown(
