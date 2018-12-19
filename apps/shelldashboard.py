@@ -422,7 +422,7 @@ def render_content(tab):
                             value='TOTAL',
                             placeholder="Channel",
                         ),
-                    ],className='two columns'),
+                    ],className='two columns',style={'display': 'none'}),
 
                     html.Div([
                         html.P('Select Subgroup:'),
