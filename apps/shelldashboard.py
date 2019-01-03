@@ -99,7 +99,7 @@ layout = html.Div(
             dcc.Tab(label='RUSSIA', value='russia', style=tab_style, selected_style=tab_selected_style),
             dcc.Tab(label='APAC', value='apac', style=tab_style, selected_style=tab_selected_style),
             dcc.Tab(label='CHINA', value='china', style=tab_style, selected_style=tab_selected_style),
-            dcc.Tab(label='EU', value='eu', style=tab_style, selected_style=tab_selected_style)
+            # dcc.Tab(label='EU', value='eu', style=tab_style, selected_style=tab_selected_style)
         ]),
         html.Br(),
         html.Div(id='shelldbcontent')
@@ -725,132 +725,133 @@ def render_content(tab):
                     ),
                 ],className='row'),
             ],style={'font-family': 'Calibri Light'})
-    if tab == 'eu':
-        return html.Div([
-                html.Div([
-                    html.Div([
-                        html.P('Select Analysis Type:')
-                    ],className='two columns'),
-                    dcc.RadioItems(
-                        id='analysistype',
-                        options=[
-                            {'label': 'By Channel  ', 'value': 'channel_analysis'},
-                            {'label': 'By Region  ', 'value': 'region_analysis'}
-                        ],
-                        value='channel_analysis',
-                        labelStyle={'display': 'inline-block'}
-                    ),
-                    html.Div([
-                        html.P('Note: Selecting an option will disable the other. For example, selecting By Region will disable Select Channel dropdown')
-                    ],className='nine columns', style= {'display': 'inline-block','color': 'red'}),
-                ],className='row',style={'display': 'none'}),
-                html.Br(),
-                html.Div([
-                    html.Div([
-                        html.P('Select Country:'),
-                        dcc.Dropdown(
-                            id='country', #Left it is as country since i didnt want to change all the code again. What it really means is region
-                            value='EU',
-                            options=[
-                                {'label': 'EU Total', 'value': 'EU'},
-                                {'label': 'Italy', 'value': 'Italy'},
-                                {'label': 'Great Britain', 'value': 'Great Britain'},
-                                {'label': 'Germany', 'value': 'Germany'}
-                            ],
-                            placeholder="Country",
-                        ),
-                    ],className='two columns'),
-
-                    html.Div([
-                        html.P('Select Engine Oil Type:'),
-                        dcc.Dropdown(
-                            id='typeveh',
-                            value='TOTAL',
-                            placeholder="Type Of Vehicle",
-                        ),
-                    ],className='two columns'),
-
-                    html.Div([
-                        html.P('Select Region:'),
-                        dcc.Dropdown(
-                            id='region',
-                            value='TOTAL',
-                            placeholder="Region",
-                        ),
-                    ],className='two columns',style={'display': 'none'}),
-
-                    html.Div([
-                        html.P('Select Channel:'),
-                        dcc.Dropdown(
-                            id='channel',
-                            value='TOTAL',
-                            placeholder="Channel",
-                        ),
-                    ],className='two columns'),
-
-                    html.Div([
-                        html.P('Select Subgroup:'),
-                        dcc.Dropdown(
-                            id='base',
-                            value='TOTAL',
-                            placeholder="Base",
-                        ),
-                    ],className='two columns')
-                ],className='row'),
-                html.Br(),
-
-                #QoQ Brandshares Div
-
-
-
-                html.Div([
-                    html.Div([
-                        dcc.Graph(
-                            id='brandshares',
-                            config={'displayModeBar': False},
-                        )
-                    ],className='six columns'),
-                    html.Div([
-                        dcc.Graph(
-                            id='brandshares2',
-                            config={'displayModeBar': False},
-                        )
-                    ],className='six columns')
-                ],className='row'),
-
-                #YoY Brandshares Div
-                html.Div([
-                    html.Div([
-                        dcc.Graph(
-                            id='brandshares3',
-                            config={'displayModeBar': False},
-                        )
-                    ],className='six columns'),
-                    html.Div([
-                        dcc.Graph(
-                            id='brandshares4',
-                            config={'displayModeBar': False},
-                        )
-                    ],className='six columns')
-                ],className='row'),
-                dcc.Markdown('''---'''),
-                html.Div([
-                    html.Div([
-                        dcc.Graph(
-                            id='distbrand',
-                            config={'displayModeBar': False}
-                        ),
-                    ],className='row'),
-                ]),
-                dcc.Markdown('''---'''),
-                html.Div([
-                    dcc.Graph(
-                        style={'height': '900px'},
-                        id='skubar',
-                        config={'displayModeBar': False}
-                    ),
-                ],className='row'),
-            ],style={'font-family': 'Calibri Light'})
+    #EU hidden in Jan since end of shell subscription
+    # if tab == 'eu':
+    #     return html.Div([
+    #             html.Div([
+    #                 html.Div([
+    #                     html.P('Select Analysis Type:')
+    #                 ],className='two columns'),
+    #                 dcc.RadioItems(
+    #                     id='analysistype',
+    #                     options=[
+    #                         {'label': 'By Channel  ', 'value': 'channel_analysis'},
+    #                         {'label': 'By Region  ', 'value': 'region_analysis'}
+    #                     ],
+    #                     value='channel_analysis',
+    #                     labelStyle={'display': 'inline-block'}
+    #                 ),
+    #                 html.Div([
+    #                     html.P('Note: Selecting an option will disable the other. For example, selecting By Region will disable Select Channel dropdown')
+    #                 ],className='nine columns', style= {'display': 'inline-block','color': 'red'}),
+    #             ],className='row',style={'display': 'none'}),
+    #             html.Br(),
+    #             html.Div([
+    #                 html.Div([
+    #                     html.P('Select Country:'),
+    #                     dcc.Dropdown(
+    #                         id='country', #Left it is as country since i didnt want to change all the code again. What it really means is region
+    #                         value='EU',
+    #                         options=[
+    #                             {'label': 'EU Total', 'value': 'EU'},
+    #                             {'label': 'Italy', 'value': 'Italy'},
+    #                             {'label': 'Great Britain', 'value': 'Great Britain'},
+    #                             {'label': 'Germany', 'value': 'Germany'}
+    #                         ],
+    #                         placeholder="Country",
+    #                     ),
+    #                 ],className='two columns'),
+    #
+    #                 html.Div([
+    #                     html.P('Select Engine Oil Type:'),
+    #                     dcc.Dropdown(
+    #                         id='typeveh',
+    #                         value='TOTAL',
+    #                         placeholder="Type Of Vehicle",
+    #                     ),
+    #                 ],className='two columns'),
+    #
+    #                 html.Div([
+    #                     html.P('Select Region:'),
+    #                     dcc.Dropdown(
+    #                         id='region',
+    #                         value='TOTAL',
+    #                         placeholder="Region",
+    #                     ),
+    #                 ],className='two columns',style={'display': 'none'}),
+    #
+    #                 html.Div([
+    #                     html.P('Select Channel:'),
+    #                     dcc.Dropdown(
+    #                         id='channel',
+    #                         value='TOTAL',
+    #                         placeholder="Channel",
+    #                     ),
+    #                 ],className='two columns'),
+    #
+    #                 html.Div([
+    #                     html.P('Select Subgroup:'),
+    #                     dcc.Dropdown(
+    #                         id='base',
+    #                         value='TOTAL',
+    #                         placeholder="Base",
+    #                     ),
+    #                 ],className='two columns')
+    #             ],className='row'),
+    #             html.Br(),
+    #
+    #             #QoQ Brandshares Div
+    #
+    #
+    #
+    #             html.Div([
+    #                 html.Div([
+    #                     dcc.Graph(
+    #                         id='brandshares',
+    #                         config={'displayModeBar': False},
+    #                     )
+    #                 ],className='six columns'),
+    #                 html.Div([
+    #                     dcc.Graph(
+    #                         id='brandshares2',
+    #                         config={'displayModeBar': False},
+    #                     )
+    #                 ],className='six columns')
+    #             ],className='row'),
+    #
+    #             #YoY Brandshares Div
+    #             html.Div([
+    #                 html.Div([
+    #                     dcc.Graph(
+    #                         id='brandshares3',
+    #                         config={'displayModeBar': False},
+    #                     )
+    #                 ],className='six columns'),
+    #                 html.Div([
+    #                     dcc.Graph(
+    #                         id='brandshares4',
+    #                         config={'displayModeBar': False},
+    #                     )
+    #                 ],className='six columns')
+    #             ],className='row'),
+    #             dcc.Markdown('''---'''),
+    #             html.Div([
+    #                 html.Div([
+    #                     dcc.Graph(
+    #                         id='distbrand',
+    #                         config={'displayModeBar': False}
+    #                     ),
+    #                 ],className='row'),
+    #             ]),
+    #             dcc.Markdown('''---'''),
+    #             html.Div([
+    #                 dcc.Graph(
+    #                     style={'height': '900px'},
+    #                     id='skubar',
+    #                     config={'displayModeBar': False}
+    #                 ),
+    #             ],className='row'),
+    #         ],style={'font-family': 'Calibri Light'})
 
 
 ########<Options for dropdowns Callbacks>########
