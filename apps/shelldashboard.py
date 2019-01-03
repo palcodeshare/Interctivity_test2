@@ -1535,13 +1535,15 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
 @app.callback(
     Output('pie','figure'),
     [Input('country','value'),
+     Input('typeveh','value'),
+     Input('base','value')
     ]
 )
 
-def update_BS_brands(globalregion_name):
+def update_BS_brands(globalregion_name, typeveh_name, base_name):
 
-    SQL="SELECT ctry, salesplkq2, valplkq2 FROM pieandbar2 WHERE globalreg=(%s)"
-    cur.execute(SQL,(globalregion_name,))
+    SQL="SELECT ctry, salesplkq2, valplkq2 FROM pieandbar3 WHERE globalreg=(%s) AND typeveh=(%s) AND base=(%s)"
+    cur.execute(SQL,(globalregion_name,typeveh_name,base_name,))
     result=cur.fetchall()
     ctry_val, salesplkq2_val, valplkq2_val = zip(*result)
 
