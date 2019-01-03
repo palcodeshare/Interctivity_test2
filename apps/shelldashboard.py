@@ -1576,13 +1576,15 @@ def update_BS_brands(globalregion_name):
 @app.callback(
     Output('horizbar','figure'),
     [Input('country','value'),
+     Input('typeveh','value'),
+     Input('base','value')
     ]
 )
 
-def update_flag(globalregion_name):
+def update_flag(globalregion_name, typeveh_name, base_name):
 
-    SQL="SELECT ctry, salesplkq1, salesplkq2, shellsalesplkq1, shellsalesplkq2, valplkq1, valplkq2, shellvalplkq1, shellvalplkq2 FROM pieandbar2 WHERE globalreg=(%s)"
-    cur.execute(SQL,(globalregion_name,))
+    SQL="SELECT ctry, salesplkq1, salesplkq2, shellsalesplkq1, shellsalesplkq2, valplkq1, valplkq2, shellvalplkq1, shellvalplkq2 FROM pieandbar3 WHERE globalreg=(%s) AND typeveh=(%s) AND base=(%s)"
+    cur.execute(SQL,(globalregion_name,typeveh_name,base_name,))
     result=cur.fetchall()
     ctry_val, salesplkq1_val, salesplkq2_val, shellsalesplkq1_val, shellsalesplkq2_val, valplkq1_val, valplkq2_val, shellvalplkq1_val, shellvalplkq2_val = zip(*result)
 
