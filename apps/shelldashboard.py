@@ -1569,7 +1569,7 @@ def update_BS_brands(globalregion_name, typeveh_name, base_name):
             }
         ],
         'layout': {
-            'title':'Country Split Q3 2018 (Volume% & Value%)',
+            'title':'Country Panel Split Q3 2018 (Volume% & Value%)',
         }
     }
     return fig
@@ -1605,7 +1605,7 @@ def update_flag(globalregion_name, typeveh_name, base_name):
     fig = tls.make_subplots(rows=1, cols=4, shared_yaxes=True,vertical_spacing=0.02,horizontal_spacing=0.05,subplot_titles=('Total Market Sales Volume', 'Shell Sales Volume', 'Total Market Sales Value USD', 'Shell Sales Value USD'))
     fig['layout']['margin'] = {'l': 150, 'r': 20, 'b': 150, 't': 70}
 
-    fig['layout'].update(title='Absolute Volume & Value Figures (Millions) - Q2 2018 vs Q3 2018',titlefont=dict(family='Calibri Light'),barmode='group')
+    fig['layout'].update(title='Absolute Panel Volume & Value Figures (Millions) - Q2 2018 vs Q3 2018',titlefont=dict(family='Calibri Light'),barmode='group')
 
     fig.append_trace(trace1,1,1)
     fig.append_trace(trace2,1,1)
