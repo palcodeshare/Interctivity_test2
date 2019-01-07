@@ -1,7 +1,7 @@
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
-import dash_auth
+from dash-auth-master import dash_auth
 from app import app
 from apps import shelldashboard,howtouse,notes
 import os
