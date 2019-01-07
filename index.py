@@ -12,23 +12,36 @@ auth = dash_auth.BasicAuth(
     app,
     (('Retailaudit','Distributionkpis',),('gfkinternal','gfkoneposdb',),)
 )
-
+myauthenticateduser = auth._username
 app.layout = html.Div([
-    dcc.Location(id='url',refresh=True),
-    html.Div(id='page-content')
-])
+            dcc.Location(id='url',refresh=True),
+            html.Div(id='page-content')
+        ])
 
-@app.callback(Output('page-content', 'children'),
-              [Input('url', 'pathname')])
-def display_page(pathname):
-    if pathname == '/apps/shelldashboard':
-         return shelldashboard.layout
-    elif pathname == '/apps/howtouse':
-         return howtouse.layout
-    elif pathname == '/apps/notes':
-         return notes.layout
-    else:
-        return shelldashboard.layout
+if myauthenticateduser == 'gfkinternal':
+    @app.callback(Output('page-content', 'children'),
+                          [Input('url', 'pathname')])
+    def display_page(pathname):
+        if pathname == '/apps/shelldashboard':
+             return shelldashboard.layout
+        elif pathname == '/apps/howtouse':
+             return howtouse.layout
+        elif pathname == '/apps/notes':
+             return notes.layout
+        else:
+            return notes.layout
+elif myauthenticateduser == 'Retailaudit':
+    @app.callback(Output('page-content', 'children'),
+                  [Input('url', 'pathname')])
+    def display_page(pathname):
+        if pathname == '/apps/shelldashboard':
+             return shelldashboard.layout
+        elif pathname == '/apps/howtouse':
+             return howtouse.layout
+        elif pathname == '/apps/notes':
+             return notes.layout
+        else:
+            return shelldashboard.layout
 
 if __name__ == '__main__':
     app.run_server(debug=True)
