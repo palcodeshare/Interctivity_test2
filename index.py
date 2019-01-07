@@ -18,11 +18,15 @@ app.layout = html.Div([
             html.Div(id='page-content')
         ])
 
-if myauthenticateduser == 'gfkinternal':
-    @app.callback(Output('page-content', 'children'),
-                          [Input('url', 'pathname')])
-    def display_page(pathname):
-        myauthenticateduser = auth._username
+
+# myauthenticateduser = 'gfkinternal'
+# print(myauthenticateduser)
+
+@app.callback(Output('page-content', 'children'),
+                      [Input('url', 'pathname')])
+def display_page(pathname):
+    myauthenticateduser = auth._username
+    if myauthenticateduser == 'gfkinternal':
         if pathname == '/apps/shelldashboard':
              return shelldashboard.layout
         elif pathname == '/apps/howtouse':
@@ -31,11 +35,7 @@ if myauthenticateduser == 'gfkinternal':
              return notes.layout
         else:
             return notes.layout
-elif myauthenticateduser == 'Retailaudit':
-    @app.callback(Output('page-content', 'children'),
-                  [Input('url', 'pathname')])
-    def display_page(pathname):
-        myauthenticateduser = auth._username
+    elif myauthenticateduser == 'Retailaudit':
         if pathname == '/apps/shelldashboard':
              return shelldashboard.layout
         elif pathname == '/apps/howtouse':
