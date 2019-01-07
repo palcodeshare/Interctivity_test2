@@ -12,7 +12,7 @@ auth = dash_auth.BasicAuth(
     app,
     (('Retailaudit','Distributionkpis',),('gfkinternal','gfkoneposdb',),)
 )
-myauthenticateduser = auth._username
+
 app.layout = html.Div([
             dcc.Location(id='url',refresh=True),
             html.Div(id='page-content')
@@ -22,6 +22,7 @@ if myauthenticateduser == 'gfkinternal':
     @app.callback(Output('page-content', 'children'),
                           [Input('url', 'pathname')])
     def display_page(pathname):
+        myauthenticateduser = auth._username
         if pathname == '/apps/shelldashboard':
              return shelldashboard.layout
         elif pathname == '/apps/howtouse':
@@ -34,6 +35,7 @@ elif myauthenticateduser == 'Retailaudit':
     @app.callback(Output('page-content', 'children'),
                   [Input('url', 'pathname')])
     def display_page(pathname):
+        myauthenticateduser = auth._username
         if pathname == '/apps/shelldashboard':
              return shelldashboard.layout
         elif pathname == '/apps/howtouse':
