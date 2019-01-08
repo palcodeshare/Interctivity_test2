@@ -32,7 +32,7 @@ def display_page(pathname):
         elif pathname == '/apps/howtouse':
              return howtouse.layout
         elif pathname == '/apps/notes':
-             return notes.layout
+             return shelldashboard.layout
         else:
             return notes.layout
     elif myauthenticateduser == 'Retailaudit':
