@@ -1,16 +1,32 @@
 import dash
-
+import plotly.plotly as py
+import pandas as pd
+import re
+import plotly.graph_objs as go
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 import plotly
 import plotly.tools as tls
 
-
 from app import app
+
+df = pd.read_csv('https://raw.githubusercontent.com/mokshaxkrodha/Interactivity_test/master/Subscription_info.csv')
+
+def generate_table(dataframe, max_rows=10):
+    return html.Table(
+        # Header
+        [html.Tr([html.Th(col) for col in dataframe.columns])] +
+
+        # Body
+        [html.Tr([
+            html.Td(dataframe.iloc[i][col]) for col in dataframe.columns
+        ]) for i in range(min(len(dataframe), max_rows))]
+    )
 
 layout = html.Div(
     [
+
         dcc.Location(
              id='url3'
         ),
@@ -18,6 +34,7 @@ layout = html.Div(
         dcc.Location(
              id='url4'
         ),
+
 
         html.Div([
             html.Div([
@@ -57,10 +74,21 @@ layout = html.Div(
             html.P('2. RUSSIA '),
             html.P('3. APAC (Asia Pacific) - Indonesia, Malaysia, Thailand '),
             html.P('4. China '),
-            html.P('5. EU (Europe) - Italy, Great Britain, Germany '),
             dcc.Markdown('''---'''),
-
         ]),
+        html.Div([
+            html.H2(
+                'Shell Study Coverage',
+                className='five columns',
+            )
+        ],className='row',style={'color': '#FF8C00'}),
+        html.Br(),
+        html.Div(
+            children=[
+                generate_table(df),
+                dcc.Markdown('''---'''),
+            ]
+        ),
         html.Div([
             html.H2(
                 'Important Notes',

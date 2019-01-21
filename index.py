@@ -6,6 +6,7 @@ from app import app
 from apps import shelldashboard,howtouse,notes
 import os
 
+app.config['suppress_callback_exceptions']=True
 server = app.server
 server.secret_key = os.environ.get('secret_key', 'secret')
 auth = dash_auth.BasicAuth(
@@ -32,9 +33,9 @@ def display_page(pathname):
         elif pathname == '/apps/howtouse':
              return howtouse.layout
         elif pathname == '/apps/notes':
-             return shelldashboard.layout
+             return notes.layout
         else:
-            return notes.layout
+            return shelldashboard.layout
     elif myauthenticateduser == 'Retailaudit':
         if pathname == '/apps/shelldashboard':
              return shelldashboard.layout
