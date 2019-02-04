@@ -857,7 +857,6 @@ def render_content(tab):
 ########<Options for dropdowns Callbacks>########
 
 #Vehicle type button options
-
 @app.callback(
     Output('typeveh','options'),
     [Input('analysistype','value'),
