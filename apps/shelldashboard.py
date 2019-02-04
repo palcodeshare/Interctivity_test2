@@ -1501,10 +1501,10 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
 def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, channel_name, base_name):
 
     if analysistype_val=='region_analysis':
-        SQL="SELECT brands, wdpq, wdcq, uwdpq, uwdcq FROM distbrand_region2 WHERE ctry=(%s) AND typeveh=(%s) AND region=(%s) AND base=(%s)"
+        SQL="SELECT brands, wdpq, wdcq, uwdpq, uwdcq FROM distbrand_region WHERE ctry=(%s) AND typeveh=(%s) AND region=(%s) AND base=(%s)"
         cur.execute(SQL,(country_name,typeveh_name,region_name,base_name,))
     elif analysistype_val=='channel_analysis':
-        SQL="SELECT brands, wdpq, wdcq, uwdpq, uwdcq FROM distbrand_channel4 WHERE ctry=(%s) AND typeveh=(%s) AND channel=(%s) AND base=(%s)"
+        SQL="SELECT brands, wdpq, wdcq, uwdpq, uwdcq FROM distbrand_channel WHERE ctry=(%s) AND typeveh=(%s) AND channel=(%s) AND base=(%s)"
         cur.execute(SQL,(country_name,typeveh_name,channel_name,base_name,))
 
     result=cur.fetchall()
@@ -1542,7 +1542,7 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
 
 def update_BS_brands(globalregion_name, typeveh_name, base_name):
 
-    SQL="SELECT ctry, salesplkq2, valplkq2 FROM pieandbar3 WHERE globalreg=(%s) AND typeveh=(%s) AND base=(%s)"
+    SQL="SELECT ctry, salesplkq2, valplkq2 FROM pieandbar WHERE globalreg=(%s) AND typeveh=(%s) AND base=(%s)"
     cur.execute(SQL,(globalregion_name,typeveh_name,base_name,))
     result=cur.fetchall()
     ctry_val, salesplkq2_val, valplkq2_val = zip(*result)
@@ -1585,7 +1585,7 @@ def update_BS_brands(globalregion_name, typeveh_name, base_name):
 
 def update_flag(globalregion_name, typeveh_name, base_name):
 
-    SQL="SELECT ctry, salesplkq1, salesplkq2, shellsalesplkq1, shellsalesplkq2, valplkq1, valplkq2, shellvalplkq1, shellvalplkq2 FROM pieandbar3 WHERE globalreg=(%s) AND typeveh=(%s) AND base=(%s)"
+    SQL="SELECT ctry, salesplkq1, salesplkq2, shellsalesplkq1, shellsalesplkq2, valplkq1, valplkq2, shellvalplkq1, shellvalplkq2 FROM pieandbar WHERE globalreg=(%s) AND typeveh=(%s) AND base=(%s)"
     cur.execute(SQL,(globalregion_name,typeveh_name,base_name,))
     result=cur.fetchall()
     ctry_val, salesplkq1_val, salesplkq2_val, shellsalesplkq1_val, shellsalesplkq2_val, valplkq1_val, valplkq2_val, shellvalplkq1_val, shellvalplkq2_val = zip(*result)
@@ -1632,7 +1632,7 @@ def update_flag(globalregion_name, typeveh_name, base_name):
 
 def update_flag(ctry_name):
 
-    SQL="SELECT itemname, salesplkpq, salesplkcq, valplkpq, valplkcq, pricepq, pricecq FROM skubardat2 WHERE ctry=(%s)"
+    SQL="SELECT itemname, salesplkpq, salesplkcq, valplkpq, valplkcq, pricepq, pricecq FROM skubardat WHERE ctry=(%s)"
     cur.execute(SQL,(ctry_name,))
     result=cur.fetchall()
     itemname_val, salesplkpq_val, salesplkcq_val, valplkpq_val, valplkcq_val, pricepq_val, pricecq_val = zip(*result)
