@@ -369,6 +369,14 @@ def render_content(tab):
                         config={'displayModeBar': False}
                     ),
                 ],className='row'),
+                dcc.Markdown('''---'''),
+                html.Div([
+                    dcc.Graph(
+                        style={'height': '900px'},
+                        id='pothead',
+                        config={'displayModeBar': False}
+                    ),
+                ],className='row'),
             ],style={'font-family': 'Calibri Light'})
     if tab == 'russia':
         return html.Div([
@@ -481,6 +489,14 @@ def render_content(tab):
                     dcc.Graph(
                         style={'height': '900px'},
                         id='skubar',
+                        config={'displayModeBar': False}
+                    ),
+                ],className='row'),
+                dcc.Markdown('''---'''),
+                html.Div([
+                    dcc.Graph(
+                        style={'height': '900px'},
+                        id='pothead',
                         config={'displayModeBar': False}
                     ),
                 ],className='row'),
@@ -609,6 +625,14 @@ def render_content(tab):
                         config={'displayModeBar': False}
                     ),
                 ],className='row'),
+                dcc.Markdown('''---'''),
+                html.Div([
+                    dcc.Graph(
+                        style={'height': '900px'},
+                        id='pothead',
+                        config={'displayModeBar': False}
+                    ),
+                ],className='row'),
             ],style={'font-family': 'Calibri Light'})
     if tab == 'china':
         return html.Div([
@@ -724,135 +748,15 @@ def render_content(tab):
                         config={'displayModeBar': False}
                     ),
                 ],className='row'),
+                dcc.Markdown('''---'''),
+                html.Div([
+                    dcc.Graph(
+                        style={'height': '900px'},
+                        id='pothead',
+                        config={'displayModeBar': False}
+                    ),
+                ],className='row'),
             ],style={'font-family': 'Calibri Light'})
-    #EU hidden in Jan since end of shell subscription
-    # if tab == 'eu':
-    #     return html.Div([
-    #             html.Div([
-    #                 html.Div([
-    #                     html.P('Select Analysis Type:')
-    #                 ],className='two columns'),
-    #                 dcc.RadioItems(
-    #                     id='analysistype',
-    #                     options=[
-    #                         {'label': 'By Channel  ', 'value': 'channel_analysis'},
-    #                         {'label': 'By Region  ', 'value': 'region_analysis'}
-    #                     ],
-    #                     value='channel_analysis',
-    #                     labelStyle={'display': 'inline-block'}
-    #                 ),
-    #                 html.Div([
-    #                     html.P('Note: Selecting an option will disable the other. For example, selecting By Region will disable Select Channel dropdown')
-    #                 ],className='nine columns', style= {'display': 'inline-block','color': 'red'}),
-    #             ],className='row',style={'display': 'none'}),
-    #             html.Br(),
-    #             html.Div([
-    #                 html.Div([
-    #                     html.P('Select Country:'),
-    #                     dcc.Dropdown(
-    #                         id='country', #Left it is as country since i didnt want to change all the code again. What it really means is region
-    #                         value='EU',
-    #                         options=[
-    #                             {'label': 'EU Total', 'value': 'EU'},
-    #                             {'label': 'Italy', 'value': 'Italy'},
-    #                             {'label': 'Great Britain', 'value': 'Great Britain'},
-    #                             {'label': 'Germany', 'value': 'Germany'}
-    #                         ],
-    #                         placeholder="Country",
-    #                     ),
-    #                 ],className='two columns'),
-    #
-    #                 html.Div([
-    #                     html.P('Select Engine Oil Type:'),
-    #                     dcc.Dropdown(
-    #                         id='typeveh',
-    #                         value='TOTAL',
-    #                         placeholder="Type Of Vehicle",
-    #                     ),
-    #                 ],className='two columns'),
-    #
-    #                 html.Div([
-    #                     html.P('Select Region:'),
-    #                     dcc.Dropdown(
-    #                         id='region',
-    #                         value='TOTAL',
-    #                         placeholder="Region",
-    #                     ),
-    #                 ],className='two columns',style={'display': 'none'}),
-    #
-    #                 html.Div([
-    #                     html.P('Select Channel:'),
-    #                     dcc.Dropdown(
-    #                         id='channel',
-    #                         value='TOTAL',
-    #                         placeholder="Channel",
-    #                     ),
-    #                 ],className='two columns'),
-    #
-    #                 html.Div([
-    #                     html.P('Select Subgroup:'),
-    #                     dcc.Dropdown(
-    #                         id='base',
-    #                         value='TOTAL',
-    #                         placeholder="Base",
-    #                     ),
-    #                 ],className='two columns')
-    #             ],className='row'),
-    #             html.Br(),
-    #
-    #             #QoQ Brandshares Div
-    #
-    #
-    #
-    #             html.Div([
-    #                 html.Div([
-    #                     dcc.Graph(
-    #                         id='brandshares',
-    #                         config={'displayModeBar': False},
-    #                     )
-    #                 ],className='six columns'),
-    #                 html.Div([
-    #                     dcc.Graph(
-    #                         id='brandshares2',
-    #                         config={'displayModeBar': False},
-    #                     )
-    #                 ],className='six columns')
-    #             ],className='row'),
-    #
-    #             #YoY Brandshares Div
-    #             html.Div([
-    #                 html.Div([
-    #                     dcc.Graph(
-    #                         id='brandshares3',
-    #                         config={'displayModeBar': False},
-    #                     )
-    #                 ],className='six columns'),
-    #                 html.Div([
-    #                     dcc.Graph(
-    #                         id='brandshares4',
-    #                         config={'displayModeBar': False},
-    #                     )
-    #                 ],className='six columns')
-    #             ],className='row'),
-    #             dcc.Markdown('''---'''),
-    #             html.Div([
-    #                 html.Div([
-    #                     dcc.Graph(
-    #                         id='distbrand',
-    #                         config={'displayModeBar': False}
-    #                     ),
-    #                 ],className='row'),
-    #             ]),
-    #             dcc.Markdown('''---'''),
-    #             html.Div([
-    #                 dcc.Graph(
-    #                     style={'height': '900px'},
-    #                     id='skubar',
-    #                     config={'displayModeBar': False}
-    #                 ),
-    #             ],className='row'),
-    #         ],style={'font-family': 'Calibri Light'})
-
 
 ########<Options for dropdowns Callbacks>########
 #Vehicle type button options
@@ -1671,4 +1575,33 @@ def update_flag(ctry_name):
     for i in fig['layout']['annotations']:
         i['font'] = dict(family='Calibri Light',size=16)
 
+    return fig
+
+########<Potential Headroom Charts Callbacks>########
+@app.callback(
+    Output('pothead','figure'),
+    [Input('country','value'),
+     Input('typeveh','value'),
+     Input('base','value')
+    ]
+)
+
+def update_flag(globalregion_name, typeveh_name, base_name):
+
+    SQL="SELECT itemname, salesplk, pohplk FROM potheadbar WHERE ctry=(%s) AND typeveh=(%s) AND base=(%s)"
+    cur.execute(SQL,(ctry_name,typeveh_name,base_name,))
+    result=cur.fetchall()
+    item_val, salesplk_val, pohplk_val = zip(*result)
+
+    trial_y=item_val
+
+    trace1 = go.Bar(y=item_val,x=salesplk_val,name='Shell Item Share')
+    trace2 = go.Bar(y=item_val,x=pohplk_val,name='Potential Headroom')
+
+    data = [trace1, trace2]
+    layout = go.Layout(
+        barmode='stack'
+    )
+
+    fig = go.Figure(data=data, layout=layout)
     return fig
