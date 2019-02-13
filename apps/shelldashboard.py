@@ -1586,7 +1586,7 @@ def update_flag(ctry_name):
     ]
 )
 
-def update_flag(globalregion_name, typeveh_name, base_name):
+def update_flag(ctry_name, typeveh_name, base_name):
 
     SQL="SELECT itemname, salesplk, pohplk FROM potheadbar WHERE ctry=(%s) AND typeveh=(%s) AND base=(%s)"
     cur.execute(SQL,(ctry_name,typeveh_name,base_name,))
