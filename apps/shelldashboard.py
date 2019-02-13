@@ -1600,6 +1600,7 @@ def update_flag(ctry_name, typeveh_name, base_name):
 
     data = [trace1, trace2]
     layout = go.Layout(
+        title='Potential Headroom',
         barmode='stack'
     )
 
