@@ -372,7 +372,7 @@ def render_content(tab):
                 dcc.Markdown('''---'''),
                 html.Div([
                     dcc.Graph(
-                        style={'height': '900px'},
+                        style={'height': '500px'},
                         id='pothead',
                         config={'displayModeBar': False}
                     ),
@@ -495,7 +495,7 @@ def render_content(tab):
                 dcc.Markdown('''---'''),
                 html.Div([
                     dcc.Graph(
-                        style={'height': '900px'},
+                        style={'height': '500px'},
                         id='pothead',
                         config={'displayModeBar': False}
                     ),
@@ -628,7 +628,7 @@ def render_content(tab):
                 dcc.Markdown('''---'''),
                 html.Div([
                     dcc.Graph(
-                        style={'height': '900px'},
+                        style={'height': '500px'},
                         id='pothead',
                         config={'displayModeBar': False}
                     ),
@@ -751,7 +751,7 @@ def render_content(tab):
                 dcc.Markdown('''---'''),
                 html.Div([
                     dcc.Graph(
-                        style={'height': '900px'},
+                        style={'height': '500px'},
                         id='pothead',
                         config={'displayModeBar': False}
                     ),
