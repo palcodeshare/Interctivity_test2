@@ -364,16 +364,16 @@ def render_content(tab):
                 dcc.Markdown('''---'''),
                 html.Div([
                     dcc.Graph(
-                        style={'height': '900px'},
-                        id='skubar',
+                        style={'height': '500px'},
+                        id='pothead',
                         config={'displayModeBar': False}
                     ),
                 ],className='row'),
                 dcc.Markdown('''---'''),
                 html.Div([
                     dcc.Graph(
-                        style={'height': '500px'},
-                        id='pothead',
+                        style={'height': '900px'},
+                        id='skubar',
                         config={'displayModeBar': False}
                     ),
                 ],className='row'),
@@ -487,16 +487,16 @@ def render_content(tab):
                 dcc.Markdown('''---'''),
                 html.Div([
                     dcc.Graph(
-                        style={'height': '900px'},
-                        id='skubar',
+                        style={'height': '500px'},
+                        id='pothead',
                         config={'displayModeBar': False}
                     ),
                 ],className='row'),
                 dcc.Markdown('''---'''),
                 html.Div([
                     dcc.Graph(
-                        style={'height': '500px'},
-                        id='pothead',
+                        style={'height': '900px'},
+                        id='skubar',
                         config={'displayModeBar': False}
                     ),
                 ],className='row'),
@@ -620,16 +620,16 @@ def render_content(tab):
                 dcc.Markdown('''---'''),
                 html.Div([
                     dcc.Graph(
-                        style={'height': '900px'},
-                        id='skubar',
+                        style={'height': '500px'},
+                        id='pothead',
                         config={'displayModeBar': False}
                     ),
                 ],className='row'),
                 dcc.Markdown('''---'''),
                 html.Div([
                     dcc.Graph(
-                        style={'height': '500px'},
-                        id='pothead',
+                        style={'height': '900px'},
+                        id='skubar',
                         config={'displayModeBar': False}
                     ),
                 ],className='row'),
@@ -743,16 +743,16 @@ def render_content(tab):
                 dcc.Markdown('''---'''),
                 html.Div([
                     dcc.Graph(
-                        style={'height': '900px'},
-                        id='skubar',
+                        style={'height': '500px'},
+                        id='pothead',
                         config={'displayModeBar': False}
                     ),
                 ],className='row'),
                 dcc.Markdown('''---'''),
                 html.Div([
                     dcc.Graph(
-                        style={'height': '500px'},
-                        id='pothead',
+                        style={'height': '900px'},
+                        id='skubar',
                         config={'displayModeBar': False}
                     ),
                 ],className='row'),
@@ -1596,7 +1596,7 @@ def update_flag(ctry_name, typeveh_name, base_name):
     trial_y=item_val
 
     trace1 = go.Bar(y=item_val,x=salesplk_val,name='Current market share',orientation = 'h')
-    trace2 = go.Bar(y=item_val,x=pohplk_val,name='incremental headroom',orientation = 'h',opacity=0.8)
+    trace2 = go.Bar(y=item_val,x=pohplk_val,name='incremental headroom',orientation = 'h')
 
     data = [trace1, trace2]
     layout = go.Layout(
