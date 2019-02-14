@@ -1601,7 +1601,20 @@ def update_flag(ctry_name, typeveh_name, base_name):
     data = [trace1, trace2]
     layout = go.Layout(
         title='Potential Headroom',
-        barmode='stack'
+        barmode='stack',
+        autosize=False,
+
+        width=1490,
+        height=500,
+        margin=go.layout.Margin(
+            l=300,
+            r=50,
+            b=100,
+            t=100,
+            pad=4
+        ),
+        paper_bgcolor='#7f7f7f',
+        plot_bgcolor='#c7c7c7'
     )
 
     fig = go.Figure(data=data, layout=layout)
