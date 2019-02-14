@@ -376,6 +376,8 @@ def render_content(tab):
                 ],className='nine columns', style= {'display': 'inline-block'}),
                 html.Br(),
                 html.Br(),
+                html.Br(),
+                html.Br(),
                 dcc.Markdown('''---'''),
                 html.Div([
                     dcc.Graph(
