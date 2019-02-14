@@ -1606,7 +1606,7 @@ def update_flag(ctry_name, typeveh_name, base_name):
             l=350,
             r=50,
             b=100,
-            t=200,
+            t=100,
             pad=4
         ),
     )
