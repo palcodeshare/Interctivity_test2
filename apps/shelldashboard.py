@@ -1609,7 +1609,9 @@ def update_flag(ctry_name, typeveh_name, base_name):
             t=100,
             pad=4
         ),
-        yaxis=dict(tickformat=".1%")
+        xaxis=go.layout.XAxis(
+            tickformat=".1%"
+        )
     )
 
     fig = go.Figure(data=data, layout=layout)
