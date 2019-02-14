@@ -12,7 +12,7 @@ import plotly.tools as tls
 from io import StringIO
 import numpy as np
 
-import  plotly.plotly as py
+import plotly.plotly as py
 import plotly.graph_objs as go
 
 from app import app
