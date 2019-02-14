@@ -1602,7 +1602,6 @@ def update_flag(ctry_name, typeveh_name, base_name):
     layout = go.Layout(
         title='Potential Headroom',
         barmode='stack',
-    
         margin=go.layout.Margin(
             l=300,
             r=50,
