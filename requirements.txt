@@ -23,7 +23,7 @@ nbformat==4.3.0
 numpy==1.13.0
 pandas==0.21.0
 pandas-datareader==0.6.0
-plotly==2.0.10
+plotly==3.6.1
 
 pytz==2017.2
 requests==2.18.1
