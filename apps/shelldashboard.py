@@ -1596,7 +1596,7 @@ def update_flag(ctry_name, typeveh_name, base_name):
     trial_y=item_val
 
     trace1 = go.Bar(y=item_val,x=salesplk_val,name='Current market share',orientation = 'h')
-    trace2 = go.Bar(y=item_val,x=pohplk_val,name='incremental headroom',orientation = 'h')
+    trace2 = go.Bar(y=item_val,x=pohplk_val,name='incremental headroom',orientation = 'h',opacity=0.6)
 
     data = [trace1, trace2]
     layout = go.Layout(
