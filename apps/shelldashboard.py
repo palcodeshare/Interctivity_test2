@@ -1608,8 +1608,6 @@ def update_flag(ctry_name, typeveh_name, base_name):
             t=100,
             pad=4
         ),
-        paper_bgcolor='#7f7f7f',
-        plot_bgcolor='#c7c7c7'
     )
 
     fig = go.Figure(data=data, layout=layout)
