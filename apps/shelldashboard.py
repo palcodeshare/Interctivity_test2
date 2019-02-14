@@ -11,7 +11,7 @@ import plotly.tools as tls
 from io import StringIO
 import numpy as np
 
-import plotly.plotly as py
+from plotly import plotly
 import plotly.graph_objs as go
 
 from app import app
@@ -1601,13 +1601,13 @@ def update_flag(ctry_name, typeveh_name, base_name):
     layout = go.Layout(
         title='Potential Headroom',
         barmode='stack',
-        # margin=go.layout.Margin(
-        #     l=300,
-        #     r=50,
-        #     b=100,
-        #     t=100,
-        #     pad=4
-        # ),
+        margin=go.layout.Margin(
+            l=300,
+            r=50,
+            b=100,
+            t=100,
+            pad=4
+        ),
         paper_bgcolor='#7f7f7f',
         plot_bgcolor='#c7c7c7'
     )
