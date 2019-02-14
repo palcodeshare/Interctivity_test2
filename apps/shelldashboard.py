@@ -10,6 +10,7 @@ from dash.dependencies import Input, Output
 import plotly.tools as tls
 from io import StringIO
 import numpy as np
+import plotly
 
 import plotly.plotly as py
 import plotly.graph_objs as go
@@ -1605,7 +1606,7 @@ def update_flag(ctry_name, typeveh_name, base_name):
             l=350,
             r=50,
             b=100,
-            t=100,
+            t=200,
             pad=4
         ),
     )
