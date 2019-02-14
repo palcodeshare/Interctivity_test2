@@ -1610,7 +1610,7 @@ def update_flag(ctry_name, typeveh_name, base_name):
             pad=4
         ),
         xaxis=go.layout.XAxis(
-            tickformat="1%"
+            tickformat=".0%"
         )
     )
 
