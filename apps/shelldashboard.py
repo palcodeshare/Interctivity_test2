@@ -779,7 +779,7 @@ def render_content(tab):
 def update_typeveh(analysistype_val,selected_country):
 
     if analysistype_val=='region_analysis':
-        SQL="SELECT DISTINCT(typeveh) FROM brandshares_region2 WHERE ctry=(%s)"
+        SQL="SELECT DISTINCT(typeveh) FROM brandshares_region3 WHERE ctry=(%s)"
     elif analysistype_val=='channel_analysis':
         SQL="SELECT DISTINCT(typeveh) FROM brandshares_channel2 WHERE ctry=(%s)"
 
@@ -806,7 +806,7 @@ def update_typeveh(analysistype_val,
     if analysistype_val=='channel_analysis':
         return [{'label': 'Disabled', 'value': 'Disabled'}]
     elif analysistype_val=='region_analysis':
-        SQL="SELECT DISTINCT(region) FROM brandshares_region2 WHERE ctry=(%s) AND typeveh=(%s)"
+        SQL="SELECT DISTINCT(region) FROM brandshares_region3 WHERE ctry=(%s) AND typeveh=(%s)"
         cur.execute(SQL,(selected_country,selected_typeveh,))
         result=cur.fetchall()
         region_options = zip(*result)
@@ -858,7 +858,7 @@ def update_typeveh(analysistype_val,
                    selected_channel):
 
     if analysistype_val=='region_analysis':
-        SQL="SELECT DISTINCT(base) FROM brandshares_region2 WHERE ctry=(%s) AND typeveh=(%s) AND region=(%s)"
+        SQL="SELECT DISTINCT(base) FROM brandshares_region3 WHERE ctry=(%s) AND typeveh=(%s) AND region=(%s)"
         cur.execute(SQL,(selected_country,selected_typeveh,selected_region,))
     elif analysistype_val=='channel_analysis':
         SQL="SELECT DISTINCT(base) FROM brandshares_channel2 WHERE ctry=(%s) AND typeveh=(%s) AND channel=(%s)"
@@ -890,7 +890,7 @@ def update_typeveh(analysistype_val,
 def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, channel_name, base_name):
 
     if analysistype_val=='region_analysis':
-        SQL="SELECT  brands, salesplkpq, salesplkcq FROM brandshares_region2 WHERE ctry=(%s) AND typeveh=(%s) AND region=(%s) AND base=(%s)"
+        SQL="SELECT  brands, salesplkpq, salesplkcq FROM brandshares_region3 WHERE ctry=(%s) AND typeveh=(%s) AND region=(%s) AND base=(%s)"
         cur.execute(SQL,(country_name,typeveh_name,region_name,base_name,))
     elif analysistype_val=='channel_analysis':
         SQL="SELECT  brands, salesplkpq, salesplkcq FROM brandshares_channel2 WHERE ctry=(%s) AND typeveh=(%s) AND channel=(%s) AND base=(%s)"
@@ -1020,7 +1020,7 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
 
 
     if analysistype_val=='region_analysis':
-        SQL="SELECT  brands, valplkpq, valplkcq FROM brandshares_region2 WHERE ctry=(%s) AND typeveh=(%s) AND region=(%s) AND base=(%s)"
+        SQL="SELECT  brands, valplkpq, valplkcq FROM brandshares_region3 WHERE ctry=(%s) AND typeveh=(%s) AND region=(%s) AND base=(%s)"
         cur.execute(SQL,(country_name,typeveh_name,region_name,base_name,))
     elif analysistype_val=='channel_analysis':
         SQL="SELECT  brands, valplkpq, valplkcq FROM brandshares_channel2 WHERE ctry=(%s) AND typeveh=(%s) AND channel=(%s) AND base=(%s)"
@@ -1151,7 +1151,7 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
 def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, channel_name, base_name):
 
     if analysistype_val=='region_analysis':
-        SQL="SELECT  brands, salesplkpy, salesplkcy FROM brandshares_region2 WHERE ctry=(%s) AND typeveh=(%s) AND region=(%s) AND base=(%s)"
+        SQL="SELECT  brands, salesplkpy, salesplkcy FROM brandshares_region3 WHERE ctry=(%s) AND typeveh=(%s) AND region=(%s) AND base=(%s)"
         cur.execute(SQL,(country_name,typeveh_name,region_name,base_name,))
     elif analysistype_val=='channel_analysis':
         SQL="SELECT  brands, salesplkpy, salesplkcy FROM brandshares_channel2 WHERE ctry=(%s) AND typeveh=(%s) AND channel=(%s) AND base=(%s)"
@@ -1281,7 +1281,7 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
 def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, channel_name, base_name):
 
     if analysistype_val=='region_analysis':
-        SQL="SELECT  brands, valplkpy, valplkcy FROM brandshares_region2 WHERE ctry=(%s) AND typeveh=(%s) AND region=(%s) AND base=(%s)"
+        SQL="SELECT  brands, valplkpy, valplkcy FROM brandshares_region3 WHERE ctry=(%s) AND typeveh=(%s) AND region=(%s) AND base=(%s)"
         cur.execute(SQL,(country_name,typeveh_name,region_name,base_name,))
     elif analysistype_val=='channel_analysis':
         SQL="SELECT  brands, valplkpy, valplkcy FROM brandshares_channel2 WHERE ctry=(%s) AND typeveh=(%s) AND channel=(%s) AND base=(%s)"
