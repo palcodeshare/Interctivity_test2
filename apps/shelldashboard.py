@@ -501,6 +501,15 @@ def render_content(tab):
                         config={'displayModeBar': False}
                     ),
                 ],className='row'),
+                html.Div([
+                    html.P('- The purpose of this graph is to demonstrate value of closing gaps in distribution KPIs compared to market leader within a category.'),
+                    html.P('- Bar chart shows current market Share within a sub-group of a engine oil type with top SKUs from Shell and the highlighted incremental market share.'),
+                    html.P('- The incremental share is market share that would be gained if the gap in distribution compared to market leader is closed.')
+                ],className='nine columns', style= {'display': 'inline-block'}),
+                html.Br(),
+                html.Br(),
+                html.Br(),
+                html.Br(),
                 dcc.Markdown('''---'''),
                 html.Div([
                     dcc.Graph(
@@ -634,6 +643,15 @@ def render_content(tab):
                         config={'displayModeBar': False}
                     ),
                 ],className='row'),
+                html.Div([
+                    html.P('- The purpose of this graph is to demonstrate value of closing gaps in distribution KPIs compared to market leader within a category.'),
+                    html.P('- Bar chart shows current market Share within a sub-group of a engine oil type with top SKUs from Shell and the highlighted incremental market share.'),
+                    html.P('- The incremental share is market share that would be gained if the gap in distribution compared to market leader is closed.')
+                ],className='nine columns', style= {'display': 'inline-block'}),
+                html.Br(),
+                html.Br(),
+                html.Br(),
+                html.Br(),
                 dcc.Markdown('''---'''),
                 html.Div([
                     dcc.Graph(
@@ -757,6 +775,15 @@ def render_content(tab):
                         config={'displayModeBar': False}
                     ),
                 ],className='row'),
+                html.Div([
+                    html.P('- The purpose of this graph is to demonstrate value of closing gaps in distribution KPIs compared to market leader within a category.'),
+                    html.P('- Bar chart shows current market Share within a sub-group of a engine oil type with top SKUs from Shell and the highlighted incremental market share.'),
+                    html.P('- The incremental share is market share that would be gained if the gap in distribution compared to market leader is closed.')
+                ],className='nine columns', style= {'display': 'inline-block'}),
+                html.Br(),
+                html.Br(),
+                html.Br(),
+                html.Br(),
                 dcc.Markdown('''---'''),
                 html.Div([
                     dcc.Graph(
