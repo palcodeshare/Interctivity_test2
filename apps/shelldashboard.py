@@ -223,15 +223,15 @@ def render_content(tab):
                 ],className='row'),
                 dcc.Markdown('''---'''),
 
-                html.Div([
-                    html.Div([
-                        dcc.Graph(
-                            id='pie',
-                            config={'displayModeBar': False}
-                        ),
-                    ],className='row'),
-                ]),
-                dcc.Markdown('''---'''),
+                # html.Div([
+                #     html.Div([
+                #         dcc.Graph(
+                #             id='pie',
+                #             config={'displayModeBar': False}
+                #         ),
+                #     ],className='row'),
+                # ]),
+                # dcc.Markdown('''---'''),
 
                 html.Div([
                     html.Div([
