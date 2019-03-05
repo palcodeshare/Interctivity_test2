@@ -370,9 +370,7 @@ def render_content(tab):
                     ),
                 ],className='row'),
                 html.Div([
-                    html.P('- The purpose of this graph is to demonstrate value of closing gaps in distribution KPIs compared to market leader within a category.'),
-                    html.P('- Bar chart shows current market Share within a sub-group of a engine oil type with top SKUs from Shell and the highlighted incremental market share.'),
-                    html.P('- The incremental share is market share that would be gained if the gap in distribution compared to market leader is closed.')
+                    html.P('- Please refer to point (2) under the notes tab for more details on the graph')
                 ],className='nine columns', style= {'display': 'inline-block'}),
                 html.Br(),
                 html.Br(),
@@ -502,9 +500,7 @@ def render_content(tab):
                     ),
                 ],className='row'),
                 html.Div([
-                    html.P('- The purpose of this graph is to demonstrate value of closing gaps in distribution KPIs compared to market leader within a category.'),
-                    html.P('- Bar chart shows current market Share within a sub-group of a engine oil type with top SKUs from Shell and the highlighted incremental market share.'),
-                    html.P('- The incremental share is market share that would be gained if the gap in distribution compared to market leader is closed.')
+                    html.P('- Please refer to point (2) under the notes tab for more details on the graph')
                 ],className='nine columns', style= {'display': 'inline-block'}),
                 html.Br(),
                 html.Br(),
@@ -644,9 +640,7 @@ def render_content(tab):
                     ),
                 ],className='row'),
                 html.Div([
-                    html.P('- The purpose of this graph is to demonstrate value of closing gaps in distribution KPIs compared to market leader within a category.'),
-                    html.P('- Bar chart shows current market Share within a sub-group of a engine oil type with top SKUs from Shell and the highlighted incremental market share.'),
-                    html.P('- The incremental share is market share that would be gained if the gap in distribution compared to market leader is closed.')
+                    html.P('- Please refer to point (2) under the notes tab for more details on the graph')
                 ],className='nine columns', style= {'display': 'inline-block'}),
                 html.Br(),
                 html.Br(),
@@ -776,9 +770,7 @@ def render_content(tab):
                     ),
                 ],className='row'),
                 html.Div([
-                    html.P('- The purpose of this graph is to demonstrate value of closing gaps in distribution KPIs compared to market leader within a category.'),
-                    html.P('- Bar chart shows current market Share within a sub-group of a engine oil type with top SKUs from Shell and the highlighted incremental market share.'),
-                    html.P('- The incremental share is market share that would be gained if the gap in distribution compared to market leader is closed.')
+                    html.P('- Please refer to point (2) under the notes tab for more details on the graph')
                 ],className='nine columns', style= {'display': 'inline-block'}),
                 html.Br(),
                 html.Br(),

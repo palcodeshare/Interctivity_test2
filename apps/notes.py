@@ -99,7 +99,8 @@ layout = html.Div(
         html.Div([
             html.P('Please find critical information on certain data features available in the dashboard below:'),
             html.P('1. SKU information excludes all tradebrands and exclusives from rankings to maintain retailer confidentiality.'),
-            html.P('2. EU doesnt have the region functionality as shell is not being reported by regions in the EU countries.'),
+            # html.P('2. EU doesnt have the region functionality as shell is not being reported by regions in the EU countries.'),
+            html.P('2. The purpose of the potential headroom graph is to demonstrate value of closing gaps in distribution KPIs compared to market leader within a category. Bar chart shows current market Share within a sub-group of a engine oil type with top SKUs from Shell and the highlighted incremental market share. The incremental share is market share that would be gained if the gap in distribution compared to market leader is closed.'),
             dcc.Markdown('''---'''),
         ]),
         html.Div([
