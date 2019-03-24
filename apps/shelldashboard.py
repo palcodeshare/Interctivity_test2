@@ -209,7 +209,8 @@ def render_content(tab):
                 #YoY Brandshares Div
                 html.Div([
                     html.Div([
-                            id='brandshares7',
+                        dcc.Graph(
+                            id='brandshares9',
                             config={'displayModeBar': False},
                         )
                     ],className='six columns'),
@@ -1188,7 +1189,7 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
 
 #YoY Chart Callback
 @app.callback(
-    Output('brandshares7','figure'),
+    Output('brandshares9','figure'),
     [Input('analysistype','value'),
      Input('country','value'),
      Input('typeveh','value'),
