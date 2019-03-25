@@ -102,7 +102,7 @@ layout = html.Div(
             # dcc.Tab(label='EU', value='eu', style=tab_style, selected_style=tab_selected_style)
         ]),
         html.Br(),
-        html.Div(id='shelldbcontent')
+        html.Div(id='shelldbcontent2')
     ],style={'font-family': 'Calibri Light'},className='ten columns offset-by-one'
 )
 @app.callback(Output('url7', 'pathname'),
@@ -119,7 +119,7 @@ def render_content2(clickData2):
     if clickData2 > 0:
         return '/apps/notes'
 
-@app.callback(Output('shelldbcontent', 'children'),
+@app.callback(Output('shelldbcontent2', 'children'),
               [Input('shelldbtabs', 'value')])
 
 def render_content(tab):
