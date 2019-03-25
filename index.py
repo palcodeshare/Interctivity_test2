@@ -3,7 +3,7 @@ import dash_html_components as html
 from dash.dependencies import Input, Output
 import dash_auth
 from app import app
-from apps import shelldashboard,howtouse,notes
+from apps import shelldashboard,shelldashboard_login,howtouse,notes
 import os
 
 app.config['suppress_callback_exceptions']=True
