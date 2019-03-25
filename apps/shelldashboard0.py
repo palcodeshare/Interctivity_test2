@@ -94,11 +94,11 @@ layout = html.Div(
         dcc.Markdown('''---'''),
 
         dcc.Tabs(id="shelldbtabs", value='global', children=[
-            dcc.Tab(label='GLOBAL', value='global', style=tab_style, selected_style=tab_selected_style),
+            # dcc.Tab(label='GLOBAL', value='global', style=tab_style, selected_style=tab_selected_style),
             dcc.Tab(label='MESA', value='mesa', style=tab_style, selected_style=tab_selected_style),
-            dcc.Tab(label='RUSSIA', value='russia', style=tab_style, selected_style=tab_selected_style),
+            # dcc.Tab(label='RUSSIA', value='russia', style=tab_style, selected_style=tab_selected_style),
             dcc.Tab(label='APAC', value='apac', style=tab_style, selected_style=tab_selected_style),
-            dcc.Tab(label='CHINA', value='china', style=tab_style, selected_style=tab_selected_style),
+            # dcc.Tab(label='CHINA', value='china', style=tab_style, selected_style=tab_selected_style),
             # dcc.Tab(label='EU', value='eu', style=tab_style, selected_style=tab_selected_style)
         ]),
         html.Br(),
