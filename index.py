@@ -11,7 +11,7 @@ server = app.server
 server.secret_key = os.environ.get('secret_key', 'secret')
 auth = dash_auth.BasicAuth(
     app,
-    (('Retailaudit','Distributionkpis',),('gfkinternal','gfkoneposdb',),)
+    (('Retailaudit','Distributionkpis',),('gfkinternal','gfkoneposdb',),('aajaya','gfkoneposdb37',),)
 )
 
 app.layout = html.Div([
@@ -38,6 +38,15 @@ def display_page(pathname):
             return shelldashboard.layout
     elif myauthenticateduser == 'Retailaudit':
         if pathname == '/apps/shelldashboard':
+             return shelldashboard.layout
+        elif pathname == '/apps/howtouse':
+             return howtouse.layout
+        elif pathname == '/apps/notes':
+             return notes.layout
+        else:
+            return shelldashboard.layout
+    elif myauthenticateduser == 'aajaya':
+        if pathname == '/apps/shelldashboard0':
              return shelldashboard.layout
         elif pathname == '/apps/howtouse':
              return howtouse.layout
