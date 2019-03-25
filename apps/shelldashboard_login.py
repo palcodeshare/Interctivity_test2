@@ -105,14 +105,14 @@ layout = html.Div(
         html.Div(id='shelldbcontent')
     ],style={'font-family': 'Calibri Light'},className='ten columns offset-by-one'
 )
-@app.callback(Output('url1', 'pathname'),
+@app.callback(Output('url7', 'pathname'),
               [Input('button1', 'n_clicks')])
 
 def render_content1(clickData):
     if clickData > 0:
         return '/apps/howtouse'
 
-@app.callback(Output('url2', 'pathname'),
+@app.callback(Output('url8', 'pathname'),
               [Input('button2', 'n_clicks')])
 
 def render_content2(clickData2):
