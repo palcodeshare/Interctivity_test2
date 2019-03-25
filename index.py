@@ -53,7 +53,7 @@ def display_page(pathname):
         elif pathname == '/apps/notes':
              return notes.layout
         else:
-            return shelldashboard.layout
+            return shelldashboard0.layout
 
 if __name__ == '__main__':
     app.run_server(debug=True)
