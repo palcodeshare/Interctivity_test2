@@ -132,16 +132,16 @@ layout = html.Div(
     ],style={'font-family': 'Calibri Light'},className='ten columns offset-by-one'
 )
 
-@app.callback(Output('url3', 'pathname'),
+@app.callback(Output('url9', 'pathname'),
               [Input('button1', 'n_clicks')])
 
 def render_content3(clickData):
     if clickData > 0:
-        return '/apps/shelldashboard'
+        return '/apps/shelldashboard0'
 
-@app.callback(Output('url4', 'pathname'),
+@app.callback(Output('url10', 'pathname'),
               [Input('button2', 'n_clicks')])
 
 def render_content4(clickData):
     if clickData > 0:
-        return '/apps/howtouse'
+        return '/apps/howtouse0'
