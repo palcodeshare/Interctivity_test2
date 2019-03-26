@@ -105,7 +105,7 @@ layout = html.Div(
     ],style={'font-family': 'Calibri Light'},className='ten columns offset-by-one'
 )
 
-
+auth = 'retailaudit'
 
 @app.callback(Output('url1', 'pathname'),
               [Input('button1', 'n_clicks')])
