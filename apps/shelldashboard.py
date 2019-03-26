@@ -92,7 +92,7 @@ layout = html.Div(
 
         dcc.Markdown('''---'''),
 
-        dcc.Tabs(id="shelldbtabs", value='global', children=[
+        dcc.Tabs(id='shelldbtabs', value='global', children=[
             dcc.Tab(label='GLOBAL', value='global', style=tab_style, selected_style=tab_selected_style),
             dcc.Tab(label='MESA', value='mesa', style=tab_style, selected_style=tab_selected_style),
             dcc.Tab(label='RUSSIA', value='russia', style=tab_style, selected_style=tab_selected_style),
@@ -122,8 +122,7 @@ def render_content2(clickData2):
         return '/apps/notes'
 
 @app.callback(Output('shelldbcontent', 'children'),
-              [Input('shelldbtabs', 'value'),
-               Input('authval', 'value')])
+              [Input('shelldbtabs', 'value'))
 
 def render_content(tab,auth):
     if auth == 'aajaya':

@@ -18,15 +18,14 @@ auth = dash_auth.BasicAuth(
 app.layout = html.Div([
             dcc.Location(id='url',refresh=True),
             html.Div(id='page-content'),
-            dcc.Tabs(id='authval')
+            
         ])
 
 
 # myauthenticateduser = 'gfkinternal'
 # print(myauthenticateduser)
 
-@app.callback([Output('page-content', 'children'),
-               Output('authval', 'value')],
+@app.callback([Output('page-content', 'children')],
               [Input('url', 'pathname')])
 def display_page(pathname):
     myauthenticateduser = auth._username
@@ -42,23 +41,23 @@ def display_page(pathname):
     elif myauthenticateduser == 'Retailaudit':
         auth == 'retailaudit'
         if pathname == '/apps/shelldashboard':
-             return shelldashboard.layout,auth
+             return shelldashboard.layout
         elif pathname == '/apps/howtouse':
-             return howtouse.layout,auth
+             return howtouse.layout
         elif pathname == '/apps/notes':
-             return notes.layout,auth
+             return notes.layout
         else:
             return shelldashboard.layout,auth
     elif myauthenticateduser == 'aajaya':
         auth == 'aajaya'
         if pathname == '/apps/shelldashboard':
-             return shelldashboard.layout,auth
+             return shelldashboard.layout
         elif pathname == '/apps/howtouse':
-             return howtouse.layout,auth
+             return howtouse.layout
         elif pathname == '/apps/notes':
-             return notes.layout,auth
+             return notes.layout
         else:
-            return shelldashboard.layout,auth
+            return shelldashboard.layout
 
 if __name__ == '__main__':
     app.run_server(debug=True)
