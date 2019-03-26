@@ -47,7 +47,7 @@ def display_page(pathname):
         elif pathname == '/apps/notes':
              return notes.layout
         else:
-            return shelldashboard.layout,auth
+            return shelldashboard.layout
     elif myauthenticateduser == 'aajaya':
         auth == 'aajaya'
         if pathname == '/apps/shelldashboard':
