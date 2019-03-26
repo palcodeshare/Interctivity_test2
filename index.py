@@ -11,7 +11,7 @@ server = app.server
 server.secret_key = os.environ.get('secret_key', 'secret')
 auth = dash_auth.BasicAuth(
     app,
-    (('Retailaudit','Distributionkpis',),('gfkinternal','gfkoneposdb',),)
+    (('Retailaudit','Distributionkpis',),('gfkinternal','gfkoneposdb',),('aajaya','gfkoneposdb37',),)
 )
 
 app.layout = html.Div([
