@@ -94,15 +94,15 @@ layout = html.Div(
         dcc.Markdown('''---'''),
 
         dcc.Tabs(id="shelldbtabs", value='global', children=[
-            dcc.Tab(label='GLOBAL', value='global', style=tab_style, selected_style=tab_selected_style),
+            # dcc.Tab(label='GLOBAL', value='global', style=tab_style, selected_style=tab_selected_style),
             dcc.Tab(label='MESA', value='mesa', style=tab_style, selected_style=tab_selected_style),
-            dcc.Tab(label='RUSSIA', value='russia', style=tab_style, selected_style=tab_selected_style),
+            # dcc.Tab(label='RUSSIA', value='russia', style=tab_style, selected_style=tab_selected_style),
             dcc.Tab(label='APAC', value='apac', style=tab_style, selected_style=tab_selected_style),
-            dcc.Tab(label='CHINA', value='china', style=tab_style, selected_style=tab_selected_style),
+            # dcc.Tab(label='CHINA', value='china', style=tab_style, selected_style=tab_selected_style),
             # dcc.Tab(label='EU', value='eu', style=tab_style, selected_style=tab_selected_style)
         ]),
         html.Br(),
-        html.Div(id='shelldbcontent')
+        html.Div(id='shelldbcontent1')
     ],style={'font-family': 'Calibri Light'},className='ten columns offset-by-one'
 )
 @app.callback(Output('url7', 'pathname'),
@@ -119,7 +119,7 @@ def render_content2(clickData2):
     if clickData2 > 0:
         return '/apps/notes'
 
-@app.callback(Output('shelldbcontent', 'children'),
+@app.callback(Output('shelldbcontent1', 'children'),
               [Input('shelldbtabs', 'value')])
 
 def render_content(tab):
