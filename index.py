@@ -18,14 +18,14 @@ auth = dash_auth.BasicAuth(
 app.layout = html.Div([
             dcc.Location(id='url',refresh=True),
             html.Div(id='page-content'),
-            
+
         ])
 
 
 # myauthenticateduser = 'gfkinternal'
 # print(myauthenticateduser)
 
-@app.callback([Output('page-content', 'children')],
+@app.callback(Output('page-content', 'children'),
               [Input('url', 'pathname')])
 def display_page(pathname):
     myauthenticateduser = auth._username
