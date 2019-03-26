@@ -2,7 +2,7 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 import dash_auth
-from app import app
+from app import app,app0
 from apps import shelldashboard,shelldashboard0,howtouse,notes
 import os
 
@@ -48,10 +48,10 @@ def display_page(pathname):
     elif myauthenticateduser == 'aajaya':
         if pathname == '/apps/shelldashboard0':
              return shelldashboard0.layout
-        elif pathname == '/apps/howtouse':
-             return howtouse.layout
-        elif pathname == '/apps/notes':
-             return notes.layout
+        elif pathname == '/apps/howtouse0':
+             return howtouse0.layout
+        elif pathname == '/apps/notes0':
+             return notes0.layout
         else:
             return shelldashboard0.layout
 
