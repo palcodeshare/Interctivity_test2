@@ -357,13 +357,13 @@ def render_content(tab):
                 html.Div([
                     html.Div([
                         dcc.Graph(
-                            id='brandshares',
+                            id='brandshares10',
                             config={'displayModeBar': False},
                         )
                     ],className='six columns'),
                     html.Div([
                         dcc.Graph(
-                            id='brandshares2',
+                            id='brandshares11',
                             config={'displayModeBar': False},
                         )
                     ],className='six columns')
@@ -373,13 +373,13 @@ def render_content(tab):
                 html.Div([
                     html.Div([
                         dcc.Graph(
-                            id='brandshares3',
+                            id='brandshares12',
                             config={'displayModeBar': False},
                         )
                     ],className='six columns'),
                     html.Div([
                         dcc.Graph(
-                            id='brandshares4',
+                            id='brandshares13',
                             config={'displayModeBar': False},
                         )
                     ],className='six columns')
@@ -388,7 +388,7 @@ def render_content(tab):
                 html.Div([
                     html.Div([
                         dcc.Graph(
-                            id='distbrand',
+                            id='distbrand1',
                             config={'displayModeBar': False}
                         ),
                     ],className='row'),
@@ -397,7 +397,7 @@ def render_content(tab):
                 html.Div([
                     dcc.Graph(
                         style={'height': '500px'},
-                        id='pothead',
+                        id='pothead1',
                         config={'displayModeBar': False}
                     ),
                 ],className='row'),
@@ -627,13 +627,13 @@ def render_content(tab):
                 html.Div([
                     html.Div([
                         dcc.Graph(
-                            id='brandshares',
+                            id='brandshares10',
                             config={'displayModeBar': False},
                         )
                     ],className='six columns'),
                     html.Div([
                         dcc.Graph(
-                            id='brandshares2',
+                            id='brandshares11',
                             config={'displayModeBar': False},
                         )
                     ],className='six columns')
@@ -643,13 +643,13 @@ def render_content(tab):
                 html.Div([
                     html.Div([
                         dcc.Graph(
-                            id='brandshares3',
+                            id='brandshares12',
                             config={'displayModeBar': False},
                         )
                     ],className='six columns'),
                     html.Div([
                         dcc.Graph(
-                            id='brandshares4',
+                            id='brandshares13',
                             config={'displayModeBar': False},
                         )
                     ],className='six columns')
@@ -658,7 +658,7 @@ def render_content(tab):
                 html.Div([
                     html.Div([
                         dcc.Graph(
-                            id='distbrand',
+                            id='distbrand1',
                             config={'displayModeBar': False}
                         ),
                     ],className='row'),
@@ -667,7 +667,7 @@ def render_content(tab):
                 html.Div([
                     dcc.Graph(
                         style={'height': '500px'},
-                        id='pothead',
+                        id='pothead1',
                         config={'displayModeBar': False}
                     ),
                 ],className='row'),
@@ -1973,7 +1973,7 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
 
 ########<Numeric and Weighted Distribution Callbacks>########
 @app.callback(
-    Output('distbrand','figure'),
+    Output('distbrand1','figure'),
     [Input('analysistype','value'),
      Input('country1','value'),
      Input('typeveh1','value'),
@@ -2017,100 +2017,100 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
     return fig
 
 ########<Pie Charts Callbacks>########
-@app.callback(
-    Output('pie','figure'),
-    [Input('country','value'),
-     Input('typeveh1','value'),
-     Input('base1','value')
-    ]
-)
-
-def update_BS_brands(globalregion_name, typeveh_name, base_name):
-
-    SQL="SELECT ctry, salesplkq2, valplkq2 FROM pieandbar WHERE globalreg=(%s) AND typeveh=(%s) AND base=(%s)"
-    cur.execute(SQL,(globalregion_name,typeveh_name,base_name,))
-    result=cur.fetchall()
-    ctry_val, salesplkq2_val, valplkq2_val = zip(*result)
-
-    fig = {
-        'data': [
-            {
-                'labels': ctry_val,
-                'values': salesplkq2_val,
-                'name':'Sales Volume',
-                'type': 'pie',
-                'domain': {'x': [0, 0.5],
-                           'y': [0, 1]},
-                'text':'Text D',
-                'textposition':'bottom center'
-            },
-            {
-                'labels': ctry_val,
-                'name':'Sales Value',
-                'values': valplkq2_val,
-                'type': 'pie',
-                'domain': {'x': [0.5, 1],
-                           'y': [0, 1]},
-            }
-        ],
-        'layout': {
-            'title':'Country Panel Split Q4 2018 (Volume% & Value%)',
-        }
-    }
-    return fig
+# @app.callback(
+#     Output('pie1','figure'),
+#     [Input('country','value'),
+#      Input('typeveh1','value'),
+#      Input('base1','value')
+#     ]
+# )
+#
+# def update_BS_brands(globalregion_name, typeveh_name, base_name):
+#
+#     SQL="SELECT ctry, salesplkq2, valplkq2 FROM pieandbar WHERE globalreg=(%s) AND typeveh=(%s) AND base=(%s)"
+#     cur.execute(SQL,(globalregion_name,typeveh_name,base_name,))
+#     result=cur.fetchall()
+#     ctry_val, salesplkq2_val, valplkq2_val = zip(*result)
+#
+#     fig = {
+#         'data': [
+#             {
+#                 'labels': ctry_val,
+#                 'values': salesplkq2_val,
+#                 'name':'Sales Volume',
+#                 'type': 'pie',
+#                 'domain': {'x': [0, 0.5],
+#                            'y': [0, 1]},
+#                 'text':'Text D',
+#                 'textposition':'bottom center'
+#             },
+#             {
+#                 'labels': ctry_val,
+#                 'name':'Sales Value',
+#                 'values': valplkq2_val,
+#                 'type': 'pie',
+#                 'domain': {'x': [0.5, 1],
+#                            'y': [0, 1]},
+#             }
+#         ],
+#         'layout': {
+#             'title':'Country Panel Split Q4 2018 (Volume% & Value%)',
+#         }
+#     }
+#     return fig
 
 ########<Horizontal Bar Charts Callbacks>########
-@app.callback(
-    Output('horizbar','figure'),
-    [Input('country','value'),
-     Input('typeveh1','value'),
-     Input('base1','value')
-    ]
-)
-
-def update_flag(globalregion_name, typeveh_name, base_name):
-
-    SQL="SELECT ctry, salesplkq1, salesplkq2, shellsalesplkq1, shellsalesplkq2, valplkq1, valplkq2, shellvalplkq1, shellvalplkq2 FROM pieandbar WHERE globalreg=(%s) AND typeveh=(%s) AND base=(%s)"
-    cur.execute(SQL,(globalregion_name,typeveh_name,base_name,))
-    result=cur.fetchall()
-    ctry_val, salesplkq1_val, salesplkq2_val, shellsalesplkq1_val, shellsalesplkq2_val, valplkq1_val, valplkq2_val, shellvalplkq1_val, shellvalplkq2_val = zip(*result)
-
-    trace1 = go.Bar(y=ctry_val,x=salesplkq1_val,name="Q3",orientation='h',text=salesplkq1_val,textposition = 'auto',hoverinfo='skip',marker=dict(color='rgba(255,122,66,1)'))
-    trace2 = go.Bar(y=ctry_val,x=salesplkq2_val,name="Q4",orientation='h',text=salesplkq2_val,textposition = 'auto',hoverinfo='skip',marker=dict(color='rgba(90,151,2016,1)'))
-
-    trace3 = go.Bar(y=ctry_val,x=shellsalesplkq1_val,name="Sales Volume",orientation='h',text=shellsalesplkq1_val,textposition = 'auto',hoverinfo='skip',showlegend=False,marker=dict(color='rgba(255,122,66,1)'))
-    trace4 = go.Bar(y=ctry_val,x=shellsalesplkq2_val,name="Sales Value",orientation='h',text=shellsalesplkq2_val,textposition = 'auto',hoverinfo='skip',showlegend=False,marker=dict(color='rgba(90,151,2016,1)'))
-
-    trace5 = go.Bar(y=ctry_val,x=valplkq1_val,name="Sales Volume",orientation='h',text=valplkq1_val,textposition = 'auto',hoverinfo='skip',showlegend=False,marker=dict(color='rgba(255,122,66,1)'))
-    trace6 = go.Bar(y=ctry_val,x=valplkq2_val,name="Sales Value",orientation='h',text=valplkq2_val,textposition = 'auto',hoverinfo='skip',showlegend=False,marker=dict(color='rgba(90,151,2016,1)'))
-
-    trace7 = go.Bar(y=ctry_val,x=shellvalplkq1_val,name="Sales Volume",orientation='h',text=shellvalplkq1_val,textposition = 'auto',hoverinfo='skip',showlegend=False,marker=dict(color='rgba(255,122,66,1)'))
-    trace8 = go.Bar(y=ctry_val,x=shellvalplkq2_val,name="Sales Value",orientation='h',text=shellvalplkq2_val,textposition = 'auto',hoverinfo='skip',showlegend=False,marker=dict(color='rgba(90,151,2016,1)'))
-
-    fig = tls.make_subplots(rows=1, cols=4, shared_yaxes=True,vertical_spacing=0.02,horizontal_spacing=0.05,subplot_titles=('Total Market Sales Volume', 'Shell Sales Volume', 'Total Market Sales Value USD', 'Shell Sales Value USD'))
-    fig['layout']['margin'] = {'l': 150, 'r': 20, 'b': 150, 't': 70}
-
-    fig['layout'].update(title='Absolute Panel Volume & Value Figures (Millions) - Q3 2018 vs Q4 2018',titlefont=dict(family='Calibri Light'),barmode='group')
-
-    fig.append_trace(trace1,1,1)
-    fig.append_trace(trace2,1,1)
-    fig.append_trace(trace3,1,2)
-    fig.append_trace(trace4,1,2)
-
-    fig.append_trace(trace5,1,3)
-    fig.append_trace(trace6,1,3)
-    fig.append_trace(trace7,1,4)
-    fig.append_trace(trace8,1,4)
-
-    for i in fig['layout']['annotations']:
-        i['font'] = dict(family='Calibri Light',size=15)
-
-    fig['layout']['yaxis1'].update(showgrid=False,autorange='reversed')
-    return fig
+# @app.callback(
+#     Output('horizbar1','figure'),
+#     [Input('country','value'),
+#      Input('typeveh1','value'),
+#      Input('base1','value')
+#     ]
+# )
+#
+# def update_flag(globalregion_name, typeveh_name, base_name):
+#
+#     SQL="SELECT ctry, salesplkq1, salesplkq2, shellsalesplkq1, shellsalesplkq2, valplkq1, valplkq2, shellvalplkq1, shellvalplkq2 FROM pieandbar WHERE globalreg=(%s) AND typeveh=(%s) AND base=(%s)"
+#     cur.execute(SQL,(globalregion_name,typeveh_name,base_name,))
+#     result=cur.fetchall()
+#     ctry_val, salesplkq1_val, salesplkq2_val, shellsalesplkq1_val, shellsalesplkq2_val, valplkq1_val, valplkq2_val, shellvalplkq1_val, shellvalplkq2_val = zip(*result)
+#
+#     trace1 = go.Bar(y=ctry_val,x=salesplkq1_val,name="Q3",orientation='h',text=salesplkq1_val,textposition = 'auto',hoverinfo='skip',marker=dict(color='rgba(255,122,66,1)'))
+#     trace2 = go.Bar(y=ctry_val,x=salesplkq2_val,name="Q4",orientation='h',text=salesplkq2_val,textposition = 'auto',hoverinfo='skip',marker=dict(color='rgba(90,151,2016,1)'))
+#
+#     trace3 = go.Bar(y=ctry_val,x=shellsalesplkq1_val,name="Sales Volume",orientation='h',text=shellsalesplkq1_val,textposition = 'auto',hoverinfo='skip',showlegend=False,marker=dict(color='rgba(255,122,66,1)'))
+#     trace4 = go.Bar(y=ctry_val,x=shellsalesplkq2_val,name="Sales Value",orientation='h',text=shellsalesplkq2_val,textposition = 'auto',hoverinfo='skip',showlegend=False,marker=dict(color='rgba(90,151,2016,1)'))
+#
+#     trace5 = go.Bar(y=ctry_val,x=valplkq1_val,name="Sales Volume",orientation='h',text=valplkq1_val,textposition = 'auto',hoverinfo='skip',showlegend=False,marker=dict(color='rgba(255,122,66,1)'))
+#     trace6 = go.Bar(y=ctry_val,x=valplkq2_val,name="Sales Value",orientation='h',text=valplkq2_val,textposition = 'auto',hoverinfo='skip',showlegend=False,marker=dict(color='rgba(90,151,2016,1)'))
+#
+#     trace7 = go.Bar(y=ctry_val,x=shellvalplkq1_val,name="Sales Volume",orientation='h',text=shellvalplkq1_val,textposition = 'auto',hoverinfo='skip',showlegend=False,marker=dict(color='rgba(255,122,66,1)'))
+#     trace8 = go.Bar(y=ctry_val,x=shellvalplkq2_val,name="Sales Value",orientation='h',text=shellvalplkq2_val,textposition = 'auto',hoverinfo='skip',showlegend=False,marker=dict(color='rgba(90,151,2016,1)'))
+#
+#     fig = tls.make_subplots(rows=1, cols=4, shared_yaxes=True,vertical_spacing=0.02,horizontal_spacing=0.05,subplot_titles=('Total Market Sales Volume', 'Shell Sales Volume', 'Total Market Sales Value USD', 'Shell Sales Value USD'))
+#     fig['layout']['margin'] = {'l': 150, 'r': 20, 'b': 150, 't': 70}
+#
+#     fig['layout'].update(title='Absolute Panel Volume & Value Figures (Millions) - Q3 2018 vs Q4 2018',titlefont=dict(family='Calibri Light'),barmode='group')
+#
+#     fig.append_trace(trace1,1,1)
+#     fig.append_trace(trace2,1,1)
+#     fig.append_trace(trace3,1,2)
+#     fig.append_trace(trace4,1,2)
+#
+#     fig.append_trace(trace5,1,3)
+#     fig.append_trace(trace6,1,3)
+#     fig.append_trace(trace7,1,4)
+#     fig.append_trace(trace8,1,4)
+#
+#     for i in fig['layout']['annotations']:
+#         i['font'] = dict(family='Calibri Light',size=15)
+#
+#     fig['layout']['yaxis1'].update(showgrid=False,autorange='reversed')
+#     return fig
 
 ########<Top 15 SKU by country Callbacks>########
 @app.callback(
-    Output('skubar','figure'),
+    Output('skubar1','figure'),
     [Input('country','value'),
     ]
 )
@@ -2161,7 +2161,7 @@ def update_flag(ctry_name):
 
 ########<Potential Headroom Charts Callbacks>########
 @app.callback(
-    Output('pothead','figure'),
+    Output('pothead1','figure'),
     [Input('country','value'),
      Input('typeveh1','value'),
      Input('base1','value')
