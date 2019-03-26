@@ -2,8 +2,8 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 import dash_auth
-from app import app,app0
-from apps import shelldashboard,shelldashboard0,howtouse,notes
+from app import app
+from apps import shelldashboard,shelldashboard0,howtouse,notes,howtouse0,notes0
 import os
 
 app.config['suppress_callback_exceptions']=True
@@ -49,9 +49,9 @@ def display_page(pathname):
         if pathname == '/apps/shelldashboard0':
              return shelldashboard0.layout
         elif pathname == '/apps/howtouse0':
-             return howtouse0.layout
+             return howtouse.layout
         elif pathname == '/apps/notes0':
-             return notes0.layout
+             return notes.layout
         else:
             return shelldashboard0.layout
 
