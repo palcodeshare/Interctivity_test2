@@ -124,7 +124,7 @@ def render_content2(clickData2):
 @app.callback(Output('shelldbcontent', 'children'),
               [Input('shelldbtabs', 'value')])
 
-def render_content(tab,auth):
+def render_content(tab):
     # if auth == 'aajaya':
     #     if tab == 'global':
     #         return html.Div([
