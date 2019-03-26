@@ -58,11 +58,11 @@ tab_selected_style = {
 layout = html.Div(
     [
         dcc.Location(
-             id='url1'
+             id='url7'
         ),
 
         dcc.Location(
-             id='url2'
+             id='url8'
         ),
 
         html.Div([
@@ -105,14 +105,14 @@ layout = html.Div(
         html.Div(id='shelldbcontent')
     ],style={'font-family': 'Calibri Light'},className='ten columns offset-by-one'
 )
-@app.callback(Output('url1', 'pathname'),
+@app.callback(Output('url7', 'pathname'),
               [Input('button1', 'n_clicks')])
 
 def render_content1(clickData):
     if clickData > 0:
         return '/apps/howtouse'
 
-@app.callback(Output('url2', 'pathname'),
+@app.callback(Output('url8', 'pathname'),
               [Input('button2', 'n_clicks')])
 
 def render_content2(clickData2):
@@ -123,158 +123,158 @@ def render_content2(clickData2):
               [Input('shelldbtabs', 'value')])
 
 def render_content(tab):
-    if tab == 'global':
-        return html.Div([
-                html.Div([
-                    html.Div([
-                        html.P('Select Analysis Type:')
-                    ],className='two columns'),
-                    dcc.RadioItems(
-                        id='analysistype',
-                        options=[
-                            {'label': 'By Channel  ', 'value': 'channel_analysis'},
-                            {'label': 'By Region  ', 'value': 'region_analysis'}
-                        ],
-                        value='channel_analysis',
-                        labelStyle={'display': 'inline-block'}
-                    ),
-                    html.Div([
-                        html.P('Note: Selecting an option will disable the other. For example, selecting By Region will disable Select Channel dropdown')
-                    ],className='nine columns', style= {'display': 'inline-block','color': 'red'}),
-                ],className='row',style={'display': 'none'}),
-                html.Br(),
-                html.Div([
-                    dcc.Dropdown(
-                        id='country',
-                        value='Global',
-                    )
-                ],style={'display': 'none'}),
-                html.Div([
-                    html.Div([
-                        html.P('Select Engine Oil Type:'),
-                        dcc.Dropdown(
-                            id='typeveh',
-                            value='TOTAL',
-                            placeholder="Type Of Vehicle",
-                        ),
-                    ],className='two columns'),
-
-                    html.Div([
-                        html.P('Select Region:'),
-                        dcc.Dropdown(
-                            id='region',
-                            value='TOTAL',
-                            placeholder="Region",
-                        ),
-                    ],className='two columns',style={'display': 'none'}),
-
-                    html.Div([
-                        html.P('Select Channel:'),
-                        dcc.Dropdown(
-                            id='channel',
-                            value='TOTAL',
-                            placeholder="Channel",
-                        ),
-                    ],className='two columns',style={'display': 'none'}),
-
-                    html.Div([
-                        html.P('Select Subgroup:'),
-                        dcc.Dropdown(
-                            id='base',
-                            value='TOTAL',
-                            placeholder="Base",
-                        ),
-                    ],className='two columns')
-                ],className='row'),
-                html.Br(),
-
-                #QoQ Brandshares Div
-
-
-                html.Div([
-                    html.Div([
-                        dcc.Graph(
-                            id='brandshares5',
-                            config={'displayModeBar': False},
-                        )
-                    ],className='six columns'),
-                    html.Div([
-                        dcc.Graph(
-                            id='brandshares6',
-                            config={'displayModeBar': False},
-                        )
-                    ],className='six columns')
-                ],className='row'),
-
-                #YoY Brandshares Div
-                html.Div([
-                    html.Div([
-                        dcc.Graph(
-                            id='brandshares9',
-                            config={'displayModeBar': False},
-                        )
-                    ],className='six columns'),
-                    html.Div([
-                        dcc.Graph(
-                            id='brandshares8',
-                            config={'displayModeBar': False},
-                        )
-                    ],className='six columns')
-                ],className='row'),
-                dcc.Markdown('''---'''),
-
-                html.Div([
-                    html.Div([
-                        dcc.Graph(
-                            id='brandshares',
-                            config={'displayModeBar': False},
-                        )
-                    ],className='six columns'),
-                    html.Div([
-                        dcc.Graph(
-                            id='brandshares2',
-                            config={'displayModeBar': False},
-                        )
-                    ],className='six columns')
-                ],className='row'),
-
-                #YoY Brandshares Div
-                html.Div([
-                    html.Div([
-                        dcc.Graph(
-                            id='brandshares3',
-                            config={'displayModeBar': False},
-                        )
-                    ],className='six columns'),
-                    html.Div([
-                        dcc.Graph(
-                            id='brandshares4',
-                            config={'displayModeBar': False},
-                        )
-                    ],className='six columns')
-                ],className='row'),
-                dcc.Markdown('''---'''),
-
-                html.Div([
-                    html.Div([
-                        dcc.Graph(
-                            id='pie',
-                            config={'displayModeBar': False}
-                        ),
-                    ],className='row'),
-                ]),
-                dcc.Markdown('''---'''),
-
-                html.Div([
-                    html.Div([
-                        dcc.Graph(
-                            style={'height': '1200px'},
-                            id='horizbar',
-                            config={'displayModeBar': False}
-                        ),
-                    ],className='row'),
-                ]),
-            ],style={'font-family': 'Calibri Light'})
+    # if tab == 'global':
+    #     return html.Div([
+    #             html.Div([
+    #                 html.Div([
+    #                     html.P('Select Analysis Type:')
+    #                 ],className='two columns'),
+    #                 dcc.RadioItems(
+    #                     id='analysistype',
+    #                     options=[
+    #                         {'label': 'By Channel  ', 'value': 'channel_analysis'},
+    #                         {'label': 'By Region  ', 'value': 'region_analysis'}
+    #                     ],
+    #                     value='channel_analysis',
+    #                     labelStyle={'display': 'inline-block'}
+    #                 ),
+    #                 html.Div([
+    #                     html.P('Note: Selecting an option will disable the other. For example, selecting By Region will disable Select Channel dropdown')
+    #                 ],className='nine columns', style= {'display': 'inline-block','color': 'red'}),
+    #             ],className='row',style={'display': 'none'}),
+    #             html.Br(),
+    #             html.Div([
+    #                 dcc.Dropdown(
+    #                     id='country',
+    #                     value='Global',
+    #                 )
+    #             ],style={'display': 'none'}),
+    #             html.Div([
+    #                 html.Div([
+    #                     html.P('Select Engine Oil Type:'),
+    #                     dcc.Dropdown(
+    #                         id='typeveh',
+    #                         value='TOTAL',
+    #                         placeholder="Type Of Vehicle",
+    #                     ),
+    #                 ],className='two columns'),
+    #
+    #                 html.Div([
+    #                     html.P('Select Region:'),
+    #                     dcc.Dropdown(
+    #                         id='region',
+    #                         value='TOTAL',
+    #                         placeholder="Region",
+    #                     ),
+    #                 ],className='two columns',style={'display': 'none'}),
+    #
+    #                 html.Div([
+    #                     html.P('Select Channel:'),
+    #                     dcc.Dropdown(
+    #                         id='channel',
+    #                         value='TOTAL',
+    #                         placeholder="Channel",
+    #                     ),
+    #                 ],className='two columns',style={'display': 'none'}),
+    #
+    #                 html.Div([
+    #                     html.P('Select Subgroup:'),
+    #                     dcc.Dropdown(
+    #                         id='base',
+    #                         value='TOTAL',
+    #                         placeholder="Base",
+    #                     ),
+    #                 ],className='two columns')
+    #             ],className='row'),
+    #             html.Br(),
+    #
+    #             #QoQ Brandshares Div
+    #
+    #
+    #             html.Div([
+    #                 html.Div([
+    #                     dcc.Graph(
+    #                         id='brandshares5',
+    #                         config={'displayModeBar': False},
+    #                     )
+    #                 ],className='six columns'),
+    #                 html.Div([
+    #                     dcc.Graph(
+    #                         id='brandshares6',
+    #                         config={'displayModeBar': False},
+    #                     )
+    #                 ],className='six columns')
+    #             ],className='row'),
+    #
+    #             #YoY Brandshares Div
+    #             html.Div([
+    #                 html.Div([
+    #                     dcc.Graph(
+    #                         id='brandshares9',
+    #                         config={'displayModeBar': False},
+    #                     )
+    #                 ],className='six columns'),
+    #                 html.Div([
+    #                     dcc.Graph(
+    #                         id='brandshares8',
+    #                         config={'displayModeBar': False},
+    #                     )
+    #                 ],className='six columns')
+    #             ],className='row'),
+    #             dcc.Markdown('''---'''),
+    #
+    #             html.Div([
+    #                 html.Div([
+    #                     dcc.Graph(
+    #                         id='brandshares',
+    #                         config={'displayModeBar': False},
+    #                     )
+    #                 ],className='six columns'),
+    #                 html.Div([
+    #                     dcc.Graph(
+    #                         id='brandshares2',
+    #                         config={'displayModeBar': False},
+    #                     )
+    #                 ],className='six columns')
+    #             ],className='row'),
+    #
+    #             #YoY Brandshares Div
+    #             html.Div([
+    #                 html.Div([
+    #                     dcc.Graph(
+    #                         id='brandshares3',
+    #                         config={'displayModeBar': False},
+    #                     )
+    #                 ],className='six columns'),
+    #                 html.Div([
+    #                     dcc.Graph(
+    #                         id='brandshares4',
+    #                         config={'displayModeBar': False},
+    #                     )
+    #                 ],className='six columns')
+    #             ],className='row'),
+    #             dcc.Markdown('''---'''),
+    #
+    #             html.Div([
+    #                 html.Div([
+    #                     dcc.Graph(
+    #                         id='pie',
+    #                         config={'displayModeBar': False}
+    #                     ),
+    #                 ],className='row'),
+    #             ]),
+    #             dcc.Markdown('''---'''),
+    #
+    #             html.Div([
+    #                 html.Div([
+    #                     dcc.Graph(
+    #                         style={'height': '1200px'},
+    #                         id='horizbar',
+    #                         config={'displayModeBar': False}
+    #                     ),
+    #                 ],className='row'),
+    #             ]),
+    #         ],style={'font-family': 'Calibri Light'})
     if tab == 'mesa':
         return html.Div([
                 html.Div([
@@ -315,7 +315,7 @@ def render_content(tab):
                     html.Div([
                         html.P('Select Engine Oil Type:'),
                         dcc.Dropdown(
-                            id='typeveh',
+                            id='typeveh1',
                             value='TOTAL',
                             placeholder="Type Of Vehicle",
                         ),
@@ -324,7 +324,7 @@ def render_content(tab):
                     html.Div([
                         html.P('Select Region:'),
                         dcc.Dropdown(
-                            id='region',
+                            id='region1',
                             value='TOTAL',
                             placeholder="Region",
                         ),
@@ -333,7 +333,7 @@ def render_content(tab):
                     html.Div([
                         html.P('Select Channel:'),
                         dcc.Dropdown(
-                            id='channel',
+                            id='channel1',
                             value='TOTAL',
                             placeholder="Channel",
                         ),
@@ -342,7 +342,7 @@ def render_content(tab):
                     html.Div([
                         html.P('Select Subgroup:'),
                         dcc.Dropdown(
-                            id='base',
+                            id='base1',
                             value='TOTAL',
                             placeholder="Base",
                         ),
@@ -417,136 +417,136 @@ def render_content(tab):
                     ),
                 ],className='row'),
             ],style={'font-family': 'Calibri Light'})
-    if tab == 'russia':
-        return html.Div([
-                html.Div([
-                    html.Div([
-                        html.P('Select Analysis Type:')
-                    ],className='two columns'),
-                    dcc.RadioItems(
-                        id='analysistype',
-                        options=[
-                            {'label': 'By Channel  ', 'value': 'channel_analysis'},
-                            {'label': 'By Region  ', 'value': 'region_analysis'}
-                        ],
-                        value='region_analysis',
-                        labelStyle={'display': 'inline-block'}
-                    ),
-                    html.Div([
-                        html.P('Note: Selecting an option will disable the other. For example, selecting By Region will disable Select Channel dropdown')
-                    ],className='nine columns', style= {'display': 'inline-block','color': 'red'}),
-                ],className='row'),
-                html.Br(),
-                html.Div([
-                    dcc.Dropdown(
-                        id='country',
-                        value='Russia',
-                    )
-                ],style={'display': 'none'}),
-                html.Div([
-                    html.Div([
-                        html.P('Select Engine Oil Type:'),
-                        dcc.Dropdown(
-                            id='typeveh',
-                            value='TOTAL',
-                            placeholder="Type Of Vehicle",
-                        ),
-                    ],className='two columns'),
-
-                    html.Div([
-                        html.P('Select Region:'),
-                        dcc.Dropdown(
-                            id='region',
-                            value='TOTAL',
-                            placeholder="Region",
-                        ),
-                    ],className='two columns'),
-
-                    html.Div([
-                        html.P('Select Channel:'),
-                        dcc.Dropdown(
-                            id='channel',
-                            value='TOTAL',
-                            placeholder="Channel",
-                        ),
-                    ],className='two columns'),
-
-                    html.Div([
-                        html.P('Select Subgroup:'),
-                        dcc.Dropdown(
-                            id='base',
-                            value='TOTAL',
-                            placeholder="Base",
-                        ),
-                    ],className='two columns')
-                ],className='row'),
-                html.Br(),
-
-                #QoQ Brandshares Div
-
-
-
-                html.Div([
-                    html.Div([
-                        dcc.Graph(
-                            id='brandshares',
-                            config={'displayModeBar': False},
-                        )
-                    ],className='six columns'),
-                    html.Div([
-                        dcc.Graph(
-                            id='brandshares2',
-                            config={'displayModeBar': False},
-                        )
-                    ],className='six columns')
-                ],className='row'),
-
-                #YoY Brandshares Div
-                html.Div([
-                    html.Div([
-                        dcc.Graph(
-                            id='brandshares3',
-                            config={'displayModeBar': False},
-                        )
-                    ],className='six columns'),
-                    html.Div([
-                        dcc.Graph(
-                            id='brandshares4',
-                            config={'displayModeBar': False},
-                        )
-                    ],className='six columns')
-                ],className='row'),
-                dcc.Markdown('''---'''),
-                html.Div([
-                    dcc.Graph(
-                        id='distbrand',
-                        config={'displayModeBar': False}
-                    ),
-                ],className='row'),
-                dcc.Markdown('''---'''),
-                html.Div([
-                    dcc.Graph(
-                        style={'height': '500px'},
-                        id='pothead',
-                        config={'displayModeBar': False}
-                    ),
-                ],className='row'),
-                html.Div([
-                    html.P('- Please refer to point (2) under the notes tab for more details on the graph')
-                ],className='nine columns', style= {'display': 'inline-block'}),
-                html.Br(),
-                html.Br(),
-                html.Br(),
-                html.Br(),
-                dcc.Markdown('''---'''),
-                html.Div([
-                    dcc.Graph(
-                        style={'height': '900px'},
-                        id='skubar',
-                        config={'displayModeBar': False}
-                    ),
-                ],className='row'),
-            ],style={'font-family': 'Calibri Light'})
+    # if tab == 'russia':
+    #     return html.Div([
+    #             html.Div([
+    #                 html.Div([
+    #                     html.P('Select Analysis Type:')
+    #                 ],className='two columns'),
+    #                 dcc.RadioItems(
+    #                     id='analysistype',
+    #                     options=[
+    #                         {'label': 'By Channel  ', 'value': 'channel_analysis'},
+    #                         {'label': 'By Region  ', 'value': 'region_analysis'}
+    #                     ],
+    #                     value='region_analysis',
+    #                     labelStyle={'display': 'inline-block'}
+    #                 ),
+    #                 html.Div([
+    #                     html.P('Note: Selecting an option will disable the other. For example, selecting By Region will disable Select Channel dropdown')
+    #                 ],className='nine columns', style= {'display': 'inline-block','color': 'red'}),
+    #             ],className='row'),
+    #             html.Br(),
+    #             html.Div([
+    #                 dcc.Dropdown(
+    #                     id='country',
+    #                     value='Russia',
+    #                 )
+    #             ],style={'display': 'none'}),
+    #             html.Div([
+    #                 html.Div([
+    #                     html.P('Select Engine Oil Type:'),
+    #                     dcc.Dropdown(
+    #                         id='typeveh',
+    #                         value='TOTAL',
+    #                         placeholder="Type Of Vehicle",
+    #                     ),
+    #                 ],className='two columns'),
+    #
+    #                 html.Div([
+    #                     html.P('Select Region:'),
+    #                     dcc.Dropdown(
+    #                         id='region',
+    #                         value='TOTAL',
+    #                         placeholder="Region",
+    #                     ),
+    #                 ],className='two columns'),
+    #
+    #                 html.Div([
+    #                     html.P('Select Channel:'),
+    #                     dcc.Dropdown(
+    #                         id='channel',
+    #                         value='TOTAL',
+    #                         placeholder="Channel",
+    #                     ),
+    #                 ],className='two columns'),
+    #
+    #                 html.Div([
+    #                     html.P('Select Subgroup:'),
+    #                     dcc.Dropdown(
+    #                         id='base',
+    #                         value='TOTAL',
+    #                         placeholder="Base",
+    #                     ),
+    #                 ],className='two columns')
+    #             ],className='row'),
+    #             html.Br(),
+    #
+    #             #QoQ Brandshares Div
+    #
+    #
+    #
+    #             html.Div([
+    #                 html.Div([
+    #                     dcc.Graph(
+    #                         id='brandshares',
+    #                         config={'displayModeBar': False},
+    #                     )
+    #                 ],className='six columns'),
+    #                 html.Div([
+    #                     dcc.Graph(
+    #                         id='brandshares2',
+    #                         config={'displayModeBar': False},
+    #                     )
+    #                 ],className='six columns')
+    #             ],className='row'),
+    #
+    #             #YoY Brandshares Div
+    #             html.Div([
+    #                 html.Div([
+    #                     dcc.Graph(
+    #                         id='brandshares3',
+    #                         config={'displayModeBar': False},
+    #                     )
+    #                 ],className='six columns'),
+    #                 html.Div([
+    #                     dcc.Graph(
+    #                         id='brandshares4',
+    #                         config={'displayModeBar': False},
+    #                     )
+    #                 ],className='six columns')
+    #             ],className='row'),
+    #             dcc.Markdown('''---'''),
+    #             html.Div([
+    #                 dcc.Graph(
+    #                     id='distbrand',
+    #                     config={'displayModeBar': False}
+    #                 ),
+    #             ],className='row'),
+    #             dcc.Markdown('''---'''),
+    #             html.Div([
+    #                 dcc.Graph(
+    #                     style={'height': '500px'},
+    #                     id='pothead',
+    #                     config={'displayModeBar': False}
+    #                 ),
+    #             ],className='row'),
+    #             html.Div([
+    #                 html.P('- Please refer to point (2) under the notes tab for more details on the graph')
+    #             ],className='nine columns', style= {'display': 'inline-block'}),
+    #             html.Br(),
+    #             html.Br(),
+    #             html.Br(),
+    #             html.Br(),
+    #             dcc.Markdown('''---'''),
+    #             html.Div([
+    #                 dcc.Graph(
+    #                     style={'height': '900px'},
+    #                     id='skubar',
+    #                     config={'displayModeBar': False}
+    #                 ),
+    #             ],className='row'),
+    #         ],style={'font-family': 'Calibri Light'})
     if tab == 'apac':
         return html.Div([
                 html.Div([
@@ -586,7 +586,7 @@ def render_content(tab):
                     html.Div([
                         html.P('Select Engine Oil Type:'),
                         dcc.Dropdown(
-                            id='typeveh',
+                            id='typeveh1',
                             value='TOTAL',
                             placeholder="Type Of Vehicle",
                         ),
@@ -595,7 +595,7 @@ def render_content(tab):
                     html.Div([
                         html.P('Select Region:'),
                         dcc.Dropdown(
-                            id='region',
+                            id='region1',
                             value='TOTAL',
                             placeholder="Region",
                         ),
@@ -604,7 +604,7 @@ def render_content(tab):
                     html.Div([
                         html.P('Select Channel:'),
                         dcc.Dropdown(
-                            id='channel',
+                            id='channel1',
                             value='TOTAL',
                             placeholder="Channel",
                         ),
@@ -613,7 +613,7 @@ def render_content(tab):
                     html.Div([
                         html.P('Select Subgroup:'),
                         dcc.Dropdown(
-                            id='base',
+                            id='base1',
                             value='TOTAL',
                             placeholder="Base",
                         ),
@@ -687,141 +687,141 @@ def render_content(tab):
                     ),
                 ],className='row'),
             ],style={'font-family': 'Calibri Light'})
-    if tab == 'china':
-        return html.Div([
-                html.Div([
-                    html.Div([
-                        html.P('Select Analysis Type:')
-                    ],className='two columns'),
-                    dcc.RadioItems(
-                        id='analysistype',
-                        options=[
-                            {'label': 'By Channel  ', 'value': 'channel_analysis'},
-                            {'label': 'By Region  ', 'value': 'region_analysis'}
-                        ],
-                        value='channel_analysis',
-                        labelStyle={'display': 'inline-block'}
-                    ),
-                    html.Div([
-                        html.P('Note: Selecting an option will disable the other. For example, selecting By Region will disable Select Channel dropdown')
-                    ],className='nine columns', style= {'display': 'inline-block','color': 'red'}),
-                ],className='row'),
-                html.Br(),
-                html.Div([
-                    dcc.Dropdown(
-                        id='country',
-                        value='China',
-                    )
-                ],style={'display': 'none'}),
-                html.Div([
-                    html.Div([
-                        html.P('Select Engine Oil Type:'),
-                        dcc.Dropdown(
-                            id='typeveh',
-                            value='TOTAL',
-                            placeholder="Type Of Vehicle",
-                        ),
-                    ],className='two columns'),
-
-                    html.Div([
-                        html.P('Select Region:'),
-                        dcc.Dropdown(
-                            id='region',
-                            value='TOTAL',
-                            placeholder="Region",
-                        ),
-                    ],className='two columns'),
-
-                    html.Div([
-                        html.P('Select Channel:'),
-                        dcc.Dropdown(
-                            id='channel',
-                            value='TOTAL',
-                            placeholder="Channel",
-                        ),
-                    ],className='two columns'),
-
-                    html.Div([
-                        html.P('Select Subgroup:'),
-                        dcc.Dropdown(
-                            id='base',
-                            value='TOTAL',
-                            placeholder="Base",
-                        ),
-                    ],className='two columns')
-                ],className='row'),
-                html.Br(),
-
-                #QoQ Brandshares Div
-
-                html.Div([
-                    html.Div([
-                        dcc.Graph(
-                            id='brandshares',
-                            config={'displayModeBar': False},
-                        )
-                    ],className='six columns'),
-                    html.Div([
-                        dcc.Graph(
-                            id='brandshares2',
-                            config={'displayModeBar': False},
-                        )
-                    ],className='six columns')
-                ],className='row'),
-
-                #YoY Brandshares Div
-                html.Div([
-                    html.Div([
-                        dcc.Graph(
-                            id='brandshares3',
-                            config={'displayModeBar': False},
-                        )
-                    ],className='six columns'),
-                    html.Div([
-                        dcc.Graph(
-                            id='brandshares4',
-                            config={'displayModeBar': False},
-                        )
-                    ],className='six columns')
-                ],className='row'),
-                dcc.Markdown('''---'''),
-                html.Div([
-                    html.Div([
-                        dcc.Graph(
-                            id='distbrand',
-                            config={'displayModeBar': False}
-                        ),
-                    ],className='row'),
-                ]),
-                dcc.Markdown('''---'''),
-                html.Div([
-                    dcc.Graph(
-                        style={'height': '500px'},
-                        id='pothead',
-                        config={'displayModeBar': False}
-                    ),
-                ],className='row'),
-                html.Div([
-                    html.P('- Please refer to point (2) under the notes tab for more details on the graph')
-                ],className='nine columns', style= {'display': 'inline-block'}),
-                html.Br(),
-                html.Br(),
-                html.Br(),
-                html.Br(),
-                dcc.Markdown('''---'''),
-                html.Div([
-                    dcc.Graph(
-                        style={'height': '900px'},
-                        id='skubar',
-                        config={'displayModeBar': False}
-                    ),
-                ],className='row'),
-            ],style={'font-family': 'Calibri Light'})
+    # if tab == 'china':
+    #     return html.Div([
+    #             html.Div([
+    #                 html.Div([
+    #                     html.P('Select Analysis Type:')
+    #                 ],className='two columns'),
+    #                 dcc.RadioItems(
+    #                     id='analysistype',
+    #                     options=[
+    #                         {'label': 'By Channel  ', 'value': 'channel_analysis'},
+    #                         {'label': 'By Region  ', 'value': 'region_analysis'}
+    #                     ],
+    #                     value='channel_analysis',
+    #                     labelStyle={'display': 'inline-block'}
+    #                 ),
+    #                 html.Div([
+    #                     html.P('Note: Selecting an option will disable the other. For example, selecting By Region will disable Select Channel dropdown')
+    #                 ],className='nine columns', style= {'display': 'inline-block','color': 'red'}),
+    #             ],className='row'),
+    #             html.Br(),
+    #             html.Div([
+    #                 dcc.Dropdown(
+    #                     id='country',
+    #                     value='China',
+    #                 )
+    #             ],style={'display': 'none'}),
+    #             html.Div([
+    #                 html.Div([
+    #                     html.P('Select Engine Oil Type:'),
+    #                     dcc.Dropdown(
+    #                         id='typeveh',
+    #                         value='TOTAL',
+    #                         placeholder="Type Of Vehicle",
+    #                     ),
+    #                 ],className='two columns'),
+    #
+    #                 html.Div([
+    #                     html.P('Select Region:'),
+    #                     dcc.Dropdown(
+    #                         id='region',
+    #                         value='TOTAL',
+    #                         placeholder="Region",
+    #                     ),
+    #                 ],className='two columns'),
+    #
+    #                 html.Div([
+    #                     html.P('Select Channel:'),
+    #                     dcc.Dropdown(
+    #                         id='channel',
+    #                         value='TOTAL',
+    #                         placeholder="Channel",
+    #                     ),
+    #                 ],className='two columns'),
+    #
+    #                 html.Div([
+    #                     html.P('Select Subgroup:'),
+    #                     dcc.Dropdown(
+    #                         id='base',
+    #                         value='TOTAL',
+    #                         placeholder="Base",
+    #                     ),
+    #                 ],className='two columns')
+    #             ],className='row'),
+    #             html.Br(),
+    #
+    #             #QoQ Brandshares Div
+    #
+    #             html.Div([
+    #                 html.Div([
+    #                     dcc.Graph(
+    #                         id='brandshares',
+    #                         config={'displayModeBar': False},
+    #                     )
+    #                 ],className='six columns'),
+    #                 html.Div([
+    #                     dcc.Graph(
+    #                         id='brandshares2',
+    #                         config={'displayModeBar': False},
+    #                     )
+    #                 ],className='six columns')
+    #             ],className='row'),
+    #
+    #             #YoY Brandshares Div
+    #             html.Div([
+    #                 html.Div([
+    #                     dcc.Graph(
+    #                         id='brandshares3',
+    #                         config={'displayModeBar': False},
+    #                     )
+    #                 ],className='six columns'),
+    #                 html.Div([
+    #                     dcc.Graph(
+    #                         id='brandshares4',
+    #                         config={'displayModeBar': False},
+    #                     )
+    #                 ],className='six columns')
+    #             ],className='row'),
+    #             dcc.Markdown('''---'''),
+    #             html.Div([
+    #                 html.Div([
+    #                     dcc.Graph(
+    #                         id='distbrand',
+    #                         config={'displayModeBar': False}
+    #                     ),
+    #                 ],className='row'),
+    #             ]),
+    #             dcc.Markdown('''---'''),
+    #             html.Div([
+    #                 dcc.Graph(
+    #                     style={'height': '500px'},
+    #                     id='pothead',
+    #                     config={'displayModeBar': False}
+    #                 ),
+    #             ],className='row'),
+    #             html.Div([
+    #                 html.P('- Please refer to point (2) under the notes tab for more details on the graph')
+    #             ],className='nine columns', style= {'display': 'inline-block'}),
+    #             html.Br(),
+    #             html.Br(),
+    #             html.Br(),
+    #             html.Br(),
+    #             dcc.Markdown('''---'''),
+    #             html.Div([
+    #                 dcc.Graph(
+    #                     style={'height': '900px'},
+    #                     id='skubar',
+    #                     config={'displayModeBar': False}
+    #                 ),
+    #             ],className='row'),
+    #         ],style={'font-family': 'Calibri Light'})
 
 ########<Options for dropdowns Callbacks>########
 #Vehicle type button options
 @app.callback(
-    Output('typeveh','options'),
+    Output('typeveh1','options'),
     [Input('analysistype','value'),
      Input('country','value')]
 )
@@ -844,7 +844,7 @@ def update_typeveh(analysistype_val,selected_country):
 
 #region button options
 @app.callback(
-    Output('region','options'),
+    Output('region1','options'),
     [Input('analysistype','value'),
      Input('country','value'),
      Input('typeveh','value')]
@@ -869,7 +869,7 @@ def update_typeveh(analysistype_val,
 
 #Channel button options
 @app.callback(
-    Output('channel','options'),
+    Output('channel1','options'),
     [Input('analysistype','value'),
      Input('country','value'),
      Input('typeveh','value')]
@@ -894,7 +894,7 @@ def update_typeveh(analysistype_val,
 
 #Base button options
 @app.callback(
-    Output('base','options'),
+    Output('base1','options'),
     [Input('analysistype','value'),
      Input('country','value'),
      Input('typeveh','value'),
@@ -927,536 +927,536 @@ def update_typeveh(analysistype_val,
 ########<Brand Share Chart Callbacks - Top Brands>########
 
 #QoQ Chart Callback
-@app.callback(
-    Output('brandshares5','figure'),
-    [Input('analysistype','value'),
-     Input('country','value'),
-     Input('typeveh','value'),
-     Input('region','value'),
-     Input('channel','value'),
-     Input('base','value')
-     ]
-)
-
-def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, channel_name, base_name):
-
-    if analysistype_val=='region_analysis':
-        SQL="SELECT  brands, salesplkpq, salesplkcq FROM statmodshare WHERE ctry=(%s) AND typeveh=(%s) AND region=(%s) AND base=(%s)"
-        cur.execute(SQL,(country_name,typeveh_name,region_name,base_name,))
-    elif analysistype_val=='channel_analysis':
-        SQL="SELECT  brands, salesplkpq, salesplkcq FROM statmodshare WHERE ctry=(%s) AND typeveh=(%s) AND channel=(%s) AND base=(%s)"
-        cur.execute(SQL,(country_name,typeveh_name,channel_name,base_name,))
-
-    result=cur.fetchall()
-    brand_val, salesplkpq_val, salesplkcq_val = zip(*result)
-    trial_y=brand_val
-    periods=['Q3 2018','Q4 2018']
-    trial_x1=salesplkpq_val
-    trial_x2=salesplkcq_val
-
-    m=len(brand_val)
-    print(m)
-
-    def make_trace(x, name):
-        if name=='SHELL':
-            color1='rgb(255, 213, 0)'
-        elif name=='ADNOC':
-            color1='rgb(0, 102, 203)'
-        elif name=='MOBIL':
-            color1='rgb(225, 129, 129)'
-        elif name=='TOTAL':
-            color1='rgb(84, 84, 169)'
-        elif name=='CALTEX':
-            color1='rgb(1, 129, 129)'
-        elif name=='ENOC':
-            color1='rgb(135, 8, 135)'
-        elif name=='TOYOTA':
-            color1='rgb(160, 212, 255)'
-        elif name=='CASTROL':
-            color1='rgb(255, 0, 0)'
-        elif name=='LEXUS':
-            color1='rgb(246, 202, 154)'
-        elif name=='ZIC':
-            color1='rgb(6, 204, 104)'
-        elif name=='AC DELCO':
-            color1='rgb(133, 47, 226)'
-        elif name=='VOLVO':
-            color1='rgb(247, 189, 155)'
-        elif name=='VALVOLINE':
-            color1='rgb(135, 135, 7)'
-        elif name=='GULF':
-            color1='rgb(2, 255, 2)'
-        elif name=='AXCL':
-            color1='rgb(0, 0, 255)'
-        elif name=='NISSAN':
-            color1='rgb(248, 191, 157)'
-        elif name=='<Others>':
-            color1='rgb(134, 136, 138)'
-        else:
-            color1='nomatch'
-
-        if color1=='nomatch':
-            return go.Bar(
-                x=periods,   # cities name on the y-axis
-                y=x,        # monthly total on x-axis
-                name=name,
-                text=x,
-                hoverinfo='text',
-                textposition = 'inside',  # label for hover
-                orientation='v', # (!) for horizontal bars, default is 'v'
-
-
-
-                marker= go.Marker(
-                            # set bar colors
-                    line= go.Line(
-                        color='white',  # set bar border color
-                        width=1         # set bar border width
-                    )
-                ),
-                width = 0.3
-            )
-        else:
-            return go.Bar(
-                x=periods,   # cities name on the y-axis
-                y=x,        # monthly total on x-axis
-                name=name,
-                text=x,
-                hoverinfo='text',
-                textposition = 'inside',  # label for hover
-                orientation='v', # (!) for horizontal bars, default is 'v'
-
-
-
-                marker= go.Marker(
-                    color=color1,        # set bar colors
-                    line= go.Line(
-                        color='white',  # set bar border color
-                        width=1         # set bar border width
-                    )
-                ),
-                width = 0.3
-            )
-
-    data = go.Data([
-        make_trace([trial_x1[i], trial_x2[i]], trial_y[i])
-        for i in range(m)
-    ])
-
-    layout = go.Layout(
-        barmode='stack',  # (!) bars are stacked on this plot
-        bargap=0,       # (!) spacing (norm. w.r.t axis) between bars
-        title='Statistically Modified Volume Share Q-o-Q',        # set plot title
-        showlegend=True,   # remove legend
-        hovermode='closest',
-
-    )
-
-    fig = go.Figure(data=data, layout=layout)
-    return fig
-
-
-@app.callback(
-    Output('brandshares6','figure'),
-    [Input('analysistype','value'),
-     Input('country','value'),
-     Input('typeveh','value'),
-     Input('region','value'),
-     Input('channel','value'),
-     Input('base','value')
-     ]
-)
-
-def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, channel_name, base_name):
-
-
-    if analysistype_val=='region_analysis':
-        SQL="SELECT  brands, valplkpq, valplkcq FROM statmodshare WHERE ctry=(%s) AND typeveh=(%s) AND region=(%s) AND base=(%s)"
-        cur.execute(SQL,(country_name,typeveh_name,region_name,base_name,))
-    elif analysistype_val=='channel_analysis':
-        SQL="SELECT  brands, valplkpq, valplkcq FROM statmodshare WHERE ctry=(%s) AND typeveh=(%s) AND channel=(%s) AND base=(%s)"
-        cur.execute(SQL,(country_name,typeveh_name,channel_name,base_name,))
-
-    result=cur.fetchall()
-    brand_val, valplkpq_val, valplkcq_val = zip(*result)
-
-    trial_y=brand_val
-    periods=['Q3 2018','Q4 2018']
-
-    trial_x3=valplkpq_val
-    trial_x4=valplkcq_val
-
-    m=len(brand_val)
-    print(m)
-
-
-    def make_trace(x, name):
-        if name=='SHELL':
-            color1='rgb(255, 213, 0)'
-        elif name=='ADNOC':
-            color1='rgb(0, 102, 203)'
-        elif name=='MOBIL':
-            color1='rgb(225, 129, 129)'
-        elif name=='TOTAL':
-            color1='rgb(84, 84, 169)'
-        elif name=='CALTEX':
-            color1='rgb(1, 129, 129)'
-        elif name=='ENOC':
-            color1='rgb(135, 8, 135)'
-        elif name=='TOYOTA':
-            color1='rgb(160, 212, 255)'
-        elif name=='CASTROL':
-            color1='rgb(255, 0, 0)'
-        elif name=='LEXUS':
-            color1='rgb(246, 202, 154)'
-        elif name=='ZIC':
-            color1='rgb(6, 204, 104)'
-        elif name=='AC DELCO':
-            color1='rgb(133, 47, 226)'
-        elif name=='VOLVO':
-            color1='rgb(247, 189, 155)'
-        elif name=='VALVOLINE':
-            color1='rgb(135, 135, 7)'
-        elif name=='GULF':
-            color1='rgb(2, 255, 2)'
-        elif name=='AXCL':
-            color1='rgb(0, 0, 255)'
-        elif name=='NISSAN':
-            color1='rgb(248, 191, 157)'
-        elif name=='<Others>':
-            color1='rgb(134, 136, 138)'
-        else:
-            color1='nomatch'
-
-        if color1=='nomatch':
-            return go.Bar(
-                x=periods,   # cities name on the y-axis
-                y=x,        # monthly total on x-axis
-                name=name,
-                text=x,
-                hoverinfo='text',
-                textposition = 'inside',  # label for hover
-                orientation='v', # (!) for horizontal bars, default is 'v'
-
-
-
-                marker= go.Marker(
-                            # set bar colors
-                    line= go.Line(
-                        color='white',  # set bar border color
-                        width=1         # set bar border width
-                    )
-                ),
-                width = 0.3
-            )
-        else:
-            return go.Bar(
-                x=periods,   # cities name on the y-axis
-                y=x,        # monthly total on x-axis
-                name=name,
-                text=x,
-                hoverinfo='text',
-                textposition = 'inside',  # label for hover
-                orientation='v', # (!) for horizontal bars, default is 'v'
-
-
-
-                marker= go.Marker(
-                    color=color1,        # set bar colors
-                    line= go.Line(
-                        color='white',  # set bar border color
-                        width=1         # set bar border width
-                    )
-                ),
-                width = 0.3
-            )
-
-    data = go.Data([
-        make_trace([trial_x3[i], trial_x4[i]], trial_y[i]) for i in range(m)
-    ])
-
-    layout = go.Layout(
-        barmode='stack',  # (!) bars are stacked on this plot
-        bargap=0.1,       # (!) spacing (norm. w.r.t axis) between bars
-        title='Statistically Modified Value Share Q-o-Q (USD)',        # set plot title
-        showlegend=True,   # remove legend
-        hovermode='closest',
-
-    )
-
-    fig = go.Figure(data=data, layout=layout)
-    return fig
-
-#YoY Chart Callback
-@app.callback(
-    Output('brandshares9','figure'),
-    [Input('analysistype','value'),
-     Input('country','value'),
-     Input('typeveh','value'),
-     Input('region','value'),
-     Input('channel','value'),
-     Input('base','value')
-    ]
-)
-
-def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, channel_name, base_name):
-
-    if analysistype_val=='region_analysis':
-        SQL="SELECT  brands, salesplkpy, salesplkcy FROM statmodshare WHERE ctry=(%s) AND typeveh=(%s) AND region=(%s) AND base=(%s)"
-        cur.execute(SQL,(country_name,typeveh_name,region_name,base_name,))
-    elif analysistype_val=='channel_analysis':
-        SQL="SELECT  brands, salesplkpy, salesplkcy FROM statmodshare WHERE ctry=(%s) AND typeveh=(%s) AND channel=(%s) AND base=(%s)"
-        cur.execute(SQL,(country_name,typeveh_name,channel_name,base_name,))
-
-    result=cur.fetchall()
-    brand_val, salesplkpy_val, salesplkcy_val = zip(*result)
-
-    trial_y=brand_val
-    periods=['FY 2017','FY 2018']
-    trial_x1=salesplkpy_val
-    trial_x2=salesplkcy_val
-
-    m=len(brand_val)
-    print(m)
-
-
-    def make_trace(x, name):
-        if name=='SHELL':
-            color1='rgb(255, 213, 0)'
-        elif name=='ADNOC':
-            color1='rgb(0, 102, 203)'
-        elif name=='MOBIL':
-            color1='rgb(225, 129, 129)'
-        elif name=='TOTAL':
-            color1='rgb(84, 84, 169)'
-        elif name=='CALTEX':
-            color1='rgb(1, 129, 129)'
-        elif name=='ENOC':
-            color1='rgb(135, 8, 135)'
-        elif name=='TOYOTA':
-            color1='rgb(160, 212, 255)'
-        elif name=='CASTROL':
-            color1='rgb(255, 0, 0)'
-        elif name=='LEXUS':
-            color1='rgb(246, 202, 154)'
-        elif name=='ZIC':
-            color1='rgb(6, 204, 104)'
-        elif name=='AC DELCO':
-            color1='rgb(133, 47, 226)'
-        elif name=='VOLVO':
-            color1='rgb(247, 189, 155)'
-        elif name=='VALVOLINE':
-            color1='rgb(135, 135, 7)'
-        elif name=='GULF':
-            color1='rgb(2, 255, 2)'
-        elif name=='AXCL':
-            color1='rgb(0, 0, 255)'
-        elif name=='NISSAN':
-            color1='rgb(248, 191, 157)'
-        elif name=='<Others>':
-            color1='rgb(134, 136, 138)'
-        else:
-            color1='nomatch'
-
-        if color1=='nomatch':
-            return go.Bar(
-                x=periods,   # cities name on the y-axis
-                y=x,        # monthly total on x-axis
-                name=name,
-                text=x,
-                hoverinfo='text',
-                textposition = 'inside',  # label for hover
-                orientation='v', # (!) for horizontal bars, default is 'v'
-
-
-
-                marker= go.Marker(
-                            # set bar colors
-                    line= go.Line(
-                        color='white',  # set bar border color
-                        width=1         # set bar border width
-                    )
-                ),
-                width = 0.3
-            )
-        else:
-            return go.Bar(
-                x=periods,   # cities name on the y-axis
-                y=x,        # monthly total on x-axis
-                name=name,
-                text=x,
-                hoverinfo='text',
-                textposition = 'inside',  # label for hover
-                orientation='v', # (!) for horizontal bars, default is 'v'
-
-
-
-                marker= go.Marker(
-                    color=color1,        # set bar colors
-                    line= go.Line(
-                        color='white',  # set bar border color
-                        width=1         # set bar border width
-                    )
-                ),
-                width = 0.3
-            )
-
-    data = go.Data([
-        make_trace([trial_x1[i], trial_x2[i]], trial_y[i])
-        for i in range(m)
-    ])
-
-    layout = go.Layout(
-        barmode='stack',  # (!) bars are stacked on this plot
-        bargap=0,       # (!) spacing (norm. w.r.t axis) between bars
-        title='Statistically Modified Volume Share Y-o-Y (FY 2018)',        # set plot title
-        showlegend=True,   # remove legend
-        hovermode='closest',
-
-    )
-
-    fig = go.Figure(data=data, layout=layout)
-    return fig
-
-@app.callback(
-    Output('brandshares8','figure'),
-    [Input('analysistype','value'),
-     Input('country','value'),
-     Input('typeveh','value'),
-     Input('region','value'),
-     Input('channel','value'),
-     Input('base','value')
-    ]
-)
-
-def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, channel_name, base_name):
-
-    if analysistype_val=='region_analysis':
-        SQL="SELECT  brands, valplkpy, valplkcy FROM statmodshare WHERE ctry=(%s) AND typeveh=(%s) AND region=(%s) AND base=(%s)"
-        cur.execute(SQL,(country_name,typeveh_name,region_name,base_name,))
-    elif analysistype_val=='channel_analysis':
-        SQL="SELECT  brands, valplkpy, valplkcy FROM statmodshare WHERE ctry=(%s) AND typeveh=(%s) AND channel=(%s) AND base=(%s)"
-        cur.execute(SQL,(country_name,typeveh_name,channel_name,base_name,))
-
-    result=cur.fetchall()
-    brand_val, valplkpy_val, valplkcy_val = zip(*result)
-
-    trial_y=brand_val
-    periods=['FY 2017','FY 2018']
-
-    trial_x3=valplkpy_val
-    trial_x4=valplkcy_val
-
-    m=len(brand_val)
-    print(m)
-
-
-    def make_trace(x, name):
-        if name=='SHELL':
-            color1='rgb(255, 213, 0)'
-        elif name=='ADNOC':
-            color1='rgb(0, 102, 203)'
-        elif name=='MOBIL':
-            color1='rgb(225, 129, 129)'
-        elif name=='TOTAL':
-            color1='rgb(84, 84, 169)'
-        elif name=='CALTEX':
-            color1='rgb(1, 129, 129)'
-        elif name=='ENOC':
-            color1='rgb(135, 8, 135)'
-        elif name=='TOYOTA':
-            color1='rgb(160, 212, 255)'
-        elif name=='CASTROL':
-            color1='rgb(255, 0, 0)'
-        elif name=='LEXUS':
-            color1='rgb(246, 202, 154)'
-        elif name=='ZIC':
-            color1='rgb(6, 204, 104)'
-        elif name=='AC DELCO':
-            color1='rgb(133, 47, 226)'
-        elif name=='VOLVO':
-            color1='rgb(247, 189, 155)'
-        elif name=='VALVOLINE':
-            color1='rgb(135, 135, 7)'
-        elif name=='GULF':
-            color1='rgb(2, 255, 2)'
-        elif name=='AXCL':
-            color1='rgb(0, 0, 255)'
-        elif name=='NISSAN':
-            color1='rgb(248, 191, 157)'
-        elif name=='<Others>':
-            color1='rgb(134, 136, 138)'
-        else:
-            color1='nomatch'
-
-        if color1=='nomatch':
-            return go.Bar(
-                x=periods,   # cities name on the y-axis
-                y=x,        # monthly total on x-axis
-                name=name,
-                text=x,
-                hoverinfo='text',
-                textposition = 'inside',  # label for hover
-                orientation='v', # (!) for horizontal bars, default is 'v'
-
-
-
-                marker= go.Marker(
-                            # set bar colors
-                    line= go.Line(
-                        color='white',  # set bar border color
-                        width=1         # set bar border width
-                    )
-                ),
-                width = 0.3
-            )
-        else:
-            return go.Bar(
-                x=periods,   # cities name on the y-axis
-                y=x,        # monthly total on x-axis
-                name=name,
-                text=x,
-                hoverinfo='text',
-                textposition = 'inside',  # label for hover
-                orientation='v', # (!) for horizontal bars, default is 'v'
-
-
-
-                marker= go.Marker(
-                    color=color1,        # set bar colors
-                    line= go.Line(
-                        color='white',  # set bar border color
-                        width=1         # set bar border width
-                    )
-                ),
-                width = 0.3
-            )
-
-    data = go.Data([
-        make_trace([trial_x3[i], trial_x4[i]], trial_y[i]) for i in range(m)
-    ])
-
-    layout = go.Layout(
-        barmode='stack',  # (!) bars are stacked on this plot
-        bargap=0.1,       # (!) spacing (norm. w.r.t axis) between bars
-        title='Statistically Modified Value Share Y-o-Y (FY 2018)(USD)',        # set plot title
-        showlegend=True,   # remove legend
-        hovermode='closest',
-
-    )
-
-    fig = go.Figure(data=data, layout=layout)
-    return fig
+# @app.callback(
+#     Output('brandshares5','figure'),
+#     [Input('analysistype','value'),
+#      Input('country','value'),
+#      Input('typeveh','value'),
+#      Input('region','value'),
+#      Input('channel','value'),
+#      Input('base','value')
+#      ]
+# )
+#
+# def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, channel_name, base_name):
+#
+#     if analysistype_val=='region_analysis':
+#         SQL="SELECT  brands, salesplkpq, salesplkcq FROM statmodshare WHERE ctry=(%s) AND typeveh=(%s) AND region=(%s) AND base=(%s)"
+#         cur.execute(SQL,(country_name,typeveh_name,region_name,base_name,))
+#     elif analysistype_val=='channel_analysis':
+#         SQL="SELECT  brands, salesplkpq, salesplkcq FROM statmodshare WHERE ctry=(%s) AND typeveh=(%s) AND channel=(%s) AND base=(%s)"
+#         cur.execute(SQL,(country_name,typeveh_name,channel_name,base_name,))
+#
+#     result=cur.fetchall()
+#     brand_val, salesplkpq_val, salesplkcq_val = zip(*result)
+#     trial_y=brand_val
+#     periods=['Q3 2018','Q4 2018']
+#     trial_x1=salesplkpq_val
+#     trial_x2=salesplkcq_val
+#
+#     m=len(brand_val)
+#     print(m)
+#
+#     def make_trace(x, name):
+#         if name=='SHELL':
+#             color1='rgb(255, 213, 0)'
+#         elif name=='ADNOC':
+#             color1='rgb(0, 102, 203)'
+#         elif name=='MOBIL':
+#             color1='rgb(225, 129, 129)'
+#         elif name=='TOTAL':
+#             color1='rgb(84, 84, 169)'
+#         elif name=='CALTEX':
+#             color1='rgb(1, 129, 129)'
+#         elif name=='ENOC':
+#             color1='rgb(135, 8, 135)'
+#         elif name=='TOYOTA':
+#             color1='rgb(160, 212, 255)'
+#         elif name=='CASTROL':
+#             color1='rgb(255, 0, 0)'
+#         elif name=='LEXUS':
+#             color1='rgb(246, 202, 154)'
+#         elif name=='ZIC':
+#             color1='rgb(6, 204, 104)'
+#         elif name=='AC DELCO':
+#             color1='rgb(133, 47, 226)'
+#         elif name=='VOLVO':
+#             color1='rgb(247, 189, 155)'
+#         elif name=='VALVOLINE':
+#             color1='rgb(135, 135, 7)'
+#         elif name=='GULF':
+#             color1='rgb(2, 255, 2)'
+#         elif name=='AXCL':
+#             color1='rgb(0, 0, 255)'
+#         elif name=='NISSAN':
+#             color1='rgb(248, 191, 157)'
+#         elif name=='<Others>':
+#             color1='rgb(134, 136, 138)'
+#         else:
+#             color1='nomatch'
+#
+#         if color1=='nomatch':
+#             return go.Bar(
+#                 x=periods,   # cities name on the y-axis
+#                 y=x,        # monthly total on x-axis
+#                 name=name,
+#                 text=x,
+#                 hoverinfo='text',
+#                 textposition = 'inside',  # label for hover
+#                 orientation='v', # (!) for horizontal bars, default is 'v'
+#
+#
+#
+#                 marker= go.Marker(
+#                             # set bar colors
+#                     line= go.Line(
+#                         color='white',  # set bar border color
+#                         width=1         # set bar border width
+#                     )
+#                 ),
+#                 width = 0.3
+#             )
+#         else:
+#             return go.Bar(
+#                 x=periods,   # cities name on the y-axis
+#                 y=x,        # monthly total on x-axis
+#                 name=name,
+#                 text=x,
+#                 hoverinfo='text',
+#                 textposition = 'inside',  # label for hover
+#                 orientation='v', # (!) for horizontal bars, default is 'v'
+#
+#
+#
+#                 marker= go.Marker(
+#                     color=color1,        # set bar colors
+#                     line= go.Line(
+#                         color='white',  # set bar border color
+#                         width=1         # set bar border width
+#                     )
+#                 ),
+#                 width = 0.3
+#             )
+#
+#     data = go.Data([
+#         make_trace([trial_x1[i], trial_x2[i]], trial_y[i])
+#         for i in range(m)
+#     ])
+#
+#     layout = go.Layout(
+#         barmode='stack',  # (!) bars are stacked on this plot
+#         bargap=0,       # (!) spacing (norm. w.r.t axis) between bars
+#         title='Statistically Modified Volume Share Q-o-Q',        # set plot title
+#         showlegend=True,   # remove legend
+#         hovermode='closest',
+#
+#     )
+#
+#     fig = go.Figure(data=data, layout=layout)
+#     return fig
+#
+#
+# @app.callback(
+#     Output('brandshares6','figure'),
+#     [Input('analysistype','value'),
+#      Input('country','value'),
+#      Input('typeveh','value'),
+#      Input('region','value'),
+#      Input('channel','value'),
+#      Input('base','value')
+#      ]
+# )
+#
+# def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, channel_name, base_name):
+#
+#
+#     if analysistype_val=='region_analysis':
+#         SQL="SELECT  brands, valplkpq, valplkcq FROM statmodshare WHERE ctry=(%s) AND typeveh=(%s) AND region=(%s) AND base=(%s)"
+#         cur.execute(SQL,(country_name,typeveh_name,region_name,base_name,))
+#     elif analysistype_val=='channel_analysis':
+#         SQL="SELECT  brands, valplkpq, valplkcq FROM statmodshare WHERE ctry=(%s) AND typeveh=(%s) AND channel=(%s) AND base=(%s)"
+#         cur.execute(SQL,(country_name,typeveh_name,channel_name,base_name,))
+#
+#     result=cur.fetchall()
+#     brand_val, valplkpq_val, valplkcq_val = zip(*result)
+#
+#     trial_y=brand_val
+#     periods=['Q3 2018','Q4 2018']
+#
+#     trial_x3=valplkpq_val
+#     trial_x4=valplkcq_val
+#
+#     m=len(brand_val)
+#     print(m)
+#
+#
+#     def make_trace(x, name):
+#         if name=='SHELL':
+#             color1='rgb(255, 213, 0)'
+#         elif name=='ADNOC':
+#             color1='rgb(0, 102, 203)'
+#         elif name=='MOBIL':
+#             color1='rgb(225, 129, 129)'
+#         elif name=='TOTAL':
+#             color1='rgb(84, 84, 169)'
+#         elif name=='CALTEX':
+#             color1='rgb(1, 129, 129)'
+#         elif name=='ENOC':
+#             color1='rgb(135, 8, 135)'
+#         elif name=='TOYOTA':
+#             color1='rgb(160, 212, 255)'
+#         elif name=='CASTROL':
+#             color1='rgb(255, 0, 0)'
+#         elif name=='LEXUS':
+#             color1='rgb(246, 202, 154)'
+#         elif name=='ZIC':
+#             color1='rgb(6, 204, 104)'
+#         elif name=='AC DELCO':
+#             color1='rgb(133, 47, 226)'
+#         elif name=='VOLVO':
+#             color1='rgb(247, 189, 155)'
+#         elif name=='VALVOLINE':
+#             color1='rgb(135, 135, 7)'
+#         elif name=='GULF':
+#             color1='rgb(2, 255, 2)'
+#         elif name=='AXCL':
+#             color1='rgb(0, 0, 255)'
+#         elif name=='NISSAN':
+#             color1='rgb(248, 191, 157)'
+#         elif name=='<Others>':
+#             color1='rgb(134, 136, 138)'
+#         else:
+#             color1='nomatch'
+#
+#         if color1=='nomatch':
+#             return go.Bar(
+#                 x=periods,   # cities name on the y-axis
+#                 y=x,        # monthly total on x-axis
+#                 name=name,
+#                 text=x,
+#                 hoverinfo='text',
+#                 textposition = 'inside',  # label for hover
+#                 orientation='v', # (!) for horizontal bars, default is 'v'
+#
+#
+#
+#                 marker= go.Marker(
+#                             # set bar colors
+#                     line= go.Line(
+#                         color='white',  # set bar border color
+#                         width=1         # set bar border width
+#                     )
+#                 ),
+#                 width = 0.3
+#             )
+#         else:
+#             return go.Bar(
+#                 x=periods,   # cities name on the y-axis
+#                 y=x,        # monthly total on x-axis
+#                 name=name,
+#                 text=x,
+#                 hoverinfo='text',
+#                 textposition = 'inside',  # label for hover
+#                 orientation='v', # (!) for horizontal bars, default is 'v'
+#
+#
+#
+#                 marker= go.Marker(
+#                     color=color1,        # set bar colors
+#                     line= go.Line(
+#                         color='white',  # set bar border color
+#                         width=1         # set bar border width
+#                     )
+#                 ),
+#                 width = 0.3
+#             )
+#
+#     data = go.Data([
+#         make_trace([trial_x3[i], trial_x4[i]], trial_y[i]) for i in range(m)
+#     ])
+#
+#     layout = go.Layout(
+#         barmode='stack',  # (!) bars are stacked on this plot
+#         bargap=0.1,       # (!) spacing (norm. w.r.t axis) between bars
+#         title='Statistically Modified Value Share Q-o-Q (USD)',        # set plot title
+#         showlegend=True,   # remove legend
+#         hovermode='closest',
+#
+#     )
+#
+#     fig = go.Figure(data=data, layout=layout)
+#     return fig
+#
+# #YoY Chart Callback
+# @app.callback(
+#     Output('brandshares9','figure'),
+#     [Input('analysistype','value'),
+#      Input('country','value'),
+#      Input('typeveh','value'),
+#      Input('region','value'),
+#      Input('channel','value'),
+#      Input('base','value')
+#     ]
+# )
+#
+# def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, channel_name, base_name):
+#
+#     if analysistype_val=='region_analysis':
+#         SQL="SELECT  brands, salesplkpy, salesplkcy FROM statmodshare WHERE ctry=(%s) AND typeveh=(%s) AND region=(%s) AND base=(%s)"
+#         cur.execute(SQL,(country_name,typeveh_name,region_name,base_name,))
+#     elif analysistype_val=='channel_analysis':
+#         SQL="SELECT  brands, salesplkpy, salesplkcy FROM statmodshare WHERE ctry=(%s) AND typeveh=(%s) AND channel=(%s) AND base=(%s)"
+#         cur.execute(SQL,(country_name,typeveh_name,channel_name,base_name,))
+#
+#     result=cur.fetchall()
+#     brand_val, salesplkpy_val, salesplkcy_val = zip(*result)
+#
+#     trial_y=brand_val
+#     periods=['FY 2017','FY 2018']
+#     trial_x1=salesplkpy_val
+#     trial_x2=salesplkcy_val
+#
+#     m=len(brand_val)
+#     print(m)
+#
+#
+#     def make_trace(x, name):
+#         if name=='SHELL':
+#             color1='rgb(255, 213, 0)'
+#         elif name=='ADNOC':
+#             color1='rgb(0, 102, 203)'
+#         elif name=='MOBIL':
+#             color1='rgb(225, 129, 129)'
+#         elif name=='TOTAL':
+#             color1='rgb(84, 84, 169)'
+#         elif name=='CALTEX':
+#             color1='rgb(1, 129, 129)'
+#         elif name=='ENOC':
+#             color1='rgb(135, 8, 135)'
+#         elif name=='TOYOTA':
+#             color1='rgb(160, 212, 255)'
+#         elif name=='CASTROL':
+#             color1='rgb(255, 0, 0)'
+#         elif name=='LEXUS':
+#             color1='rgb(246, 202, 154)'
+#         elif name=='ZIC':
+#             color1='rgb(6, 204, 104)'
+#         elif name=='AC DELCO':
+#             color1='rgb(133, 47, 226)'
+#         elif name=='VOLVO':
+#             color1='rgb(247, 189, 155)'
+#         elif name=='VALVOLINE':
+#             color1='rgb(135, 135, 7)'
+#         elif name=='GULF':
+#             color1='rgb(2, 255, 2)'
+#         elif name=='AXCL':
+#             color1='rgb(0, 0, 255)'
+#         elif name=='NISSAN':
+#             color1='rgb(248, 191, 157)'
+#         elif name=='<Others>':
+#             color1='rgb(134, 136, 138)'
+#         else:
+#             color1='nomatch'
+#
+#         if color1=='nomatch':
+#             return go.Bar(
+#                 x=periods,   # cities name on the y-axis
+#                 y=x,        # monthly total on x-axis
+#                 name=name,
+#                 text=x,
+#                 hoverinfo='text',
+#                 textposition = 'inside',  # label for hover
+#                 orientation='v', # (!) for horizontal bars, default is 'v'
+#
+#
+#
+#                 marker= go.Marker(
+#                             # set bar colors
+#                     line= go.Line(
+#                         color='white',  # set bar border color
+#                         width=1         # set bar border width
+#                     )
+#                 ),
+#                 width = 0.3
+#             )
+#         else:
+#             return go.Bar(
+#                 x=periods,   # cities name on the y-axis
+#                 y=x,        # monthly total on x-axis
+#                 name=name,
+#                 text=x,
+#                 hoverinfo='text',
+#                 textposition = 'inside',  # label for hover
+#                 orientation='v', # (!) for horizontal bars, default is 'v'
+#
+#
+#
+#                 marker= go.Marker(
+#                     color=color1,        # set bar colors
+#                     line= go.Line(
+#                         color='white',  # set bar border color
+#                         width=1         # set bar border width
+#                     )
+#                 ),
+#                 width = 0.3
+#             )
+#
+#     data = go.Data([
+#         make_trace([trial_x1[i], trial_x2[i]], trial_y[i])
+#         for i in range(m)
+#     ])
+#
+#     layout = go.Layout(
+#         barmode='stack',  # (!) bars are stacked on this plot
+#         bargap=0,       # (!) spacing (norm. w.r.t axis) between bars
+#         title='Statistically Modified Volume Share Y-o-Y (FY 2018)',        # set plot title
+#         showlegend=True,   # remove legend
+#         hovermode='closest',
+#
+#     )
+#
+#     fig = go.Figure(data=data, layout=layout)
+#     return fig
+#
+# @app.callback(
+#     Output('brandshares8','figure'),
+#     [Input('analysistype','value'),
+#      Input('country','value'),
+#      Input('typeveh','value'),
+#      Input('region','value'),
+#      Input('channel','value'),
+#      Input('base','value')
+#     ]
+# )
+#
+# def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, channel_name, base_name):
+#
+#     if analysistype_val=='region_analysis':
+#         SQL="SELECT  brands, valplkpy, valplkcy FROM statmodshare WHERE ctry=(%s) AND typeveh=(%s) AND region=(%s) AND base=(%s)"
+#         cur.execute(SQL,(country_name,typeveh_name,region_name,base_name,))
+#     elif analysistype_val=='channel_analysis':
+#         SQL="SELECT  brands, valplkpy, valplkcy FROM statmodshare WHERE ctry=(%s) AND typeveh=(%s) AND channel=(%s) AND base=(%s)"
+#         cur.execute(SQL,(country_name,typeveh_name,channel_name,base_name,))
+#
+#     result=cur.fetchall()
+#     brand_val, valplkpy_val, valplkcy_val = zip(*result)
+#
+#     trial_y=brand_val
+#     periods=['FY 2017','FY 2018']
+#
+#     trial_x3=valplkpy_val
+#     trial_x4=valplkcy_val
+#
+#     m=len(brand_val)
+#     print(m)
+#
+#
+#     def make_trace(x, name):
+#         if name=='SHELL':
+#             color1='rgb(255, 213, 0)'
+#         elif name=='ADNOC':
+#             color1='rgb(0, 102, 203)'
+#         elif name=='MOBIL':
+#             color1='rgb(225, 129, 129)'
+#         elif name=='TOTAL':
+#             color1='rgb(84, 84, 169)'
+#         elif name=='CALTEX':
+#             color1='rgb(1, 129, 129)'
+#         elif name=='ENOC':
+#             color1='rgb(135, 8, 135)'
+#         elif name=='TOYOTA':
+#             color1='rgb(160, 212, 255)'
+#         elif name=='CASTROL':
+#             color1='rgb(255, 0, 0)'
+#         elif name=='LEXUS':
+#             color1='rgb(246, 202, 154)'
+#         elif name=='ZIC':
+#             color1='rgb(6, 204, 104)'
+#         elif name=='AC DELCO':
+#             color1='rgb(133, 47, 226)'
+#         elif name=='VOLVO':
+#             color1='rgb(247, 189, 155)'
+#         elif name=='VALVOLINE':
+#             color1='rgb(135, 135, 7)'
+#         elif name=='GULF':
+#             color1='rgb(2, 255, 2)'
+#         elif name=='AXCL':
+#             color1='rgb(0, 0, 255)'
+#         elif name=='NISSAN':
+#             color1='rgb(248, 191, 157)'
+#         elif name=='<Others>':
+#             color1='rgb(134, 136, 138)'
+#         else:
+#             color1='nomatch'
+#
+#         if color1=='nomatch':
+#             return go.Bar(
+#                 x=periods,   # cities name on the y-axis
+#                 y=x,        # monthly total on x-axis
+#                 name=name,
+#                 text=x,
+#                 hoverinfo='text',
+#                 textposition = 'inside',  # label for hover
+#                 orientation='v', # (!) for horizontal bars, default is 'v'
+#
+#
+#
+#                 marker= go.Marker(
+#                             # set bar colors
+#                     line= go.Line(
+#                         color='white',  # set bar border color
+#                         width=1         # set bar border width
+#                     )
+#                 ),
+#                 width = 0.3
+#             )
+#         else:
+#             return go.Bar(
+#                 x=periods,   # cities name on the y-axis
+#                 y=x,        # monthly total on x-axis
+#                 name=name,
+#                 text=x,
+#                 hoverinfo='text',
+#                 textposition = 'inside',  # label for hover
+#                 orientation='v', # (!) for horizontal bars, default is 'v'
+#
+#
+#
+#                 marker= go.Marker(
+#                     color=color1,        # set bar colors
+#                     line= go.Line(
+#                         color='white',  # set bar border color
+#                         width=1         # set bar border width
+#                     )
+#                 ),
+#                 width = 0.3
+#             )
+#
+#     data = go.Data([
+#         make_trace([trial_x3[i], trial_x4[i]], trial_y[i]) for i in range(m)
+#     ])
+#
+#     layout = go.Layout(
+#         barmode='stack',  # (!) bars are stacked on this plot
+#         bargap=0.1,       # (!) spacing (norm. w.r.t axis) between bars
+#         title='Statistically Modified Value Share Y-o-Y (FY 2018)(USD)',        # set plot title
+#         showlegend=True,   # remove legend
+#         hovermode='closest',
+#
+#     )
+#
+#     fig = go.Figure(data=data, layout=layout)
+#     return fig
 
 #QoQ Chart Callback
 @app.callback(
-    Output('brandshares','figure'),
+    Output('brandshares10','figure'),
     [Input('analysistype','value'),
      Input('country','value'),
-     Input('typeveh','value'),
-     Input('region','value'),
-     Input('channel','value'),
-     Input('base','value')
+     Input('typeveh1','value'),
+     Input('region1','value'),
+     Input('channel1','value'),
+     Input('base1','value')
      ]
 )
 
@@ -1579,13 +1579,13 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
 
 
 @app.callback(
-    Output('brandshares2','figure'),
+    Output('brandshares11','figure'),
     [Input('analysistype','value'),
-     Input('country','value'),
-     Input('typeveh','value'),
-     Input('region','value'),
-     Input('channel','value'),
-     Input('base','value')
+     Input('country1','value'),
+     Input('typeveh1','value'),
+     Input('region1','value'),
+     Input('channel1','value'),
+     Input('base1','value')
      ]
 )
 
@@ -1711,13 +1711,13 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
 
 #YoY Chart Callback
 @app.callback(
-    Output('brandshares3','figure'),
+    Output('brandshares12','figure'),
     [Input('analysistype','value'),
-     Input('country','value'),
-     Input('typeveh','value'),
-     Input('region','value'),
-     Input('channel','value'),
-     Input('base','value')
+     Input('country1','value'),
+     Input('typeveh1','value'),
+     Input('region1','value'),
+     Input('channel1','value'),
+     Input('base1','value')
     ]
 )
 
@@ -1841,13 +1841,13 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
     return fig
 
 @app.callback(
-    Output('brandshares4','figure'),
+    Output('brandshares13','figure'),
     [Input('analysistype','value'),
-     Input('country','value'),
-     Input('typeveh','value'),
-     Input('region','value'),
-     Input('channel','value'),
-     Input('base','value')
+     Input('country1','value'),
+     Input('typeveh1','value'),
+     Input('region1','value'),
+     Input('channel1','value'),
+     Input('base1','value')
     ]
 )
 
@@ -1975,11 +1975,11 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
 @app.callback(
     Output('distbrand','figure'),
     [Input('analysistype','value'),
-     Input('country','value'),
-     Input('typeveh','value'),
-     Input('region','value'),
-     Input('channel','value'),
-     Input('base','value')
+     Input('country1','value'),
+     Input('typeveh1','value'),
+     Input('region1','value'),
+     Input('channel1','value'),
+     Input('base1','value')
     ]
 )
 
@@ -2020,8 +2020,8 @@ def update_BS_brands(analysistype_val,country_name, typeveh_name, region_name, c
 @app.callback(
     Output('pie','figure'),
     [Input('country','value'),
-     Input('typeveh','value'),
-     Input('base','value')
+     Input('typeveh1','value'),
+     Input('base1','value')
     ]
 )
 
@@ -2063,8 +2063,8 @@ def update_BS_brands(globalregion_name, typeveh_name, base_name):
 @app.callback(
     Output('horizbar','figure'),
     [Input('country','value'),
-     Input('typeveh','value'),
-     Input('base','value')
+     Input('typeveh1','value'),
+     Input('base1','value')
     ]
 )
 
@@ -2163,8 +2163,8 @@ def update_flag(ctry_name):
 @app.callback(
     Output('pothead','figure'),
     [Input('country','value'),
-     Input('typeveh','value'),
-     Input('base','value')
+     Input('typeveh1','value'),
+     Input('base1','value')
     ]
 )
 
