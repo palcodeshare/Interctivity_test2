@@ -17,7 +17,9 @@ import plotly.graph_objs as go
 
 from app import app
 
+mapbox_access_token = "pk.eyJ1IjoiamFja3AiLCJhIjoidGpzN0lXVSJ9.7YK6eRwUNFwd3ODZff6JvA"
 app.css.append_css({'external_url': 'https://cdn.rawgit.com/plotly/dash-app-stylesheets/2d266c578d2a6e8850ebce48fdb52759b2aef506/stylesheet-oil-and-gas.css'})  # noqa: E501
+
 
 if 'DYNO' in os.environ:
     app.scripts.append_script({
