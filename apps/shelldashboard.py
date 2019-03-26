@@ -122,7 +122,7 @@ def render_content2(clickData2):
         return '/apps/notes'
 
 @app.callback(Output('shelldbcontent', 'children'),
-              [Input('shelldbtabs', 'value'))
+              [Input('shelldbtabs', 'value')])
 
 def render_content(tab,auth):
     if auth == 'aajaya':
