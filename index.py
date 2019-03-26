@@ -46,14 +46,14 @@ def display_page(pathname):
         else:
             return shelldashboard.layout
     elif myauthenticateduser == 'aajaya':
-        if pathname == '/apps/shelldashboard0':
-             return shelldashboard0.layout
-        elif pathname == '/apps/howtouse0':
-             return howtouse.layout
-        elif pathname == '/apps/notes0':
-             return notes.layout
-        else:
-            return shelldashboard0.layout
+        # if pathname == '/apps/shelldashboard0':
+        #      return shelldashboard0.layout
+        # elif pathname == '/apps/howtouse0':
+        #      return howtouse.layout
+        # elif pathname == '/apps/notes0':
+        #      return notes.layout
+        # else:
+        return shelldashboard0.layout
 
 if __name__ == '__main__':
     app.run_server(debug=True)
