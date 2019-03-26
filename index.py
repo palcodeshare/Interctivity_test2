@@ -6,6 +6,7 @@ from app import app
 from apps import shelldashboard,shelldashboard0,howtouse,notes,howtouse0,notes0
 import os
 
+
 app.config['suppress_callback_exceptions']=True
 server = app.server
 server.secret_key = os.environ.get('secret_key', 'secret')
@@ -37,6 +38,7 @@ def display_page(pathname):
         else:
             return shelldashboard.layout
     elif myauthenticateduser == 'Retailaudit':
+        auth == 'retailaudit'
         if pathname == '/apps/shelldashboard':
              return shelldashboard.layout
         elif pathname == '/apps/howtouse':
@@ -46,14 +48,15 @@ def display_page(pathname):
         else:
             return shelldashboard.layout
     elif myauthenticateduser == 'aajaya':
-        # if pathname == '/apps/shelldashboard0':
-        #      return shelldashboard0.layout
-        # elif pathname == '/apps/howtouse0':
-        #      return howtouse.layout
-        # elif pathname == '/apps/notes0':
-        #      return notes.layout
-        # else:
-        return shelldashboard0.layout
+        auth == 'aajaya'
+        if pathname == '/apps/shelldashboard':
+             return shelldashboard0.layout
+        elif pathname == '/apps/howtouse':
+             return howtouse.layout
+        elif pathname == '/apps/notes':
+             return notes.layout
+        else:
+            return shelldashboard0.layout
 
 if __name__ == '__main__':
     app.run_server(debug=True)
