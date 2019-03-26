@@ -17,9 +17,7 @@ import plotly.graph_objs as go
 
 from app import app
 
-mapbox_access_token = "pk.eyJ1IjoiamFja3AiLCJhIjoidGpzN0lXVSJ9.7YK6eRwUNFwd3ODZff6JvA"
 app.css.append_css({'external_url': 'https://cdn.rawgit.com/plotly/dash-app-stylesheets/2d266c578d2a6e8850ebce48fdb52759b2aef506/stylesheet-oil-and-gas.css'})  # noqa: E501
-
 
 if 'DYNO' in os.environ:
     app.scripts.append_script({
@@ -93,7 +91,7 @@ layout = html.Div(
 
         dcc.Markdown('''---'''),
 
-        dcc.Tabs(id="shelldbtabs", value='global', children=[
+        dcc.Tabs(id="shelldbtabs1", value='global', children=[
             # dcc.Tab(label='GLOBAL', value='global', style=tab_style, selected_style=tab_selected_style),
             dcc.Tab(label='MESA', value='mesa', style=tab_style, selected_style=tab_selected_style),
             # dcc.Tab(label='RUSSIA', value='russia', style=tab_style, selected_style=tab_selected_style),
@@ -110,17 +108,17 @@ layout = html.Div(
 
 def render_content1(clickData):
     if clickData > 0:
-        return '/apps/howtouse'
+        return '/apps/howtouse0'
 
 @app.callback(Output('url8', 'pathname'),
               [Input('button2', 'n_clicks')])
 
 def render_content2(clickData2):
     if clickData2 > 0:
-        return '/apps/notes'
+        return '/apps/notes0'
 
 @app.callback(Output('shelldbcontent1', 'children'),
-              [Input('shelldbtabs', 'value')])
+              [Input('shelldbtabs1', 'value')])
 
 def render_content(tab):
     # if tab == 'global':
@@ -412,7 +410,7 @@ def render_content(tab):
                 html.Div([
                     dcc.Graph(
                         style={'height': '900px'},
-                        id='skubar',
+                        id='skubar1',
                         config={'displayModeBar': False}
                     ),
                 ],className='row'),
@@ -682,7 +680,7 @@ def render_content(tab):
                 html.Div([
                     dcc.Graph(
                         style={'height': '900px'},
-                        id='skubar',
+                        id='skubar1',
                         config={'displayModeBar': False}
                     ),
                 ],className='row'),
