@@ -13,7 +13,6 @@ import numpy as np
 import plotly
 import dash_auth
 
-
 import plotly.plotly as py
 import plotly.graph_objs as go
 
