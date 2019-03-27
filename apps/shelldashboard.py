@@ -105,7 +105,7 @@ layout = html.Div(
         html.Br(),
 
 
-    ],style={'font-family': 'Calibri Light'},className='ten columns offset-by-one'
+    ]
 )
 
 auth = 'retailaudit'
