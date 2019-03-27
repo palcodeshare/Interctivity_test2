@@ -792,7 +792,7 @@ def render_content(tab):
         #                 ),
         #             ],className='row'),
         #         ],style={'font-family': 'Calibri Light'})
-    if myauthenticateduser == 'retailaudit':
+    if myauthenticateduser == 'Retailaudit':
         if tab == 'global':
             return html.Div([
                     html.Div([
