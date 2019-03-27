@@ -6,7 +6,7 @@ from app import app
 from apps import shelldashboard,shelldashboard0,howtouse,notes,howtouse0,notes0
 import os
 
-
+global myauthenticateduser
 app.config['suppress_callback_exceptions']=True
 server = app.server
 server.secret_key = os.environ.get('secret_key', 'secret')
