@@ -7,6 +7,9 @@ from apps import shelldashboard,shelldashboard0,howtouse,notes,howtouse0,notes0
 import os
 
 
+
+
+
 import pickle
 import copy
 import psycopg2
@@ -25,6 +28,15 @@ import plotly.plotly as py
 import plotly.graph_objs as go
 
 global myauthenticateduser
+
+app.css.append_css({'external_url': 'https://cdn.rawgit.com/plotly/dash-app-stylesheets/2d266c578d2a6e8850ebce48fdb52759b2aef506/stylesheet-oil-and-gas.css'})  # noqa: E501
+
+if 'DYNO' in os.environ:
+    app.scripts.append_script({
+        'external_url': 'https://cdn.rawgit.com/chriddyp/ca0d8f02a1659981a0ea7f013a378bbd/raw/e79f3f789517deec58f41251f7dbb6bee72c44ab/plotly_ga.js'  # noqa: E501
+    })
+
+
 app.config['suppress_callback_exceptions']=True
 server = app.server
 server.secret_key = os.environ.get('secret_key', 'secret')
