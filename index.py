@@ -28,6 +28,7 @@ app.layout = html.Div([
 @app.callback(Output('page-content', 'children'),
               [Input('url', 'pathname')])
 def display_page(pathname):
+    global myauthenticateduser
     myauthenticateduser = auth._username
     if myauthenticateduser == 'gfkinternal':
         if pathname == '/apps/shelldashboard':
