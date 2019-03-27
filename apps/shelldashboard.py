@@ -17,7 +17,7 @@ import plotly.plotly as py
 import plotly.graph_objs as go
 
 from app import app
-from index import myauthenticateduser
+
 
 
 app.css.append_css({'external_url': 'https://cdn.rawgit.com/plotly/dash-app-stylesheets/2d266c578d2a6e8850ebce48fdb52759b2aef506/stylesheet-oil-and-gas.css'})  # noqa: E501
