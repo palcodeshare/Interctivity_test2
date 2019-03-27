@@ -18,6 +18,15 @@ auth = dash_auth.BasicAuth(
 app.layout = html.Div([
             dcc.Location(id='url',refresh=True),
             html.Div(id='page-content'),
+            dcc.Tabs(id='shelldbtabs', value='global', children=[
+                dcc.Tab(label='GLOBAL', value='global', style=tab_style, selected_style=tab_selected_style),
+                dcc.Tab(label='MESA', value='mesa', style=tab_style, selected_style=tab_selected_style),
+                dcc.Tab(label='RUSSIA', value='russia', style=tab_style, selected_style=tab_selected_style),
+                dcc.Tab(label='APAC', value='apac', style=tab_style, selected_style=tab_selected_style),
+                dcc.Tab(label='CHINA', value='china', style=tab_style, selected_style=tab_selected_style),
+                # dcc.Tab(label='EU', value='eu', style=tab_style, selected_style=tab_selected_style)
+            ]),
+            html.Br(),
             html.Div(id='shelldbcontent')
 
         ])
@@ -1454,7 +1463,7 @@ def render_content(tab):
                             config={'displayModeBar': False}
                         ),
                     ],className='row'),
-                ],style={'font-family': 'Calibri Light'})            
+                ],style={'font-family': 'Calibri Light'})
 
 if __name__ == '__main__':
     app.run_server(debug=True)
