@@ -29,26 +29,7 @@ import plotly.graph_objs as go
 
 global myauthenticateduser
 
-tabs_styles = {
-    'height': '44px'
-}
-tab_style = {
-    'borderBottom': '1px solid #d6d6d6',
-    'padding': '6px',
-    'font-family': 'Calibri Light',
-    'color': '#FF8C00',
-    'fontWeight': 'bold'
-}
 
-tab_selected_style = {
-    'borderTop': '3px solid #d6d6d6',
-    'borderBottom': '0px solid #d6d6d6',
-    'backgroundColor': '#FF8C00',
-    'color': 'white',
-    'padding': '6px',
-    'fontWeight': 'bold',
-    'font-family': 'Calibri Light'
-}
 
 
 app.config['suppress_callback_exceptions']=True
@@ -62,15 +43,7 @@ auth = dash_auth.BasicAuth(
 app.layout = html.Div([
             dcc.Location(id='url',refresh=True),
             html.Div(id='page-content'),
-            dcc.Tabs(id='shelldbtabs', value='global', children=[
-                dcc.Tab(label='GLOBAL', value='global', style=tab_style, selected_style=tab_selected_style),
-                dcc.Tab(label='MESA', value='mesa', style=tab_style, selected_style=tab_selected_style),
-                dcc.Tab(label='RUSSIA', value='russia', style=tab_style, selected_style=tab_selected_style),
-                dcc.Tab(label='APAC', value='apac', style=tab_style, selected_style=tab_selected_style),
-                dcc.Tab(label='CHINA', value='china', style=tab_style, selected_style=tab_selected_style),
-                # dcc.Tab(label='EU', value='eu', style=tab_style, selected_style=tab_selected_style)
-            ]),
-            html.Br(),
+
             html.Div(id='shelldbcontent')
 
         ])

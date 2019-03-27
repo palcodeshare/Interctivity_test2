@@ -18,7 +18,26 @@ import plotly.graph_objs as go
 
 from app import app
 
+tabs_styles = {
+    'height': '44px'
+}
+tab_style = {
+    'borderBottom': '1px solid #d6d6d6',
+    'padding': '6px',
+    'font-family': 'Calibri Light',
+    'color': '#FF8C00',
+    'fontWeight': 'bold'
+}
 
+tab_selected_style = {
+    'borderTop': '3px solid #d6d6d6',
+    'borderBottom': '0px solid #d6d6d6',
+    'backgroundColor': '#FF8C00',
+    'color': 'white',
+    'padding': '6px',
+    'fontWeight': 'bold',
+    'font-family': 'Calibri Light'
+}
 
 app.css.append_css({'external_url': 'https://cdn.rawgit.com/plotly/dash-app-stylesheets/2d266c578d2a6e8850ebce48fdb52759b2aef506/stylesheet-oil-and-gas.css'})  # noqa: E501
 
@@ -72,7 +91,18 @@ layout = html.Div(
             html.Button('Notes', id='button2', style={'width':'180px','color': '#FF8C00','fontWeight': 'bold','font-family': 'Calibri Light','fontSize':'14'}, className='one column'),
         ],className='row'),
 
+
         dcc.Markdown('''---'''),
+
+        dcc.Tabs(id='shelldbtabs', value='global', children=[
+            dcc.Tab(label='GLOBAL', value='global', style=tab_style, selected_style=tab_selected_style),
+            dcc.Tab(label='MESA', value='mesa', style=tab_style, selected_style=tab_selected_style),
+            dcc.Tab(label='RUSSIA', value='russia', style=tab_style, selected_style=tab_selected_style),
+            dcc.Tab(label='APAC', value='apac', style=tab_style, selected_style=tab_selected_style),
+            dcc.Tab(label='CHINA', value='china', style=tab_style, selected_style=tab_selected_style),
+            # dcc.Tab(label='EU', value='eu', style=tab_style, selected_style=tab_selected_style)
+        ]),
+        html.Br(),
 
 
 
