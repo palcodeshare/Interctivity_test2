@@ -11,6 +11,7 @@ import plotly.tools as tls
 from io import StringIO
 import numpy as np
 import plotly
+import dash_auth
 
 import plotly.plotly as py
 import plotly.graph_objs as go
