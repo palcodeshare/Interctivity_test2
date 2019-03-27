@@ -6,6 +6,24 @@ from app import app
 from apps import shelldashboard,shelldashboard0,howtouse,notes,howtouse0,notes0
 import os
 
+
+import pickle
+import copy
+import psycopg2
+from flask import Flask
+import dash
+import dash_core_components as dcc
+import dash_html_components as html
+from dash.dependencies import Input, Output
+import plotly.tools as tls
+from io import StringIO
+import numpy as np
+import plotly
+import dash_auth
+
+import plotly.plotly as py
+import plotly.graph_objs as go
+
 global myauthenticateduser
 app.config['suppress_callback_exceptions']=True
 server = app.server
