@@ -24,7 +24,7 @@ app.layout = html.Div([
 
 # myauthenticateduser = 'gfkinternal'
 # print(myauthenticateduser)
-
+myauthenticateduser = auth._username
 @app.callback(Output('page-content', 'children'),
               [Input('url', 'pathname')])
 def display_page(pathname):
