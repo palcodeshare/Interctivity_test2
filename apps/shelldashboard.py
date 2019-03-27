@@ -12,7 +12,7 @@ from io import StringIO
 import numpy as np
 import plotly
 import dash_auth
-from index import auth
+from index import index
 
 import plotly.plotly as py
 import plotly.graph_objs as go
