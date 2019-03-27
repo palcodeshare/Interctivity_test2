@@ -125,7 +125,7 @@ def render_content2(clickData2):
               [Input('shelldbtabs', 'value')])
 
 def render_content(tab):
-    if auth == 'aajaya':
+    if auth._username == 'aajaya':
         # if tab == 'global':
         #     return html.Div([
         #             html.Div([
@@ -820,7 +820,7 @@ def render_content(tab):
         #                 ),
         #             ],className='row'),
         #         ],style={'font-family': 'Calibri Light'})
-    if auth == 'retailaudit':
+    if auth._username == 'retailaudit':
         if tab == 'global':
             return html.Div([
                     html.Div([
