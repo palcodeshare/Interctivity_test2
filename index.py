@@ -91,6 +91,7 @@ def display_page(pathname):
               [Input('shelldbtabs', 'value')])
 
 def render_content(tab):
+    myauthenticateduser = auth._username
     if myauthenticateduser == 'aajaya':
         # if tab == 'global':
         #     return html.Div([
