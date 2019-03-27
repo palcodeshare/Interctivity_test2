@@ -12,7 +12,7 @@ from io import StringIO
 import numpy as np
 import plotly
 import dash_auth
-from index import myauthenticateduser
+from index import auth
 
 import plotly.plotly as py
 import plotly.graph_objs as go
@@ -20,6 +20,8 @@ import plotly.graph_objs as go
 from app import app
 # from index import auth
 
+
+myauthenticateduser2 = auth._username
 app.css.append_css({'external_url': 'https://cdn.rawgit.com/plotly/dash-app-stylesheets/2d266c578d2a6e8850ebce48fdb52759b2aef506/stylesheet-oil-and-gas.css'})  # noqa: E501
 
 if 'DYNO' in os.environ:
@@ -127,7 +129,7 @@ def render_content2(clickData2):
               [Input('shelldbtabs', 'value')])
 
 def render_content(tab):
-    if index.myauthenticateduser == 'aajaya':
+    if myauthenticateduser2 == 'aajaya':
         # if tab == 'global':
         #     return html.Div([
         #             html.Div([
@@ -822,7 +824,7 @@ def render_content(tab):
         #                 ),
         #             ],className='row'),
         #         ],style={'font-family': 'Calibri Light'})
-    if index.myauthenticateduser == 'retailaudit':
+    if myauthenticateduser2 == 'retailaudit':
         if tab == 'global':
             return html.Div([
                     html.Div([
