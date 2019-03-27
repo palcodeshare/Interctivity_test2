@@ -33,26 +33,6 @@ DATABASE_URL = os.environ['DATABASE_URL']
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 cur = conn.cursor()
 
-tabs_styles = {
-    'height': '44px'
-}
-tab_style = {
-    'borderBottom': '1px solid #d6d6d6',
-    'padding': '6px',
-    'font-family': 'Calibri Light',
-    'color': '#FF8C00',
-    'fontWeight': 'bold'
-}
-
-tab_selected_style = {
-    'borderTop': '3px solid #d6d6d6',
-    'borderBottom': '0px solid #d6d6d6',
-    'backgroundColor': '#FF8C00',
-    'color': 'white',
-    'padding': '6px',
-    'fontWeight': 'bold',
-    'font-family': 'Calibri Light'
-}
 # Global chart template
 
 # App layout

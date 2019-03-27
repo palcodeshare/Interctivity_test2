@@ -29,12 +29,26 @@ import plotly.graph_objs as go
 
 global myauthenticateduser
 
-app.css.append_css({'external_url': 'https://cdn.rawgit.com/plotly/dash-app-stylesheets/2d266c578d2a6e8850ebce48fdb52759b2aef506/stylesheet-oil-and-gas.css'})  # noqa: E501
+tabs_styles = {
+    'height': '44px'
+}
+tab_style = {
+    'borderBottom': '1px solid #d6d6d6',
+    'padding': '6px',
+    'font-family': 'Calibri Light',
+    'color': '#FF8C00',
+    'fontWeight': 'bold'
+}
 
-if 'DYNO' in os.environ:
-    app.scripts.append_script({
-        'external_url': 'https://cdn.rawgit.com/chriddyp/ca0d8f02a1659981a0ea7f013a378bbd/raw/e79f3f789517deec58f41251f7dbb6bee72c44ab/plotly_ga.js'  # noqa: E501
-    })
+tab_selected_style = {
+    'borderTop': '3px solid #d6d6d6',
+    'borderBottom': '0px solid #d6d6d6',
+    'backgroundColor': '#FF8C00',
+    'color': 'white',
+    'padding': '6px',
+    'fontWeight': 'bold',
+    'font-family': 'Calibri Light'
+}
 
 
 app.config['suppress_callback_exceptions']=True
