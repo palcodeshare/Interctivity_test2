@@ -126,158 +126,158 @@ def render_content2(clickData2):
 
 def render_content(tab):
     if auth == 'aajaya':
-        if tab == 'global':
-            return html.Div([
-                    html.Div([
-                        html.Div([
-                            html.P('Select Analysis Type:')
-                        ],className='two columns'),
-                        dcc.RadioItems(
-                            id='analysistype',
-                            options=[
-                                {'label': 'By Channel  ', 'value': 'channel_analysis'},
-                                {'label': 'By Region  ', 'value': 'region_analysis'}
-                            ],
-                            value='channel_analysis',
-                            labelStyle={'display': 'inline-block'}
-                        ),
-                        html.Div([
-                            html.P('Note: Selecting an option will disable the other. For example, selecting By Region will disable Select Channel dropdown')
-                        ],className='nine columns', style= {'display': 'inline-block','color': 'red'}),
-                    ],className='row',style={'display': 'none'}),
-                    html.Br(),
-                    html.Div([
-                        dcc.Dropdown(
-                            id='country',
-                            value='Global',
-                        )
-                    ],style={'display': 'none'}),
-                    html.Div([
-                        html.Div([
-                            html.P('Select Engine Oil Type:'),
-                            dcc.Dropdown(
-                                id='typeveh',
-                                value='TOTAL',
-                                placeholder="Type Of Vehicle",
-                            ),
-                        ],className='two columns'),
-
-                        html.Div([
-                            html.P('Select Region:'),
-                            dcc.Dropdown(
-                                id='region',
-                                value='TOTAL',
-                                placeholder="Region",
-                            ),
-                        ],className='two columns',style={'display': 'none'}),
-
-                        html.Div([
-                            html.P('Select Channel:'),
-                            dcc.Dropdown(
-                                id='channel',
-                                value='TOTAL',
-                                placeholder="Channel",
-                            ),
-                        ],className='two columns',style={'display': 'none'}),
-
-                        html.Div([
-                            html.P('Select Subgroup:'),
-                            dcc.Dropdown(
-                                id='base',
-                                value='TOTAL',
-                                placeholder="Base",
-                            ),
-                        ],className='two columns')
-                    ],className='row',style={'display': 'none'}),
-                    html.Br(),
-
-                    #QoQ Brandshares Div
-
-
-                    html.Div([
-                        html.Div([
-                            dcc.Graph(
-                                id='brandshares5',
-                                config={'displayModeBar': False},
-                            )
-                        ],className='six columns'),
-                        html.Div([
-                            dcc.Graph(
-                                id='brandshares6',
-                                config={'displayModeBar': False},
-                            )
-                        ],className='six columns')
-                    ],className='row',style={'display': 'none'}),
-
-                    #YoY Brandshares Div
-                    html.Div([
-                        html.Div([
-                            dcc.Graph(
-                                id='brandshares9',
-                                config={'displayModeBar': False},
-                            )
-                        ],className='six columns'),
-                        html.Div([
-                            dcc.Graph(
-                                id='brandshares8',
-                                config={'displayModeBar': False},
-                            )
-                        ],className='six columns')
-                    ],className='row',style={'display': 'none'}),
-                    dcc.Markdown('''---'''),
-
-                    html.Div([
-                        html.Div([
-                            dcc.Graph(
-                                id='brandshares',
-                                config={'displayModeBar': False},
-                            )
-                        ],className='six columns'),
-                        html.Div([
-                            dcc.Graph(
-                                id='brandshares2',
-                                config={'displayModeBar': False},
-                            )
-                        ],className='six columns')
-                    ],className='row',style={'display': 'none'}),
-
-                    #YoY Brandshares Div
-                    html.Div([
-                        html.Div([
-                            dcc.Graph(
-                                id='brandshares3',
-                                config={'displayModeBar': False},
-                            )
-                        ],className='six columns'),
-                        html.Div([
-                            dcc.Graph(
-                                id='brandshares4',
-                                config={'displayModeBar': False},
-                            )
-                        ],className='six columns')
-                    ],className='row',style={'display': 'none'}),
-                    dcc.Markdown('''---'''),
-
-                    html.Div([
-                        html.Div([
-                            dcc.Graph(
-                                id='pie',
-                                config={'displayModeBar': False}
-                            ),
-                        ],className='row',style={'display': 'none'}),
-                    ]),
-                    dcc.Markdown('''---'''),
-
-                    html.Div([
-                        html.Div([
-                            dcc.Graph(
-                                style={'height': '1200px'},
-                                id='horizbar',
-                                config={'displayModeBar': False}
-                            ),
-                        ],className='row',style={'display': 'none'}),
-                    ]),
-                ],style={'font-family': 'Calibri Light'})
+        # if tab == 'global':
+        #     return html.Div([
+        #             html.Div([
+        #                 html.Div([
+        #                     html.P('Select Analysis Type:')
+        #                 ],className='two columns'),
+        #                 dcc.RadioItems(
+        #                     id='analysistype',
+        #                     options=[
+        #                         {'label': 'By Channel  ', 'value': 'channel_analysis'},
+        #                         {'label': 'By Region  ', 'value': 'region_analysis'}
+        #                     ],
+        #                     value='channel_analysis',
+        #                     labelStyle={'display': 'inline-block'}
+        #                 ),
+        #                 html.Div([
+        #                     html.P('Note: Selecting an option will disable the other. For example, selecting By Region will disable Select Channel dropdown')
+        #                 ],className='nine columns', style= {'display': 'inline-block','color': 'red'}),
+        #             ],className='row',style={'display': 'none'}),
+        #             html.Br(),
+        #             html.Div([
+        #                 dcc.Dropdown(
+        #                     id='country',
+        #                     value='Global',
+        #                 )
+        #             ],style={'display': 'none'}),
+        #             html.Div([
+        #                 html.Div([
+        #                     html.P('Select Engine Oil Type:'),
+        #                     dcc.Dropdown(
+        #                         id='typeveh',
+        #                         value='TOTAL',
+        #                         placeholder="Type Of Vehicle",
+        #                     ),
+        #                 ],className='two columns'),
+        #
+        #                 html.Div([
+        #                     html.P('Select Region:'),
+        #                     dcc.Dropdown(
+        #                         id='region',
+        #                         value='TOTAL',
+        #                         placeholder="Region",
+        #                     ),
+        #                 ],className='two columns',style={'display': 'none'}),
+        #
+        #                 html.Div([
+        #                     html.P('Select Channel:'),
+        #                     dcc.Dropdown(
+        #                         id='channel',
+        #                         value='TOTAL',
+        #                         placeholder="Channel",
+        #                     ),
+        #                 ],className='two columns',style={'display': 'none'}),
+        #
+        #                 html.Div([
+        #                     html.P('Select Subgroup:'),
+        #                     dcc.Dropdown(
+        #                         id='base',
+        #                         value='TOTAL',
+        #                         placeholder="Base",
+        #                     ),
+        #                 ],className='two columns')
+        #             ],className='row',style={'display': 'none'}),
+        #             html.Br(),
+        #
+        #             #QoQ Brandshares Div
+        #
+        #
+        #             html.Div([
+        #                 html.Div([
+        #                     dcc.Graph(
+        #                         id='brandshares5',
+        #                         config={'displayModeBar': False},
+        #                     )
+        #                 ],className='six columns'),
+        #                 html.Div([
+        #                     dcc.Graph(
+        #                         id='brandshares6',
+        #                         config={'displayModeBar': False},
+        #                     )
+        #                 ],className='six columns')
+        #             ],className='row',style={'display': 'none'}),
+        #
+        #             #YoY Brandshares Div
+        #             html.Div([
+        #                 html.Div([
+        #                     dcc.Graph(
+        #                         id='brandshares9',
+        #                         config={'displayModeBar': False},
+        #                     )
+        #                 ],className='six columns'),
+        #                 html.Div([
+        #                     dcc.Graph(
+        #                         id='brandshares8',
+        #                         config={'displayModeBar': False},
+        #                     )
+        #                 ],className='six columns')
+        #             ],className='row',style={'display': 'none'}),
+        #             dcc.Markdown('''---'''),
+        #
+        #             html.Div([
+        #                 html.Div([
+        #                     dcc.Graph(
+        #                         id='brandshares',
+        #                         config={'displayModeBar': False},
+        #                     )
+        #                 ],className='six columns'),
+        #                 html.Div([
+        #                     dcc.Graph(
+        #                         id='brandshares2',
+        #                         config={'displayModeBar': False},
+        #                     )
+        #                 ],className='six columns')
+        #             ],className='row',style={'display': 'none'}),
+        #
+        #             #YoY Brandshares Div
+        #             html.Div([
+        #                 html.Div([
+        #                     dcc.Graph(
+        #                         id='brandshares3',
+        #                         config={'displayModeBar': False},
+        #                     )
+        #                 ],className='six columns'),
+        #                 html.Div([
+        #                     dcc.Graph(
+        #                         id='brandshares4',
+        #                         config={'displayModeBar': False},
+        #                     )
+        #                 ],className='six columns')
+        #             ],className='row',style={'display': 'none'}),
+        #             dcc.Markdown('''---'''),
+        #
+        #             html.Div([
+        #                 html.Div([
+        #                     dcc.Graph(
+        #                         id='pie',
+        #                         config={'displayModeBar': False}
+        #                     ),
+        #                 ],className='row',style={'display': 'none'}),
+        #             ]),
+        #             dcc.Markdown('''---'''),
+        #
+        #             html.Div([
+        #                 html.Div([
+        #                     dcc.Graph(
+        #                         style={'height': '1200px'},
+        #                         id='horizbar',
+        #                         config={'displayModeBar': False}
+        #                     ),
+        #                 ],className='row',style={'display': 'none'}),
+        #             ]),
+        #         ],style={'font-family': 'Calibri Light'})
         if tab == 'mesa':
             return html.Div([
                     html.Div([
