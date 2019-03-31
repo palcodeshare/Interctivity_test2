@@ -70,10 +70,10 @@ layout = html.Div(
         html.Br(),
         html.Div([
             html.P('The dashboard currently operates on 13 countries segmenteted into 5 regions as below:'),
-            html.P('1. MESA (Middle East And South Africa) - United Arab Emirates, Saudi Arabia, Oman, Egypt '),
+            html.P('1. APME (Middle East And South Africa + Asia Pacific) - United Arab Emirates, Saudi Arabia, Oman, Egypt, Indonesia, Malaysia, Thailand'),
             html.P('2. RUSSIA '),
-            html.P('3. APAC (Asia Pacific) - Indonesia, Malaysia, Thailand '),
-            html.P('4. China '),
+            # html.P('3. APAC (Asia Pacific) - Indonesia, Malaysia, Thailand '),
+            html.P('3. China '),
             dcc.Markdown('''---'''),
         ]),
         html.Div([
