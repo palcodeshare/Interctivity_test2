@@ -105,12 +105,12 @@ def render_content(tab):
                                 id='country', #Left it is as country since i didnt want to change all the code again. What it really means is region
                                 value='MENA',
                                 options=[
-                                    {'label': 'MESA Total', 'value': 'MENA'},
+                                    {'label': 'APME Total', 'value': 'APME'},
                                     {'label': 'Oman', 'value': 'Oman'},
                                     {'label': 'Saudi Arabia', 'value': 'Saudi Arabia'},
                                     {'label': 'United Arab Emirates', 'value': 'United Arab Emirates'},
                                     {'label': 'Egypt', 'value': 'Egypt'},
-                                    {'label': 'APAC Total', 'value': 'APAC'},
+                                    # {'label': 'APAC Total', 'value': 'APAC'},
                                     {'label': 'Indonesia', 'value': 'Indonesia'},
                                     {'label': 'Thailand', 'value': 'Thailand'},
                                     {'label': 'Malaysia', 'value': 'Malaysia'},
@@ -405,12 +405,12 @@ def render_content(tab):
                                 id='country', #Left it is as country since i didnt want to change all the code again. What it really means is region
                                 value='MENA',
                                 options=[
-                                    {'label': 'MESA Total', 'value': 'MENA'},
+                                    {'label': 'APME Total', 'value': 'APME'},
                                     {'label': 'Oman', 'value': 'Oman'},
                                     {'label': 'Saudi Arabia', 'value': 'Saudi Arabia'},
                                     {'label': 'United Arab Emirates', 'value': 'United Arab Emirates'},
                                     {'label': 'Egypt', 'value': 'Egypt'},
-                                    {'label': 'APAC Total', 'value': 'APAC'},
+                                    # {'label': 'APAC Total', 'value': 'APAC'},
                                     {'label': 'Indonesia', 'value': 'Indonesia'},
                                     {'label': 'Thailand', 'value': 'Thailand'},
                                     {'label': 'Malaysia', 'value': 'Malaysia'},
