@@ -225,7 +225,7 @@ def render_content(tab):
                     ],className='row'),
                 ],style={'font-family': 'Calibri Light'})
 
-    if myauthenticateduser == 'Retailaudit':
+    if myauthenticateduser == 'Retailaudit' or myauthenticateduser == 'gfkinternal':
         if tab == 'global':
             return html.Div([
                     html.Div([
