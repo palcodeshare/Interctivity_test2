@@ -93,7 +93,7 @@ def display_page(pathname2):
 
 def render_content(tab,urlpath):
     myauthenticateduser = auth._username
-    if myauthenticateduser == 'aajaya' or myauthenticateduser == 'APMEGM' or myauthenticateduser == 'APMEREGION' and urlpath == 'shelldb':
+    if myauthenticateduser == 'aajaya' or myauthenticateduser == 'APMEGM' or myauthenticateduser == 'APMEREGION':
         if tab == 'apme':
             return html.Div([
                     html.Div([
