@@ -76,7 +76,7 @@ def display_page(pathname):
              return notes.layout, urlp
         else:
              urlp = shelldb
-            return shelldashboard.layout, urlp
+             return shelldashboard.layout, urlp
 
 @app.callback(Output('shelldbcontent', 'children'),
               [Input('shelldbtabs', 'value'),
