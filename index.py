@@ -60,7 +60,7 @@ app.layout = html.Div([
 myauthenticateduser = auth._username
 @app.callback([Output('page-content', 'children'),
               Output('intermediate-value', 'children')],
-             [Input('url', 'pathname')])
+              [Input('url', 'pathname')])
 def display_page(pathname):
     global myauthenticateduser
     myauthenticateduser = auth._username
