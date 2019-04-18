@@ -236,7 +236,7 @@ def render_content(tab,urlpath):
                     ],className='row'),
                 ],style={'font-family': 'Calibri Light'})
 
-    if myauthenticateduser == 'Retailaudit' or myauthenticateduser == 'gfkinternal' and urlpath == 'shelldb':
+    if myauthenticateduser == 'Retailaudit' or myauthenticateduser == 'gfkinternal':
         if tab == 'global':
             return html.Div([
                     html.Div([
