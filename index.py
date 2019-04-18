@@ -52,7 +52,9 @@ app.layout = html.Div([
             html.Div(id='page-content'),
 
             html.Div(id='shelldbcontent'),
-            dcc.Dropdown(id='intermediate-value', style={'display': 'none'})
+            html.Div([
+                dcc.Dropdown(id='intermediate-value') #dummy value
+            ],style={'display': 'none'})
 
         ],style={'font-family': 'Calibri Light'},className='ten columns offset-by-one')
 
