@@ -53,7 +53,7 @@ app.layout = html.Div([
 
             html.Div(id='shelldbcontent'),
             html.Div([
-                html.Tabs(id='intermediate-value') #dummy value
+                html.Tab(id='intermediate-value') #dummy value
             ],style={'display': 'none'})
 
         ],style={'font-family': 'Calibri Light'},className='ten columns offset-by-one')
