@@ -246,7 +246,7 @@ def render_content(tab,urlpath):
                         dcc.RadioItems(
                             id='analysistype',
                             options=[
-                                {'label': 'By Channel  ', 'value': 'channel_analysis'},
+                                {'label': urlpath, 'value': 'channel_analysis'},
                                 {'label': 'By Region  ', 'value': 'region_analysis'}
                             ],
                             value='channel_analysis',
