@@ -4,7 +4,7 @@ import os
 #
 # from flask import send_from_directory
 from rq import Queue
-from worker import conn
+from apps/worker import conn
 from utils import count_words_at_url
 
 
