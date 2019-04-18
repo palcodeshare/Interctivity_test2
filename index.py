@@ -74,7 +74,7 @@ def display_page(pathname):
              return howtouse.layout, shelllayout
         elif pathname == '/apps/notes':
              return notes.layout, shellnotes
-        else:]
+        else:
              return shelldashboard.layout, shelldb
 
 @app.callback(Output('shelldbcontent', 'children'),
