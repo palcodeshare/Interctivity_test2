@@ -71,7 +71,7 @@ def display_page(pathname):
     else:
          return shelldashboard.layout
 
-@app.callback(Output('intermediate-value', 'children')],[Input('url', 'pathname')])
+@app.callback(Output('intermediate-value', 'children'),[Input('url', 'pathname')])
 def display_page(pathname2):
     if pathname == '/apps/shelldashboard':
          return shelldb
