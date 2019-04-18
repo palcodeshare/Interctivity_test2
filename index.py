@@ -69,13 +69,13 @@ def display_page(pathname):
     myauthenticateduser = auth._username
     if myauthenticateduser == 'gfkinternal' or myauthenticateduser == 'Retailaudit' or myauthenticateduser == 'aajaya' or myauthenticateduser == 'APMEGM' or myauthenticateduser == 'APMEREGION' :
         if pathname == '/apps/shelldashboard':
-             return shelldashboard.layout, shelldb
+             return shelldashboard.layout, 'shelldb'
         elif pathname == '/apps/howtouse':
-             return howtouse.layout, shelllayout
+             return howtouse.layout, 'shelllayout'
         elif pathname == '/apps/notes':
-             return notes.layout, shellnotes
+             return notes.layout, 'shellnotes'
         else:
-             return shelldashboard.layout, shelldb
+             return shelldashboard.layout, 'shelldb'
 
 @app.callback(Output('shelldbcontent', 'children'),
               [Input('shelldbtabs', 'value'),
