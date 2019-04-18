@@ -49,7 +49,7 @@ auth = dash_auth.BasicAuth(
 
 app.layout = html.Div([
             dcc.Location(id='url',refresh=True),
-            html.Div(id='page-content', children='shelldashboard.layout'),
+            html.Div(id='page-content'),
 
             html.Div(id='shelldbcontent')
 
@@ -74,12 +74,12 @@ def display_page(pathname):
 
 @app.callback(Output('shelldbcontent', 'children'),
               [Input('shelldbtabs', 'value'),
-              Input('page-content', 'children')])
+              Input('url', 'pathname')])
 
 def render_content(tab,urlpathname):
     myauthenticateduser = auth._username
 
-    if myauthenticateduser == 'aajaya' or myauthenticateduser == 'APMEGM' or myauthenticateduser == 'APMEREGION' and urlpathname == shelldashboard.layout:
+    if myauthenticateduser == 'aajaya' or myauthenticateduser == 'APMEGM' or myauthenticateduser == 'APMEREGION' and urlpathname == '/apps/shelldashboard':
         if tab == 'apme':
             return html.Div([
                     html.Div([
@@ -227,7 +227,7 @@ def render_content(tab,urlpathname):
                     ],className='row'),
                 ],style={'font-family': 'Calibri Light'})
 
-    if myauthenticateduser == 'Retailaudit' or myauthenticateduser == 'gfkinternal' and urlpathname == shelldashboard.layout:
+    if myauthenticateduser == 'Retailaudit' or myauthenticateduser == 'gfkinternal' and urlpathname == '/apps/shelldashboard':
         if tab == 'global':
             return html.Div([
                     html.Div([
