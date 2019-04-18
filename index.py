@@ -52,15 +52,16 @@ app.layout = html.Div([
             html.Div(id='page-content'),
 
             html.Div(id='shelldbcontent'),
-            html.Div(id='intermediate-value', style={'display': 'none'})
+            dcc.Dropdown(id='intermediate-value', style={'display': 'none'})
 
         ],style={'font-family': 'Calibri Light'},className='ten columns offset-by-one')
 
 
 myauthenticateduser = auth._username
-@app.callback([Output('page-content', 'children'),
-              Output('intermediate-value', 'children')],
-              [Input('url', 'pathname')])
+@app.callback(
+    [Output('page-content', 'children'),
+     Output('intermediate-value', 'value')],
+    [Input('url', 'pathname')])
 def display_page(pathname):
     global myauthenticateduser
     myauthenticateduser = auth._username
@@ -80,7 +81,7 @@ def display_page(pathname):
 
 @app.callback(Output('shelldbcontent', 'children'),
               [Input('shelldbtabs', 'value'),
-              Input('intermediate-value', 'children')])
+              Input('intermediate-value', 'value')])
 
 def render_content(tab,urlpath):
     myauthenticateduser = auth._username
