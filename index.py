@@ -20,7 +20,7 @@ import dash_html_components as html
 from dash.dependencies import Input, Output
 import plotly.tools as tls
 from io import StringIO
-import numpy as np
+
 import plotly
 import dash_auth
 
@@ -74,13 +74,18 @@ def display_page(pathname):
 @app.callback(Output('intermediate-value', 'children'),[Input('url', 'pathname')])
 def display_page(pathname2):
     if pathname == '/apps/shelldashboard':
-         return shelldb
+         value = "shelldb"
+         return value
     elif pathname == '/apps/howtouse':
-         return shellhtu
+         value = "shellhtu"
+         return value
     elif pathname == '/apps/notes':
-         return shellnotes
+         value = "shellnotes"
+         return value
     else:
-         return shelldb
+         value = "shelldb"
+         return value
+    print(value)
 
 @app.callback(Output('shelldbcontent', 'children'),
               [Input('shelldbtabs', 'value'),
@@ -236,7 +241,7 @@ def render_content(tab,urlpath):
                     ],className='row'),
                 ],style={'font-family': 'Calibri Light'})
 
-    if myauthenticateduser == 'Retailaudit' or myauthenticateduser == 'gfkinternal':
+    if myauthenticateduser == 'Retailaudit' or myauthenticateduser == 'gfkinternal' and urlpath == 'shelldb':
         if tab == 'global':
             return html.Div([
                     html.Div([
@@ -268,7 +273,7 @@ def render_content(tab,urlpath):
                             html.P('Select Engine Oil Type:'),
                             dcc.Dropdown(
                                 id='typeveh',
-                                value=urlpath,
+                                value='TOTAL',
                                 placeholder="Type Of Vehicle",
                             ),
                         ],className='two columns'),
