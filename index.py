@@ -56,28 +56,27 @@ app.layout = html.Div([
 
         ],style={'font-family': 'Calibri Light'},className='ten columns offset-by-one')
 
-@app.callback(Output('intermediate-value', 'children'),
-              [Input('url', 'pathname')])
-def interim(pathname):
-    assignedpath = pathname
-    return assignedpath
-
 
 myauthenticateduser = auth._username
 @app.callback(Output('page-content', 'children'),
-              [Input('intermediate-value', 'children')])
-def display_page(pathname2):
+              Output('intermediate-value', 'children')],
+             [Input('url', 'pathname')])
+def display_page(pathname):
     global myauthenticateduser
     myauthenticateduser = auth._username
     if myauthenticateduser == 'gfkinternal' or myauthenticateduser == 'Retailaudit' or myauthenticateduser == 'aajaya' or myauthenticateduser == 'APMEGM' or myauthenticateduser == 'APMEREGION' :
         if pathname == '/apps/shelldashboard':
-             return shelldashboard.layout
+             urlp = shelldb
+             return shelldashboard.layout, urlp
         elif pathname == '/apps/howtouse':
-             return howtouse.layout
+             urlp = shelllayout
+             return howtouse.layout, urlp
         elif pathname == '/apps/notes':
-             return notes.layout
+             urlp = shellnotes
+             return notes.layout, urlp
         else:
-            return shelldashboard.layout
+             urlp = shelldb
+            return shelldashboard.layout, urlp
 
 @app.callback(Output('shelldbcontent', 'children'),
               [Input('shelldbtabs', 'value'),
@@ -85,7 +84,7 @@ def display_page(pathname2):
 
 def render_content(tab,urlpath):
     myauthenticateduser = auth._username
-    if myauthenticateduser == 'aajaya' or myauthenticateduser == 'APMEGM' or myauthenticateduser == 'APMEREGION' and urlpath == '/apps/shelldashboard':
+    if myauthenticateduser == 'aajaya' or myauthenticateduser == 'APMEGM' or myauthenticateduser == 'APMEREGION' and urlpath == 'shelldb':
         if tab == 'apme':
             return html.Div([
                     html.Div([
@@ -233,7 +232,7 @@ def render_content(tab,urlpath):
                     ],className='row'),
                 ],style={'font-family': 'Calibri Light'})
 
-    if myauthenticateduser == 'Retailaudit' or myauthenticateduser == 'gfkinternal' and urlpath == '/apps/shelldashboard':
+    if myauthenticateduser == 'Retailaudit' or myauthenticateduser == 'gfkinternal' and urlpath == 'shelldb':
         if tab == 'global':
             return html.Div([
                     html.Div([
