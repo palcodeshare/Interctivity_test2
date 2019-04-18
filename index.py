@@ -60,20 +60,27 @@ app.layout = html.Div([
 
 
 myauthenticateduser = auth._username
-@app.callback([Output('page-content', 'children'),Output('intermediate-value', 'children')],[Input('url', 'pathname')])
+@app.callback(Output('page-content', 'children'),[Input('url', 'pathname')])
 def display_page(pathname):
     if pathname == '/apps/shelldashboard':
-         value ='shelldb'
-         return shelldashboard.layout, value
+         return shelldashboard.layout
     elif pathname == '/apps/howtouse':
-         value = 'shelllayout'
-         return howtouse.layout, value
+         return howtouse.layout
     elif pathname == '/apps/notes':
-         value = 'shellnotes'
-         return notes.layout, value
+         return notes.layout
     else:
-         value = 'shelldb'
-         return shelldashboard.layout, value
+         return shelldashboard.layout
+
+@app.callback(Output('intermediate-value', 'children')],[Input('url', 'pathname')])
+def display_page(pathname2):
+    if pathname == '/apps/shelldashboard':
+         return shelldb
+    elif pathname == '/apps/howtouse':
+         return shellhtu
+    elif pathname == '/apps/notes':
+         return shellnotes
+    else:
+         return shelldb
 
 @app.callback(Output('shelldbcontent', 'children'),
               [Input('shelldbtabs', 'value'),
