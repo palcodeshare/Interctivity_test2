@@ -28,6 +28,15 @@ import plotly.plotly as py
 import plotly.graph_objs as go
 
 global myauthenticateduser
+from rq import Queue
+from worker import conn
+from utils import count_words_at_url
+
+
+
+q = Queue(connection=conn)
+result = q.enqueue(count_words_at_url, 'http://heroku.com')
+
 
 
 app.css.append_css({'external_url': 'https://cdn.rawgit.com/plotly/dash-app-stylesheets/2d266c578d2a6e8850ebce48fdb52759b2aef506/stylesheet-oil-and-gas.css'})  # noqa: E501
