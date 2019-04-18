@@ -54,8 +54,6 @@ app.layout = html.Div([
         ],style={'font-family': 'Calibri Light'},className='ten columns offset-by-one')
 
 
-# myauthenticateduser = 'gfkinternal'
-# print(myauthenticateduser)
 myauthenticateduser = auth._username
 @app.callback(Output('page-content', 'children'),
               [Input('url', 'pathname')])
