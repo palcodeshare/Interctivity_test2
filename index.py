@@ -66,7 +66,7 @@ def interim(pathname):
 myauthenticateduser = auth._username
 @app.callback(Output('page-content', 'children'),
               [Input('intermediate-value', 'children')])
-def display_page(pathname):
+def display_page(pathname2):
     global myauthenticateduser
     myauthenticateduser = auth._username
     if myauthenticateduser == 'gfkinternal' or myauthenticateduser == 'Retailaudit' or myauthenticateduser == 'aajaya' or myauthenticateduser == 'APMEGM' or myauthenticateduser == 'APMEREGION' :
