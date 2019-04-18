@@ -104,7 +104,7 @@ def render_content(tab):
                             html.P('Select Country:'),
                             dcc.Dropdown(
                                 id='country', #Left it is as country since i didnt want to change all the code again. What it really means is region
-                                value='MENA',
+                                value='APME',
                                 options=[
                                     {'label': 'APME Total', 'value': 'APME'},
                                     {'label': 'Oman', 'value': 'Oman'},
