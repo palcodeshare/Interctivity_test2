@@ -53,7 +53,7 @@ app.layout = html.Div([
 
             html.Div(id='shelldbcontent'),
             html.Div([
-                html.Div(id='intermediate-value') #dummy value
+                html.Tabs(id='intermediate-value') #dummy value
             ],style={'display': 'none'})
 
         ],style={'font-family': 'Calibri Light'},className='ten columns offset-by-one')
@@ -71,29 +71,25 @@ def display_page(pathname):
     else:
          return shelldashboard.layout
 
-@app.callback(Output('intermediate-value', 'children'),[Input('url', 'pathname')])
+@app.callback(Output('intermediate-value', 'value'),[Input('url', 'pathname')])
 def display_page(pathname2):
     if pathname == '/apps/shelldashboard':
-         value = "shelldb"
-         return value
+         return shelldb
     elif pathname == '/apps/howtouse':
-         value = "shellhtu"
-         return value
+         return shellhtu
     elif pathname == '/apps/notes':
-         value = "shellnotes"
-         return value
+         return shellnotes
     else:
-         value = "shelldb"
-         return value
+         return shelldb
     print(value)
 
 @app.callback(Output('shelldbcontent', 'children'),
               [Input('shelldbtabs', 'value'),
-              Input('intermediate-value', 'children')])
+              Input('intermediate-value', 'value')])
 
 def render_content(tab,urlpath):
     myauthenticateduser = auth._username
-    if myauthenticateduser == 'aajaya' or myauthenticateduser == 'APMEGM' or myauthenticateduser == 'APMEREGION':
+    if (myauthenticateduser == 'aajaya' or myauthenticateduser == 'APMEGM' or myauthenticateduser == 'APMEREGION') and (urlpath == 'shelldb'):
         if tab == 'apme':
             return html.Div([
                     html.Div([
@@ -241,7 +237,7 @@ def render_content(tab,urlpath):
                     ],className='row'),
                 ],style={'font-family': 'Calibri Light'})
 
-    if myauthenticateduser == 'Retailaudit' or myauthenticateduser == 'gfkinternal':
+    if (myauthenticateduser == 'Retailaudit' or myauthenticateduser == 'gfkinternal') and (urlpath == 'shelldb'):
         if tab == 'global':
             return html.Div([
                     html.Div([
