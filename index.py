@@ -53,7 +53,7 @@ app.layout = html.Div([
 
             html.Div(id='shelldbcontent'),
             html.Div([
-                dcc.Dropdown(id='intermediate-value') #dummy value
+                html.Div(id='intermediate-value') #dummy value
             ],style={'display': 'none'})
 
         ],style={'font-family': 'Calibri Light'},className='ten columns offset-by-one')
@@ -62,24 +62,25 @@ app.layout = html.Div([
 myauthenticateduser = auth._username
 @app.callback(
     [Output('page-content', 'children'),
-     Output('intermediate-value', 'value')],
+     Output('intermediate-value', 'children')],
     [Input('url', 'pathname')])
 def display_page(pathname):
-    global myauthenticateduser
-    myauthenticateduser = auth._username
-    if myauthenticateduser == 'gfkinternal' or myauthenticateduser == 'Retailaudit' or myauthenticateduser == 'aajaya' or myauthenticateduser == 'APMEGM' or myauthenticateduser == 'APMEREGION' :
-        if pathname == '/apps/shelldashboard':
-             return shelldashboard.layout, 'shelldb'
-        elif pathname == '/apps/howtouse':
-             return howtouse.layout, 'shelllayout'
-        elif pathname == '/apps/notes':
-             return notes.layout, 'shellnotes'
-        else:
-             return shelldashboard.layout, 'shelldb'
+    if pathname == '/apps/shelldashboard':
+         value ='shelldb'
+         return shelldashboard.layout, value
+    elif pathname == '/apps/howtouse':
+         value = 'shelllayout'
+         return howtouse.layout, value
+    elif pathname == '/apps/notes':
+         value = 'shellnotes'
+         return notes.layout, value
+    else:
+         value = 'shelldb'
+         return shelldashboard.layout, value
 
 @app.callback(Output('shelldbcontent', 'children'),
               [Input('shelldbtabs', 'value'),
-              Input('intermediate-value', 'value')])
+              Input('intermediate-value', 'children')])
 
 def render_content(tab,urlpath):
     myauthenticateduser = auth._username
