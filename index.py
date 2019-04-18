@@ -60,10 +60,7 @@ app.layout = html.Div([
 
 
 myauthenticateduser = auth._username
-@app.callback(
-    [Output('page-content', 'children'),
-     Output('intermediate-value', 'children')],
-    [Input('url', 'pathname')])
+@app.callback([Output('page-content', 'children'),Output('intermediate-value', 'children')],[Input('url', 'pathname')])
 def display_page(pathname):
     if pathname == '/apps/shelldashboard':
          value ='shelldb'
