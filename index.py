@@ -74,12 +74,12 @@ def display_page(pathname):
 
 @app.callback(Output('shelldbcontent', 'children'),
               [Input('shelldbtabs', 'value'),
-              Input('url', 'pathname')])
+              Input('page-content', 'children')])
 
 def render_content(tab,urlpathname):
     myauthenticateduser = auth._username
 
-    if myauthenticateduser == 'aajaya' or myauthenticateduser == 'APMEGM' or myauthenticateduser == 'APMEREGION' and urlpathname == '/apps/shelldashboard':
+    if myauthenticateduser == 'aajaya' or myauthenticateduser == 'APMEGM' or myauthenticateduser == 'APMEREGION' and urlpathname == shelldashboard.layout:
         if tab == 'apme':
             return html.Div([
                     html.Div([
