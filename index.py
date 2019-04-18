@@ -73,10 +73,9 @@ def display_page(pathname):
             return shelldashboard.layout
 
 @app.callback(Output('shelldbcontent', 'children'),
-              [Input('shelldbtabs', 'value'),
-              Input('url', 'pathname')])
+              [Input('shelldbtabs', 'value')])
 
-def render_content(tab,pathname):
+def render_content(tab):
     myauthenticateduser = auth._username
 
     if myauthenticateduser == 'aajaya' or myauthenticateduser == 'APMEGM' or myauthenticateduser == 'APMEREGION':
