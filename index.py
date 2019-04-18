@@ -28,14 +28,7 @@ import plotly.plotly as py
 import plotly.graph_objs as go
 
 global myauthenticateduser
-from rq import Queue
-from worker import conn
-from utils import count_words_at_url
 
-
-
-q = Queue(connection=conn)
-result = q.enqueue(count_words_at_url, 'http://heroku.com')
 
 
 
@@ -80,7 +73,8 @@ def display_page(pathname):
             return shelldashboard.layout
 
 @app.callback(Output('shelldbcontent', 'children'),
-              [Input('shelldbtabs', 'value'),Input('url', 'pathname')])
+              [Input('shelldbtabs', 'value'),
+              Input('url', 'pathname')])
 
 def render_content(tab,pathname):
     myauthenticateduser = auth._username
