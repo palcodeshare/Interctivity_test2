@@ -141,7 +141,7 @@ def render_content(tab,urlpath):
                                 ),
                             ],className='two columns'),
 
-                            htm;l.Div([
+                            html.Div([
                                 html.P('Select Region:'),
                                 dcc.Dropdown(
                                     id='region',
