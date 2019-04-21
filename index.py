@@ -63,17 +63,17 @@ app.layout = html.Div([
 
 
 myauthenticateduser = auth._username
-# @app.callback(Output('page-content', 'children'),
-#               [Input('url', 'pathname')])
-# def display_page(pathname):
-#     if pathname == '/apps/shelldashboard':
-#          return shelldashboard.layout
-#     elif pathname == '/apps/howtouse':
-#          return howtouse.layout
-#     elif pathname == '/apps/notes':
-#          return notes.layout
-#     else:
-#          return shelldashboard.layout
+@app.callback(Output('page-content', 'children'),
+              [Input('url', 'pathname')])
+def display_page(pathname):
+    if pathname == '/apps/shelldashboard':
+         return shelldashboard.layout
+    elif pathname == '/apps/howtouse':
+         return howtouse.layout
+    elif pathname == '/apps/notes':
+         return notes.layout
+    else:
+         return shelldashboard.layout
 
 # @app.callback(Output('dummy-val', 'children'),[Input('url', 'pathname')])
 # def display_page(pathname2):
@@ -88,10 +88,10 @@ myauthenticateduser = auth._username
 #     print(value)
 
 @app.callback(Output('shelldbcontent', 'children'),
-              [Input('shelldbtabs', 'value'),
-              Input('url', 'pathname')])
+              [Input('url', 'pathname'),
+              Input('shelldbtabs', 'value')])
 
-def render_content(tab,urlpath):
+def render_content(urlpath,tab):
     myauthenticateduser = auth._username
     if urlpath == '/apps/shelldashboard':
         if myauthenticateduser == 'aajaya' or myauthenticateduser == 'APMEGM' or myauthenticateduser == 'APMEREGION':
