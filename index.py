@@ -54,15 +54,18 @@ app.layout = html.Div([
             ],style={'font-family': 'Calibri Light'},className='ten columns offset-by-one')
 
 
-myauthenticateduser = auth._username
-shelldb = shelldashboard.layout
-shellhtu = howtouse.layout
-shellnotes = notes.layout
+# myauthenticateduser = auth._username
+# shelldb = shelldashboard.layout
+# shellhtu = howtouse.layout
+# shellnotes = notes.layout
 
 @app.callback(Output('page-content', 'children'),
              [Input('url', 'pathname')]
 )
 def display_page(pathname):
+    shelldb = shelldashboard.layout
+    shellhtu = howtouse.layout
+    shellnotes = notes.layout
     if pathname == '/apps/shelldashboard':
          return shelldb
     elif pathname == '/apps/howtouse':
@@ -78,6 +81,7 @@ def display_page(pathname):
                Input('page-content', 'children')])
 
 def render_content(tab, pathname2):
+    myauthenticateduser = auth._username
     if myauthenticateduser == 'aajaya' or myauthenticateduser == 'APMEGM' or myauthenticateduser == 'APMEREGION':
         if tab == 'apme':
             return html.Div([
