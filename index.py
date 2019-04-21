@@ -31,7 +31,7 @@ global myauthenticateduser
 
 
 
-
+app.config.suppress_callback_exceptions = True
 app.css.append_css({'external_url': 'https://cdn.rawgit.com/plotly/dash-app-stylesheets/2d266c578d2a6e8850ebce48fdb52759b2aef506/stylesheet-oil-and-gas.css'})  # noqa: E501
 
 if 'DYNO' in os.environ:
