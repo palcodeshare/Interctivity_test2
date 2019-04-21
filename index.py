@@ -31,7 +31,7 @@ global myauthenticateduser
 
 
 
-app.config.suppress_callback_exceptions = True
+
 app.css.append_css({'external_url': 'https://cdn.rawgit.com/plotly/dash-app-stylesheets/2d266c578d2a6e8850ebce48fdb52759b2aef506/stylesheet-oil-and-gas.css'})  # noqa: E501
 
 if 'DYNO' in os.environ:
@@ -75,17 +75,6 @@ def display_page(pathname):
     else:
          return shelldashboard.layout
 
-# @app.callback(Output('dummy-val', 'children'),[Input('url', 'pathname')])
-# def display_page(pathname2):
-#     if pathname == '/apps/shelldashboard':
-#          return 'shelldb'
-#     elif pathname == '/apps/howtouse':
-#          return 'shellhtu'
-#     elif pathname == '/apps/notes':
-#          return 'shellnotes'
-#     else:
-#          return 'shelldb'
-#     print(value)
 
 @app.callback(Output('shelldbcontent', 'children'),
               [Input('url', 'pathname'),
