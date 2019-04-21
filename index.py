@@ -77,10 +77,9 @@ def display_page(pathname):
 
 
 @app.callback(Output('shelldbcontent', 'children'),
-              [Input('shelldbtabs', 'value'),
-               Input('page-content', 'children')])
+              [Input('shelldbtabs', 'value')])
 
-def render_content(tab, pathname2):
+def render_content(tab):
     myauthenticateduser = auth._username
     if myauthenticateduser == 'aajaya' or myauthenticateduser == 'APMEGM' or myauthenticateduser == 'APMEREGION':
         if tab == 'apme':
