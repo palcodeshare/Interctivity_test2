@@ -53,11 +53,11 @@ app.layout = html.Div([
             html.Div(id='page-content'),
 
             html.Div(id='shelldbcontent'),
-            html.Div([
-                 html.Table([
-                    html.Tr([html.Td(['x', html.Sup(2)]), html.Td(id='dummy-val')]),
-                ]),
-            ],style={'display': 'none'})
+            # html.Div([
+            #      html.Table([
+            #         html.Tr([html.Td(['x', html.Sup(2)]), html.Td(id='dummy-val')]),
+            #     ]),
+            # ],style={'display': 'none'})
 
         ],style={'font-family': 'Calibri Light'},className='ten columns offset-by-one')
 
@@ -75,25 +75,25 @@ def display_page(pathname):
     else:
          return shelldashboard.layout
 
-@app.callback(Output('dummy-val', 'children'),[Input('url', 'pathname')])
-def display_page(pathname2):
-    if pathname == '/apps/shelldashboard':
-         return 'shelldb'
-    elif pathname == '/apps/howtouse':
-         return 'shellhtu'
-    elif pathname == '/apps/notes':
-         return 'shellnotes'
-    else:
-         return 'shelldb'
-    print(value)
+# @app.callback(Output('dummy-val', 'children'),[Input('url', 'pathname')])
+# def display_page(pathname2):
+#     if pathname == '/apps/shelldashboard':
+#          return 'shelldb'
+#     elif pathname == '/apps/howtouse':
+#          return 'shellhtu'
+#     elif pathname == '/apps/notes':
+#          return 'shellnotes'
+#     else:
+#          return 'shelldb'
+#     print(value)
 
 @app.callback(Output('shelldbcontent', 'children'),
               [Input('shelldbtabs', 'value'),
-              Input('dummy-val', 'children')])
+              Input('url', 'pathname')])
 
 def render_content(tab,urlpath):
     myauthenticateduser = auth._username
-    if urlpath == 'shelldb':
+    if urlpath == '/apps/shelldashboard':
         if myauthenticateduser == 'aajaya' or myauthenticateduser == 'APMEGM' or myauthenticateduser == 'APMEREGION':
             if tab == 'apme':
                 return html.Div([
