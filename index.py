@@ -49,47 +49,45 @@ auth = dash_auth.BasicAuth(
 
 app.layout = html.Div([
             dcc.Location(id='url',refresh=True),
+            dcc.Location(id='intermediate-url',refresh=True)
             html.Div(id='page-content'),
 
             html.Div(id='shelldbcontent'),
-            html.Div([
-                dcc.Tab(id='intermediate-value',value='shelldb') #dummy value
-            ])
 
         ],style={'font-family': 'Calibri Light'},className='ten columns offset-by-one')
 
 
 myauthenticateduser = auth._username
-@app.callback(Output('page-content', 'children'),[Input('url', 'pathname')])
+@app.callback([Output('page-content', 'children'),Output('intermediate-value', 'pathname')],[Input('url', 'pathname')])
 def display_page(pathname):
     if pathname == '/apps/shelldashboard':
-         return shelldashboard.layout
+         return shelldashboard.layout, '/apps/shelldashboard'
     elif pathname == '/apps/howtouse':
-         return howtouse.layout
+         return howtouse.layout, '/apps/howtouse'
     elif pathname == '/apps/notes':
-         return notes.layout
+         return notes.layout, '/apps/notes'
     else:
-         return shelldashboard.layout
+         return shelldashboard.layout, '/apps/shelldashboard'
 
-@app.callback(Output('intermediate-value', 'value'),[Input('url', 'pathname')])
-def display_page(pathname2):
-    if pathname == '/apps/shelldashboard':
-         return shelldb
-    elif pathname == '/apps/howtouse':
-         return shellhtu
-    elif pathname == '/apps/notes':
-         return shellnotes
-    else:
-         return shelldb
-    print(value)
+# @app.callback(Output('intermediate-value', 'pathname'),[Input('url', 'pathname')])
+# def display_page(pathname2):
+#     if pathname == '/apps/shelldashboard':
+#          return shelldb
+#     elif pathname == '/apps/howtouse':
+#          return shellhtu
+#     elif pathname == '/apps/notes':
+#          return shellnotes
+#     else:
+#          return shelldb
+#     print(value)
 
 @app.callback(Output('shelldbcontent', 'children'),
               [Input('shelldbtabs', 'value'),
-              Input('intermediate-value', 'value')])
+              Input('intermediate-url', 'pathname')])
 
 def render_content(tab,urlpath):
     myauthenticateduser = auth._username
-    if urlpath == 'shelldb':
+    if urlpath == '/apps/shelldashboard':
         if myauthenticateduser == 'aajaya' or myauthenticateduser == 'APMEGM' or myauthenticateduser == 'APMEREGION':
             if tab == 'apme':
                 return html.Div([
@@ -115,7 +113,7 @@ def render_content(tab,urlpath):
                             html.Div([
                                 html.P('Select Country:'),
                                 dcc.Dropdown(
-                                    id='country', #Left it is as country since i didnt want to change all the code again. What it really means is region
+                                    id='country', #Left it is as 'country' since i didnt want to change all the code again. What it really means is region
                                     value='APME',
                                     options=[
                                         {'label': 'APME Total', 'value': 'APME'},
