@@ -75,17 +75,6 @@ def display_page(pathname):
     else:
          return shelldashboard.layout
 
-# @app.callback(Output('dummy-val', 'children'),[Input('url', 'pathname')])
-# def display_page(pathname2):
-#     if pathname == '/apps/shelldashboard':
-#          return 'shelldb'
-#     elif pathname == '/apps/howtouse':
-#          return 'shellhtu'
-#     elif pathname == '/apps/notes':
-#          return 'shellnotes'
-#     else:
-#          return 'shelldb'
-#     print(value)
 
 @app.callback(Output('shelldbcontent', 'children'),
               [Input('shelldbtabs', 'value'),
