@@ -49,7 +49,7 @@ auth = dash_auth.BasicAuth(
 
 app.layout = html.Div([
             dcc.Location(id='url',refresh=True),
-            dcc.Location(id='intermediate-url',refresh=True)
+            dcc.Location(id='intermediate-url',refresh=True),
             html.Div(id='page-content'),
 
             html.Div(id='shelldbcontent'),
