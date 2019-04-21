@@ -56,7 +56,8 @@ app.layout = html.Div([
 
 myauthenticateduser = auth._username
 @app.callback(Output('page-content', 'children'),
-             [Input('url', 'pathname')])
+             [Input('url', 'pathname')]
+)
 def display_page(pathname):
     if pathname == '/apps/shelldashboard':
          return shelldashboard.layout
@@ -72,9 +73,9 @@ def display_page(pathname):
               [Input('shelldbtabs', 'value'),
                Input('url', 'pathname')])
 
-def render_content(tab,pathname2):
+def render_content(tab, pathname2):
     myauthenticateduser = auth._username
-    if myauthenticateduser == 'aajaya' or myauthenticateduser == 'APMEGM' or myauthenticateduser == 'APMEREGION' and pathname2 == '/apps/shelldashboard':
+    if pathname2 == '/apps/shelldashboard' and myauthenticateduser == 'aajaya' or myauthenticateduser == 'APMEGM' or myauthenticateduser == 'APMEREGION':
         if tab == 'apme':
             return html.Div([
                     html.Div([
@@ -222,7 +223,7 @@ def render_content(tab,pathname2):
                     ],className='row'),
                 ],style={'font-family': 'Calibri Light'})
 
-    if myauthenticateduser == 'Retailaudit' or myauthenticateduser == 'gfkinternal' and pathname2 == '/apps/shelldashboard':
+    if pathname2 == '/apps/shelldashboard' and myauthenticateduser == 'Retailaudit' or myauthenticateduser == 'gfkinternal':
         if tab == 'global':
             return html.Div([
                     html.Div([
