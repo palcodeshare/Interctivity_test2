@@ -55,27 +55,30 @@ app.layout = html.Div([
 
 
 myauthenticateduser = auth._username
+shelldb = shelldashboard.layout
+shellhtu = howtouse.layout
+shellnotes = notes.layout
+
 @app.callback(Output('page-content', 'children'),
              [Input('url', 'pathname')]
 )
 def display_page(pathname):
     if pathname == '/apps/shelldashboard':
-         return shelldashboard.layout
+         return shelldb
     elif pathname == '/apps/howtouse':
-         return howtouse.layout
+         return shellhtu
     elif pathname == '/apps/notes':
-         return notes.layout
+         return shellnotes
     else:
-         return shelldashboard.layout
+         return shelldb
 
 
 @app.callback(Output('shelldbcontent', 'children'),
               [Input('shelldbtabs', 'value'),
-               Input('url', 'pathname')])
+               Input('page-content', 'children')])
 
 def render_content(tab, pathname2):
-    myauthenticateduser = auth._username
-    if pathname2 == '/apps/shelldashboard' and myauthenticateduser == 'aajaya' or myauthenticateduser == 'APMEGM' or myauthenticateduser == 'APMEREGION':
+    if myauthenticateduser == 'aajaya' or myauthenticateduser == 'APMEGM' or myauthenticateduser == 'APMEREGION':
         if tab == 'apme':
             return html.Div([
                     html.Div([
@@ -223,7 +226,7 @@ def render_content(tab, pathname2):
                     ],className='row'),
                 ],style={'font-family': 'Calibri Light'})
 
-    if pathname2 == '/apps/shelldashboard' and myauthenticateduser == 'Retailaudit' or myauthenticateduser == 'gfkinternal':
+    if myauthenticateduser == 'Retailaudit' or myauthenticateduser == 'gfkinternal':
         if tab == 'global':
             return html.Div([
                     html.Div([
