@@ -49,25 +49,32 @@ auth = dash_auth.BasicAuth(
 
 app.layout = html.Div([
             dcc.Location(id='url',refresh=True),
-            dcc.Location(id='intermediate-url',refresh=True),
+            # dcc.Input(id='dummy-rep', type='text', value='shelldb'),
             html.Div(id='page-content'),
 
             html.Div(id='shelldbcontent'),
+            html.Div([
+                 html.Table([
+                    html.Tr([html.Td(['x', html.Sup(2)]), html.Td(id='dummy-val')]),
+                ]),
+            ],style={'display': 'none'})
 
         ],style={'font-family': 'Calibri Light'},className='ten columns offset-by-one')
 
 
 myauthenticateduser = auth._username
-@app.callback([Output('page-content', 'children'),Output('intermediate-value', 'pathname')],[Input('url', 'pathname')])
+@app.callback([Output('page-content', 'children'),
+               Output('dummy-val', 'children')],
+              [Input('url', 'pathname')])
 def display_page(pathname):
     if pathname == '/apps/shelldashboard':
-         return shelldashboard.layout, '/apps/shelldashboard'
+         return shelldashboard.layout, 'shelldb'
     elif pathname == '/apps/howtouse':
-         return howtouse.layout, '/apps/howtouse'
+         return howtouse.layout, 'shellhtu'
     elif pathname == '/apps/notes':
-         return notes.layout, '/apps/notes'
+         return notes.layout, 'shellnotes'
     else:
-         return shelldashboard.layout, '/apps/shelldashboard'
+         return shelldashboard.layout, 'shelldb'
 
 # @app.callback(Output('intermediate-value', 'pathname'),[Input('url', 'pathname')])
 # def display_page(pathname2):
@@ -83,11 +90,11 @@ def display_page(pathname):
 
 @app.callback(Output('shelldbcontent', 'children'),
               [Input('shelldbtabs', 'value'),
-              Input('intermediate-url', 'pathname')])
+              Input('dummy-val', 'pathname')])
 
 def render_content(tab,urlpath):
     myauthenticateduser = auth._username
-    if urlpath == '/apps/shelldashboard':
+    if urlpath == 'shelldb':
         if myauthenticateduser == 'aajaya' or myauthenticateduser == 'APMEGM' or myauthenticateduser == 'APMEREGION':
             if tab == 'apme':
                 return html.Div([
