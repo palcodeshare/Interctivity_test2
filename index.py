@@ -242,7 +242,7 @@ def render_content(tab,urlpath):
                         ],className='row'),
                     ],style={'font-family': 'Calibri Light'})
 
-        if myauthenticateduser == 'Retailaudit' or myauthenticateduser == 'gfkinternal':
+        elif myauthenticateduser == 'Retailaudit' or myauthenticateduser == 'gfkinternal':
             if tab == 'global':
                 return html.Div([
                         html.Div([
@@ -395,7 +395,7 @@ def render_content(tab,urlpath):
                             ],className='row'),
                         ]),
                     ],style={'font-family': 'Calibri Light'})
-            if tab == 'apme':
+            elif tab == 'apme':
                 return html.Div([
                         html.Div([
                             html.Div([
@@ -541,7 +541,7 @@ def render_content(tab,urlpath):
                             ),
                         ],className='row'),
                     ],style={'font-family': 'Calibri Light'})
-            if tab == 'russia':
+            elif tab == 'russia':
                 return html.Div([
                         html.Div([
                             html.Div([
@@ -672,7 +672,7 @@ def render_content(tab,urlpath):
                         ],className='row'),
                     ],style={'font-family': 'Calibri Light'})
 
-            if tab == 'china':
+            elif tab == 'china':
                 return html.Div([
                         html.Div([
                             html.Div([
