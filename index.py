@@ -48,23 +48,15 @@ auth = dash_auth.BasicAuth(
 )
 
 app.layout = html.Div([
-            dcc.Location(id='url',refresh=True),
-            # dcc.Input(id='dummy-rep', type='text', value='shelldb'),
-            html.Div(id='page-content'),
-
-            html.Div(id='shelldbcontent'),
-            # html.Div([
-            #      html.Table([
-            #         html.Tr([html.Td(['x', html.Sup(2)]), html.Td(id='dummy-val')]),
-            #     ]),
-            # ],style={'display': 'none'})
-
-        ],style={'font-family': 'Calibri Light'},className='ten columns offset-by-one')
+                dcc.Location(id='url',refresh=True),
+                html.Div(id='page-content'),
+                html.Div(id='shelldbcontent'),
+            ],style={'font-family': 'Calibri Light'},className='ten columns offset-by-one')
 
 
 myauthenticateduser = auth._username
 @app.callback(Output('page-content', 'children'),
-              [Input('url', 'pathname')])
+             [Input('url', 'pathname')])
 def display_page(pathname):
     if pathname == '/apps/shelldashboard':
          return shelldashboard.layout
@@ -78,9 +70,9 @@ def display_page(pathname):
 
 @app.callback(Output('shelldbcontent', 'children'),
               [Input('url', 'pathname'),
-              Input('shelldbtabs', 'value')])
+               Input('shelldbtabs', 'value')])
 
-def render_content(urlpath,tab):
+def render_content(urlpath, tab):
     myauthenticateduser = auth._username
     if urlpath == '/apps/shelldashboard':
         if myauthenticateduser == 'aajaya' or myauthenticateduser == 'APMEGM' or myauthenticateduser == 'APMEREGION':
