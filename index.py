@@ -63,34 +63,33 @@ app.layout = html.Div([
 
 
 myauthenticateduser = auth._username
-@app.callback([Output('page-content', 'children'),
-               Output('dummy-val', 'children')],
+@app.callback(Output('page-content', 'children'),
               [Input('url', 'pathname')])
 def display_page(pathname):
     if pathname == '/apps/shelldashboard':
-         return shelldashboard.layout, 'shelldb'
+         return shelldashboard.layout
     elif pathname == '/apps/howtouse':
-         return howtouse.layout, 'shellhtu'
+         return howtouse.layout
     elif pathname == '/apps/notes':
-         return notes.layout, 'shellnotes'
+         return notes.layout
     else:
-         return shelldashboard.layout, 'shelldb'
+         return shelldashboard.layout
 
-# @app.callback(Output('intermediate-value', 'pathname'),[Input('url', 'pathname')])
-# def display_page(pathname2):
-#     if pathname == '/apps/shelldashboard':
-#          return shelldb
-#     elif pathname == '/apps/howtouse':
-#          return shellhtu
-#     elif pathname == '/apps/notes':
-#          return shellnotes
-#     else:
-#          return shelldb
-#     print(value)
+@app.callback(Output('dummy-val', 'children'),[Input('url', 'pathname')])
+def display_page(pathname2):
+    if pathname == '/apps/shelldashboard':
+         return 'shelldb'
+    elif pathname == '/apps/howtouse':
+         return 'shellhtu'
+    elif pathname == '/apps/notes':
+         return 'shellnotes'
+    else:
+         return 'shelldb'
+    print(value)
 
 @app.callback(Output('shelldbcontent', 'children'),
               [Input('shelldbtabs', 'value'),
-              Input('dummy-val', 'pathname')])
+              Input('dummy-val', 'children')])
 
 def render_content(tab,urlpath):
     myauthenticateduser = auth._username
